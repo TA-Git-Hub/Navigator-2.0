@@ -64,7 +64,7 @@ class AutoTester{
         }
       }
     }
-    var returnArray : String[] = [];
+    var returnArray : String[80] = [];
     Debug("questionIds");
     for(var key in questionIds) {
       Debug("questionIds_Key : " + key);
