@@ -25,23 +25,35 @@ class AutoTester{
     return true;
   }
 
+  private function Debug(message){
+    this.log.LogDebug(message);
+  }
+
   private function CollectQuestionIds(){
     var testSubjects : Object = {dimensions: Config.Dimensions, grid: Config.QuestionsGridStructure};
     var questionIds : Object = {};
+    Debug("Dimensions : " + testSubjects.dimensions.length);
     for (var i = 0; i < testSubjects.dimensions.length; i++) {
+      Debug(i);
       var dimension = testSubjects.dimensions[i];
       if (dimension.Questions !== null){
+        Debug("Dim_Questions : " + dimension.Questions.length);
         for (var j = 0; j < dimension.Questions.length; j++) {
+          Debug(j);
           if (questionIds[dimension.Questions[j]] === undefined){
             questionIds[dimension.Questions[j]] = true;
           }
         }
       }
     }
+    Debug("Grid : " + testSubjects.grid.length);
     for (var i = 0; i < testSubjects.grid.length; i++) {
+      Debug(i);
       var grid = testSubjects.grid[i];
       if (grid.Qs !== null) {
+        Debug("Grid_Questions : " + grid.Qs.length);
         for (var j = 0; j < grid.Qs.length; j++) {
+          Debug(j);
           if (questionIds[grid.Qs[j]] === undefined){
             questionIds[grid.Qs[j]] = true;
           }
@@ -53,7 +65,9 @@ class AutoTester{
       }
     }
     var returnArray : String[] = [];
+    Debug("questionIds");
     for(var key in questionIds) {
+      Debug("questionIds_Key : " + key);
       if(questionIds[key] === true) {
         returnArray.push(key);
       }
