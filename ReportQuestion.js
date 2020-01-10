@@ -28,4 +28,11 @@ class ReportQuestion{
   public function SetFlags() {
 
   }
+
+  //TEST of Confirmit JS
+  public function SetOrgcodes(testArray : String[]) {
+    for(var i = 0; i < testArray.length; i++){
+      this.orgcodes.push(testArray[i]);
+    }
+  }
 }
