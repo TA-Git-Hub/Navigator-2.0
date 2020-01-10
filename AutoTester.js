@@ -41,7 +41,7 @@ class AutoTester{
         for (var j = 0; j < dimension.Questions.length; j++) {
           Debug(j);
           if (questionIds[dimension.Questions[j]] === undefined){
-            questionIds[dimension.Questions[j]] = true;
+            questionIds[dimension.Questions[j]] = dimension.Questions[j];
           }
         }
       }
@@ -55,22 +55,20 @@ class AutoTester{
         for (var j = 0; j < grid.Qs.length; j++) {
           Debug(j);
           if (questionIds[grid.Qs[j]] === undefined){
-            questionIds[grid.Qs[j]] = true;
+            questionIds[grid.Qs[j]] = grid.Qs[j];
           }
         }
       }else {
         if (questionIds[grid.Id] === undefined){
-          questionIds[grid.Id] = true;
+          questionIds[grid.Id] = grid.Id;
         }
       }
     }
-    var returnArray : String[80] = [];
+    var returnArray : String[] = [];
     Debug("questionIds");
     for(var key in questionIds) {
       Debug("questionIds_Key : " + key);
-      if(questionIds[key] === true) {
-        returnArray.push(key);
-      }
+      returnArray.push(key);
     }
     return returnArray;
   }
