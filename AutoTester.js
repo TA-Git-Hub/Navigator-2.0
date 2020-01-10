@@ -1,11 +1,15 @@
 class AutoTester{
   private var report : Report = null;
-  private var state : State = null;
+  private var state : ReportState = null;
+  private var confirmit : ConfirmitFacade = null;
+  private var log : Logger = null;
   private var user : User = null;
 
   public function AutoTester(context : Object) {
     this.report = context.report;
     this.state = context.state;
+    this.confirmit = context.confirmit;
+    this.log = context.log;
     this.user = context.user;
   }
 
