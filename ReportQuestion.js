@@ -13,15 +13,6 @@ class ReportQuestion{
   // constructor
   public function ReportQuestion(id : String) {
     this.id = id;
-    //this.qName = questionInfo.qName;
-    //this.qText = questionInfo.qText;
-    //this.distribution = questionInfo.distribution;
-    //this.comparatorValues = questionInfo.comparatorValues;
-    //this.scoreMapping = questionInfo.scoreMapping;
-    //this.validN = questionInfo.validN;
-    //this.flags = questionInfo.flags;
-    //this.apLink = questionInfo.apLink;
-    //this.orgcodes = questionInfo.orgcodes;
   }
 
   // -- CALCULATIONS
