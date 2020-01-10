@@ -18,7 +18,7 @@ class Config {
       	{ Id:'DIM_ENPS', Questions: ['NP01'], SuppressScoring:false,Tier:2}
   	];
 
-    static const QuestionsGridStructure = [
+    static var QuestionsGridStructure = [
                 {Id: 'GRID1', Qs: ['SD03',	'SD04',	'SD05',	'GP07',	'GP12',	'LD04',	'LD09',	'IV04',
                      'DM02',	'VC04',	'PE03',	'PE06',	'PE09',	'CP14',	'GP09',	'TW06',
                      'TW04',	'GP10',	'WL01',	'ER01',	'RC01',	'ST01',	'IV02',	'WE01',
