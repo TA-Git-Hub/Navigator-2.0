@@ -1,5 +1,5 @@
 class Config {
-  static const Dimensions = [
+  static var Dimensions = [
       //{ Id:'DIM_ENG', Questions: [ 'OM12', /* 'OM01' ,*/ 'OS02', 'OM06', 'OM11'], Tier:2 } ,
       	{ Id:'DIM_ENG', Questions: ['OM11','OM12','OM01','OM06'],Tier:2},
         { Id:'DIM_ENA', Questions: ['WE08','WE12','JS05','JS02'],Tier:2},
