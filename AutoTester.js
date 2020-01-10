@@ -30,9 +30,7 @@ class AutoTester{
     var questionIds : Object = {};
     for (var i = 0; i < testSubjects.dimensions.length; i++) {
       var dimension = testSubjects.dimensions[i];
-      this.log.LogDebug("2");
-      if (dimension.Questions.isArray()){
-        this.log.LogDebug("3");
+      if (dimension.Questions !== null){
         for (var j = 0; j < dimension.Questions.length; j++) {
           if (questionIds[dimension.Questions[j]] === undefined){
             questionIds[dimension.Questions[j]] = true;
