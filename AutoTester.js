@@ -68,7 +68,7 @@ class AutoTester{
     Debug("questionIds");
     for(var key in questionIds) {
       Debug("questionIds_Key : " + key);
-      returnArray.push(key);
+      returnArray.push(questionIds[key]);
     }
     return returnArray;
   }
