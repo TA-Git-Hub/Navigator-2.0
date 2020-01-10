@@ -8,7 +8,7 @@ class ReportQuestion{
   private var validN : int = null;
   private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   private var apLink : String = null;
-  private var orgcodes : [] = []; // to-do determines local question visibility
+  private var orgcodes = []; // to-do determines local question visibility
 
   // constructor
   public function ReportQuestion(id : String) {
