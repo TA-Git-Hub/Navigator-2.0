@@ -16,3 +16,37 @@
 // declaring a function -> name starts with an uppercase letter, camelCase is used for the rest
 //            (all words are put together with first letter of each word being uppercase).
 // each function is declared with either "public" or "private" keyword.
+
+class ExampleClass{
+  private var propertyVariable : String = "String variable.";
+  private var typeArray : String[] = [];
+
+  //constructor
+  public function ExampleClass(input){
+    this.propertyVariable = input.variable;
+  }
+
+  //CALCULATIONS
+  public function ExampleFunction(name, surname){
+    var outputString : String = null;
+    outputString = name + " " + surname;
+    return outputString;
+  }
+
+  //GETTERS
+  public function GetPropertyVariable(){
+    return this.propertyVariable;
+  }
+
+  //SETTERS
+  public function SetPropertyVariable(input){
+    this.propertyVariable = input;
+  }
+
+  public function TypeArrayHandlingExample(listOfNames){
+    this.typeArray = new String[listOfNames.length];  //This is how Array needs to be declared.
+    for(var i = 0; i < listOfNames.length; i++){      //You need to have length when declaring.
+      this.typeArray[i] = listOfNames[i];
+    }
+  }
+}
