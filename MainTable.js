@@ -23,12 +23,13 @@ class MainTable{
     //Horizontal & vertical expression function
     //Config - Add wave, survey IDs
     //Prepare TODO list
+    //Question texts - where are they taken from in curr navi
 
     var rows = X.join("+");
     var columns = Y.join("+");
     var expr = [rows, columns].join('^');
 
-    table.AddHeaders(report, 'ds2', expr);
+    table.AddHeaders(report, Config.dataSources.MainSurvey, expr);
 }
 
   static function GetAllQuestions(){
