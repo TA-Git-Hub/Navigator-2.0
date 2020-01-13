@@ -8,7 +8,7 @@ class ReportQuestion{
   private var validN : int = null;
   private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   private var apLink : String = null;
-  private var orgcodes = []; // to-do determines local question visibility
+  private var orgcodes : String[] = []; // to-do determines local question visibility
 
   // constructor
   public function ReportQuestion(id : String) {
@@ -31,8 +31,11 @@ class ReportQuestion{
 
   //TEST of Confirmit JS
   public function SetOrgcodes(testArray : String[]) {
+    this.orgcodes = new String[testArray.length];
+
     for(var i = 0; i < testArray.length; i++){
-      this.orgcodes.push(testArray[i]);
+      this.orgcodes[i] = testArray[i];
+      //this.orgcodes.push(testArray[i]);
     }
   }
 }
