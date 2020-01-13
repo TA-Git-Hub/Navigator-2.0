@@ -1,4 +1,4 @@
-/*class MainTable{
+class MainTable{
 
 //Call this function from the aggregated table
   static function GetTable(table, report){
@@ -17,7 +17,7 @@
       Y.push('[SEGMENT]{' +
               'label: "'+ trendYears[j] +'";' +
               'hideheader:false;' +
-              'expression:' + report.TableUtils.EncodeJsString(trendInfo.VariableId + '=' + trendYears[j].toString())+
+              'expression:' + report.TableUtils.EncodeJsString(trendInfo.VariableId + '="' + trendYears[j] + '"')+
               '}');
     }
 
@@ -49,4 +49,4 @@
     }
     return allQuestions;
   }
-}*/
+}

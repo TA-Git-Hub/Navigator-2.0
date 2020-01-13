@@ -13,7 +13,7 @@ static const Wave = {
   //Current wave year
   Current: 2016,
   //UPDATED THE BELOW TO REFLECT WAVE CODE VALUES IN SURVEY FOR YOUR PROJECT
-  Waves:[2015, 2014, 2013] // RP-24 Three years of Trends
+  Previous:[2015, 2014, 2013] // RP-24 Three years of Trends
 };
 
   static var Dimensions = [
