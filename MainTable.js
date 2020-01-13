@@ -17,7 +17,7 @@ class MainTable{
       Y.push('[SEGMENT]{' +
               'label: "'+ trendYears[j] +'";' +
               'hideheader:false;' +
-              'expression:' + report.TableUtils.EncodeJsString(trendInfo.VariableId + '=' + \""trendYears[j]"\")+
+              'expression:' + report.TableUtils.EncodeJsString(trendInfo.VariableId + '=' + trendYears[j])+
               '}');
     }
 
