@@ -1,4 +1,4 @@
-class ReportDimension {
+/*class ReportDimension {
 
   //Array for question objects
   private var questionArray = {};
@@ -66,3 +66,4 @@ class ReportDimension {
 
 
 }
+*/
