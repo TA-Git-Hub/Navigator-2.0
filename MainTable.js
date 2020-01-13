@@ -10,14 +10,14 @@ class MainTable{
       X.push(qs[i] + '{title:true; totals:true}')
     }
     //There is no config for trend yet, so there is just this easy array of all years
-    var trendYears = trendInfo.Current.concat(trendInfo.Previous)
+    var trendYears = trendInfo.Previous;
     var Y = [];
 
     for(var j = 0; j < trendYears.length; j++){
       Y.push('[SEGMENT]{' +
               'label: "'+ trendYears[j] +'";' +
-              'hideheader:false;' +
-              'expression:' + report.TableUtils.EncodeJsString(trendInfo.VariableId + '=' + trendYears[j])+
+              'hideheader:false;' + 
+              'expression:' + report.TableUtils.EncodeJsString(trendInfo.VariableId + '=' + trendYears[j].toString())+
               '}');
     }
 
