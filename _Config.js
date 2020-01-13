@@ -1,4 +1,12 @@
 class Config {
+
+  static const dataSources = {
+    MainSurvey: 'ds0',
+    RTSurvey: 'ds_rt',
+    APSurvey: 'ds_ap',
+    NormSurvey: 'ds_norm'
+  }
+
   static var Dimensions = [
       //{ Id:'DIM_ENG', Questions: [ 'OM12', /* 'OM01' ,*/ 'OS02', 'OM06', 'OM11'], Tier:2 } ,
       	{ Id:'DIM_ENG', Questions: ['OM11','OM12','OM01','OM06'],Tier:2},
