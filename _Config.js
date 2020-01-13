@@ -1,11 +1,20 @@
 class Config {
 
-  static const dataSources = {
+  static const DataSources = {
     MainSurvey: 'ds0',
     RTSurvey: 'ds_rt',
     APSurvey: 'ds_ap',
     NormSurvey: 'ds_norm'
-  }
+  };
+
+  // Wave (for Historical Data)
+static const Wave = {
+  VariableId: 'Wave',
+  //Current wave year
+  Current: [2016],
+  //UPDATED THE BELOW TO REFLECT WAVE CODE VALUES IN SURVEY FOR YOUR PROJECT
+  Previous:[2015,2014,2013] // RP-24 Three years of Trends
+};
 
   static var Dimensions = [
       //{ Id:'DIM_ENG', Questions: [ 'OM12', /* 'OM01' ,*/ 'OS02', 'OM06', 'OM11'], Tier:2 } ,
