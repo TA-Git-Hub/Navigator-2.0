@@ -20,11 +20,15 @@ class MainTable{
               '}');
     }
 
-    var x = X.join("+");
-    var y = Y.join("+");
-    var expr = [x, y].join('^');
+    //Horizontal & vertical expression function
+    //Config - Add wave, survey IDs
+    //Prepare TODO list
 
-    table.AddHeaders(report, 'ds0', expr);
+    var rows = X.join("+");
+    var columns = Y.join("+");
+    var expr = [rows, columns].join('^');
+
+    table.AddHeaders(report, 'ds2', expr);
 }
 
   static function GetAllQuestions(){
