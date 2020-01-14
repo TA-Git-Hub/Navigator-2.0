@@ -1,4 +1,4 @@
-class MainTables{
+class MainTable{
 //Notes section until we have TODO
 
     //Horizontal & vertical expression function (done)
@@ -27,8 +27,8 @@ class MainTables{
     }
 
 //Get columns
-    for(var j = 0; j < trendInfo.Previous.length; j++){
-      Y.push(GetVerticalExpression({label:trendInfo.Previous[j], variableId: trendInfo.VariableId, filterExpression:trendInfo.Previous[j], hideheader: 'false', headerType: 'SEGMENT'}, context));
+    for(var j = 0; j < trendInfo.Codes.length; j++){
+      Y.push(GetVerticalExpression({label:trendInfo.Codes[j], variableId: trendInfo.VariableId, filterExpression:trendInfo.Codes[j], hideheader: 'false', headerType: 'SEGMENT'}, context));
     }
 
     var rows = X.join("+");
