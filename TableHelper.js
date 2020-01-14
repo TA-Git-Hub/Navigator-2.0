@@ -4,8 +4,10 @@ class TableHelper{
 
   static function GetMainTableData(context){
     var columns = {text: context.report.TableUtils.GetColumnValues("source:MainTable", 0),
-                   currentResult: context.report.TableUtils.GetColumnValues("source:MainTable", 1)
-                   previous: GetPrevious(context)}
+                   currentResult: context.report.TableUtils.GetColumnValues("source:MainTable", 1),
+                   previous: GetPrevious(context)
+                 };
+
     return columns;
   }
 
