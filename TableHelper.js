@@ -1,5 +1,5 @@
 class TableHelper{
-  var allQIds = MainTable.GetAllGridQuestions();
+  static var allQIds = MainTable.GetAllGridQuestions();
   private var reportQuestionHT = {};
 
   static function GetMainTableData(context){
