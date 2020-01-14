@@ -1,4 +1,4 @@
-class MainTable{
+class MainTables{
 //Notes section until we have TODO
 
     //Horizontal & vertical expression function (done)
