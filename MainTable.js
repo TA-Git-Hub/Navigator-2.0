@@ -14,7 +14,7 @@ class MainTable{
     const report = context.report;
     const table = context.table;
 
-    const qs = GetAllGridQuestions();
+    const qs = GetAllGridIds();
     const trendInfo = Config.Wave;
 
     var X = [];
@@ -22,12 +22,12 @@ class MainTable{
 
 //Get rows
     for(var i = 0; i < qs.length; i++){
-      X.push(getHorizontalExpression(qs[i], {title: 'true', totals: 'true'}));
+      X.push(GetHorizontalExpression(qs[i], {title: 'true', totals: 'true'}));
     }
 
 //Get columns
     for(var j = 0; j < trendInfo.Previous.length; j++){
-      Y.push(getVerticalExpression({label:trendInfo.Previous[j], variableId: trendInfo.VariableId, filterExpression:trendInfo.Previous[j]}, {hideheader: 'false'}, context));
+      Y.push(GetVerticalExpression({label:trendInfo.Previous[j], variableId: trendInfo.VariableId, filterExpression:trendInfo.Previous[j], hideheader: 'false', headerType: 'SEGMENT'}, context));
     }
 
     var rows = X.join("+");
@@ -40,16 +40,16 @@ class MainTable{
 /*
 @@ Description: This function returns smartview syntax for columns, probably not the solution that would work for all cases
 @@ Entry parameters: duh - object, properties: label, variableID (string), filterExpression
-@@					 properties - object, properties: hideheader (true/false)
+@@					 properties - object, properties: hideheader (true/false), headerType (string)
 @@					 context - object, properties: table, report, confirmit, user, state, log
 */
-  static function getVerticalExpression(duh, properties, context){
-      var report = context.report;
+  static function GetVerticalExpression(properties, context){
+      const report = context.report;
 
-      return ('[SEGMENT]{' +
-              'label: "'+ duh.label +'";' +
+      return ('['+ properties.headerType +']{' +
+              'label: "'+ properties.label +'";' +
               'hideheader:' + properties.hideheader + ';' +
-              'expression:' + report.TableUtils.EncodeJsString(duh.variableId + '="' + duh.filterExpression + '"')+
+              'expression:' + report.TableUtils.EncodeJsString(properties.variableId + '="' + properties.filterExpression + '"')+
               '}');
   }
 
@@ -58,14 +58,14 @@ class MainTable{
 @@ Entry parameters: question - string, id of a question from Main survey
 @@					 properties: object, properties: title (true/false), totals (true/false)
 */
-  static function getHorizontalExpression(question, properties){
+  static function GetHorizontalExpression(question, properties){
     return (question + '{title:' + properties.title + '; totals:' + properties.totals+'}');
   }
 
 /*
 @@ Description: This function returns an array with all questions found in Questions Grid Structure variable in Config
 */
-static function GetAllGridQuestions(){
+  static function GetAllGridQuestions(){
 
 //Array with all GRIDs
     const allGridObjects = Config.QuestionsGridStructure;
@@ -82,5 +82,19 @@ static function GetAllGridQuestions(){
       }
     }
     return allQuestions;
+  }
+/*
+@@ Description: Function that returns array of grid Ids, and/or non-grid questions
+*/
+  static function GetAllGridIds(){
+//Array with all GRIDs
+    const allGridObjects = Config.QuestionsGridStructure;
+    var allIds= [];
+
+    for(var i = 0; i < allGridObjects.length; i++){
+      allIds.push(allGridObjects[i].Id);
+    }
+
+    return allIds;
   }
 }
