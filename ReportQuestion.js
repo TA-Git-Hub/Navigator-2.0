@@ -3,14 +3,14 @@ class ReportQuestion{
   private var label : String = null;
   private var description : String = null;
   private var distribution : int[] = []; // to-do
-  private var comparatorValues = {trend: int[] = [],
-                        inter: int[] = [],
-                        exter: int[] = []
+  private var comparatorValues = {trend:  [],
+                        inter:  [],
+                        exter:  []
                       };
-  private var scores = {fav: int = null,
-                        neu: int = null,
-                        unfav: int = null,
-                        validN: int = null
+  private var scores = {fav:  null,
+                        neu: null,
+                        unfav: null,
+                        validN:  null
                       };
   private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   private var apLink : String = null;
