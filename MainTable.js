@@ -4,7 +4,8 @@ class MainTable{
     //Horizontal & vertical expression function (done)
     //Config - Add wave, survey IDs (done)
     //Prepare TODO list (up to Filda)
-    //Question texts - where are they taken from in curr navi
+    //Question texts - where are they taken from in curr navi (done) - Don't use questions one by one, use the whole GRID
+    //Added context (copied from Confirmit's AP) - Should we use context as entry arguments all the time? Even for functions you don't really expect to use it?
 
 /*
 @@ Description - Call this function from the aggregated table
@@ -39,8 +40,7 @@ class MainTable{
 
 /*
 @@ Description: This function returns smartview syntax for columns, probably not the solution that would work for all cases
-@@ Entry parameters: duh - object, properties: label, variableID (string), filterExpression
-@@					 properties - object, properties: hideheader (true/false), headerType (string)
+@@ Entry parameters: properties - object, properties: label, variableID (string), filterExpression, hideheader (string) 'true' or 'false', headerType (string) 'SEGMENT', 'CONTENT' etc.
 @@					 context - object, properties: table, report, confirmit, user, state, log
 */
   static function GetVerticalExpression(properties, context){
@@ -56,7 +56,7 @@ class MainTable{
 /*
 @@ Description: This function returns possibly the easiest smartview syntax for rows
 @@ Entry parameters: question - string, id of a question from Main survey
-@@					 properties: object, properties: title (true/false), totals (true/false)
+@@					 properties: object, properties: title (string), totals (string) - 'true' or 'false'
 */
   static function GetHorizontalExpression(question, properties){
     return (question + '{title:' + properties.title + '; totals:' + properties.totals+'}');
