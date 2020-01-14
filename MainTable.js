@@ -1,30 +1,34 @@
 class MainTable{
+//Notes section until we have TODO
 
-//Call this function from the aggregated table
-  static function GetTable(table, report){
-    const qs = MainTable.GetAllQuestions();
-    const trendInfo = Config.Wave
-
-    var X = [];
-    for(var i = 0; i < qs.length; i++){
-      X.push(qs[i] + '{title:true; totals:true}')
-    }
-    //There is no config for trend yet, so there is just this easy array of all years
-    var trendYears = trendInfo.Previous;
-    var Y = [];
-
-    for(var j = 0; j < trendYears.length; j++){
-      Y.push('[SEGMENT]{' +
-              'label: "'+ trendYears[j] +'";' +
-              'hideheader:false;' +
-              'expression:' + report.TableUtils.EncodeJsString(trendInfo.VariableId + '="' + trendYears[j] + '"')+
-              '}');
-    }
-
-    //Horizontal & vertical expression function
+    //Horizontal & vertical expression function (done)
     //Config - Add wave, survey IDs (done)
     //Prepare TODO list (up to Filda)
     //Question texts - where are they taken from in curr navi
+
+/*
+@@ Description - Call this function from the aggregated table
+@@ Entry parameters - context - object, properties: table, report, confirmit, user, state, log
+*/
+  static function GetTable(context){
+    const report = context.report;
+    const table = context.table;
+
+    const qs = GetAllGridQuestions();
+    const trendInfo = Config.Wave;
+
+    var X = [];
+    var Y = [];
+
+//Get rows
+    for(var i = 0; i < qs.length; i++){
+      X.push(getHorizontalExpression(qs[i], {title: 'true', totals: 'true'}));
+    }
+
+//Get columns
+    for(var j = 0; j < trendInfo.Previous.length; j++){
+      Y.push(getVerticalExpression({label:trendInfo.Previous[j], variableId: trendInfo.VariableId, filterExpression:trendInfo.Previous[j]}, {hideheader: 'false'}, context));
+    }
 
     var rows = X.join("+");
     var columns = Y.join("+");
@@ -33,11 +37,41 @@ class MainTable{
     table.AddHeaders(report, Config.DataSources.MainSurvey, expr);
 }
 
-  static function GetAllQuestions(){
-    //Array with all GRIDs
+/*
+@@ Description: This function returns smartview syntax for columns, probably not the solution that would work for all cases
+@@ Entry parameters: duh - object, properties: label, variableID (string), filterExpression
+@@					 properties - object, properties: hideheader (true/false)
+@@					 context - object, properties: table, report, confirmit, user, state, log
+*/
+  static function getVerticalExpression(duh, properties, context){
+      var report = context.report;
+
+      return ('[SEGMENT]{' +
+              'label: "'+ duh.label +'";' +
+              'hideheader:' + properties.hideheader + ';' +
+              'expression:' + report.TableUtils.EncodeJsString(duh.variableId + '="' + duh.filterExpression + '"')+
+              '}');
+  }
+
+/*
+@@ Description: This function returns possibly the easiest smartview syntax for rows
+@@ Entry parameters: question - string, id of a question from Main survey
+@@					 properties: object, properties: title (true/false), totals (true/false)
+*/
+  static function getHorizontalExpression(question, properties){
+    return (question + '{title:' + properties.title + '; totals:' + properties.totals+'}');
+  }
+
+/*
+@@ Description: This function returns an array with all questions found in Questions Grid Structure variable in Config
+*/
+static function GetAllGridQuestions(){
+
+//Array with all GRIDs
     const allGridObjects = Config.QuestionsGridStructure;
     var allQuestions = [];
 
+//Iterate through each Grid question. If the Grid has no QS, push Grid ID to the allQuestions array, otherwise push QS
     for(var i = 0; i < allGridObjects.length; i++){
       if(allGridObjects[i].Qs != null){
 	    	for(var j = 0; j < allGridObjects[i].Qs.length; j++){
