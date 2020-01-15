@@ -37,19 +37,18 @@ static private function Debug(message, log){
     var columnCount = Config.Wave.Codes.length;
     for(var i = 0; i < allQIds.length; i++){
       var qValues = {current: null, trends: [], inter: [], exter: []};
+      Debug("scale: " + questionMap[allQIds[i]], context.log);
+      Debug("i/length: " + i + '/' + allQIds.length, context.log);
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
-        rowIterator = (i === 0) ?  0 : (/*i * questionMap[allQIds[i]] + (i * 1)*/ tempIt + questionMap[allQIds[i]] + 1);
-
+        rowIterator = tempIt;
         Debug("rowIterator: " + rowIterator, context.log);
-        Debug("scale: " + questionMap[allQIds[i]], context.log);
+
         var label = questionTexts[rowIterator][1];//ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
         var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
         var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
         rowIterator += questionMap[allQIds[i]];
         var validN = column[rowIterator].Value;
         rowIterator += 1;
-
-        tempIt = rowIterator;
 
         if (columnIterator === 1) {
           qValues.current = {distribution: distribution, validN: validN};
@@ -59,6 +58,9 @@ static private function Debug(message, log){
           qValues.trends.push({distribution: distribution, validN: validN});
         }
       }
+
+      tempIt = rowIterator;
+
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
       question.Setup({distribution: qValues.current.distribution, validN : qValues.current.validN, label: label, comparatorValues: {trend: qValues.trends}, description: ""}, context);
       returnArray.push(question);
