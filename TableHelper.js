@@ -27,34 +27,34 @@ static private function Debug(message, log){
 */
   static function PopulateQuestions(context){
     //var columns = GetMainTableData(context);
-    Debug("1", context.log);
+  //  Debug("1", context.log);
     var questionMap = CreateQuestionMap(context);
-    Debug("2", context.log);
+  //  Debug("2", context.log);
     var rowIterator = 0;
     var columnIterator = 1;
     for(var i = 0; i < allQIds.length; i++){
-      Debug(context.report, context.log);
+    //  Debug(context.report, context.log);
       var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
-      Debug("3A", context.log);
+    //  Debug("3A", context.log);
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
-      Debug("3B", context.log);
+    //  Debug("3B", context.log);
       var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
-      Debug("4", context.log);
+      //Debug("4", context.log);
       rowIterator += questionMap[allQIds[i]];
       var validN = column[rowIterator];
 
-      question.Setup({distribution: distribution, validN : validN, label: allQIds[i]});
-      Debug("5", context.log);
+      question.Setup({distribution: distribution, validN : validN, label: allQIds[i]}, context);
+      Debug("5 - success", context.log);
     }
   }
 
   static function CreateQuestionMap(context){
     var questionMap = {};
     var questions = Config.QuestionsGridStructure;
-    Debug("1A", context.log);
+  //  Debug("1A", context.log);
     for(var i = 0; i < questions.length; i++){
       var questionScale = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(questions[i].Id).GetScale().length;
-      Debug("1B", context.log);
+  //    Debug("1B", context.log);
       if(questions[i].Qs === null){
         questionMap[questions[i].Id] = questionScale;
       }else{
