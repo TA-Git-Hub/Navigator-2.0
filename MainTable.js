@@ -1,14 +1,7 @@
 class MainTable{
-//Notes section until we have TODO
-
-    //Horizontal & vertical expression function (done)
-    //Config - Add wave, survey IDs (done)
-    //Prepare TODO list (up to Filda)
-    //Question texts - where are they taken from in curr navi (done) - Don't use questions one by one, use the whole GRID
-    //Added context (copied from Confirmit's AP) - Should we use context as entry arguments all the time? Even for functions you don't really expect to use it?
 
 /*
-@@ Description - Call this function from the aggregated table, it will generate this awesome table
+@@ Description - Call this function from the aggregated table, it will generate this awesome table in a smartview syntax
 @@ Entry parameters - context - object, properties: table, report, confirmit, user, state, log
 */
   static function GetTable(context){
@@ -33,13 +26,13 @@ class MainTable{
       columns.push(GetVerticalExpression({label:trendInfo.Codes[j], filterExpression:filter, hideheader: 'false', headerType: 'SEGMENT'}, context));
     }
 
+//Get columns for hierarchy orgcodes filtered by current wave
     var internalColumnsOrgcodes = [];
     var internalColumnsWave = [];
     var orgcodes = [1000,1001,1002,1003];
     var orgcodeSettings = Config.Hierarchy;
     var waveFilter = GetFilterExpression({variableId: trendInfo.VariableId, filterExpression: trendInfo.Codes[0]});
 
-//Get columns for hierarchy orgcodes filtered by current wave
     for(var k = 0; k < orgcodes.length; k++){
         var hierarchyFilter = GetFilterExpression({variableId: orgcodeSettings.VariableId, filterExpression: orgcodes[k]});
 
@@ -49,10 +42,10 @@ class MainTable{
 
     var internalColumnsJoined = [];
     for(var l = 0; l < internalColumnsOrgcodes.length; l++){
-		internalColumnsJoined.push([internalColumnsOrgcodes[l], internalColumnsWave[l]].join("/"));
+	  	internalColumnsJoined.push([internalColumnsOrgcodes[l], internalColumnsWave[l]].join("/"));
     }
 
-//Create one big syntax for table
+//Create one big syntax for table by connecting arrays
     rows = rows.join("+");
     columns = columns.join("+");
     internalColumnsJoined = internalColumnsJoined.join("+");
@@ -62,16 +55,23 @@ class MainTable{
 
     table.AddHeaders(report, Config.DataSources.MainSurvey, expr);
 }
-
-  static function GetFilterExpression(properties){
+/*
+@@ Description: This function get you filter expression you can use for example in the smartview syntax. I am not sure how many cases
+@@                there can be so I created a switch. One case for Orgcode, second case for everything else.
+@@ Entry parameters: properties - object , properties: variableId (string) -> what you want to use as filter
+@@                                                     filterExpression (string) -> how you want to filter the VariableId
+@@ Return examples: 'InHierarchy(Orgcode, "1000")'
+@@                  'Wave="2016"'
+@@
+@@ This expression should be used in report.TableUtils.EncodeJsString() function for it's magical powers
+@@
+*/  static function GetFilterExpression(properties){
 
     switch(properties.variableId){
-        // 'expression:' + report.TableUtils.EncodeJsString('InHierarchy(Orgcode, "1000")')+
       case Config.Hierarchy.VariableId:
         return 'InHierarchy('+Config.Hierarchy.VariableId+',"'+ properties.filterExpression +'")';
       break;
 
-        //'expression:' + report.TableUtils.EncodeJsString('Wave="2016"')+
       default:
         return properties.variableId + '="' + properties.filterExpression + '"';
       break;
@@ -81,7 +81,7 @@ class MainTable{
 
 /*
 @@ Description: This function returns smartview syntax for columns, probably not the solution that would work for all cases
-@@ Entry parameters: properties - object, properties: label, filter (string), hideheader (string) 'true' or 'false', headerType (string) 'SEGMENT', 'CONTENT' etc.
+@@ Entry parameters: properties - object, properties: label, filterExpression (string), hideheader (string) 'true' or 'false', headerType (string) 'SEGMENT', 'CONTENT' etc.
 @@					 context - object, properties: table, report, confirmit, user, state, log
 */
   static function GetVerticalExpression(properties, context){
@@ -117,5 +117,4 @@ class MainTable{
 
     return allIds;
   }
-
 }

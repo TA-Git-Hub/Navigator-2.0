@@ -9,7 +9,6 @@ Current:
 Luky & Venca --
 - class MainTable:
 //How do we get the data for internal comparators? -> Filter by InHierarchy / Current Wave (just need a smart way to implement)
-//GetVerticalExpression - Filter Expression should have another function as this is probably the only thing that is not common
 */
 
 
@@ -19,6 +18,7 @@ Finished:
            - class MainTable - added Horizontal & vertical expression function
                              - Main table takes data and text from GRID, not individual questions
                              - Added context object with all possible stuff we may need in the future
+                             - Added special function for creating filter expression
            - class Config - Add wave, survey DataSources reference
 
 */
