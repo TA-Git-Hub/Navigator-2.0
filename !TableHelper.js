@@ -37,7 +37,7 @@ static private function Debug(message, log){
     for(var i = 0; i < allQIds.length; i++){
       var qValues = {current: null, trends: [], inter: [], exter: []};
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
-        rowIterator = (i === 0) ?  0 : (i * questionMap[allQIds[i]] + 1);
+        rowIterator = (i === 0) ?  0 : ((i + 1) * questionMap[allQIds[i]]);
 
         Debug("rowIterator: " + rowIterator, context.log);
         var label = questionTexts[rowIterator][1];//ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
