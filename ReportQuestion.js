@@ -25,23 +25,23 @@ class ReportQuestion{
 
   // -- CALCULATIONS
   public function Setup(information, context) {
-    ReportHelper.Debug("1", context.log);
+    ReportHelper.Debug("1 " + information.label, context.log);
     if(information.label !== null){
       SetLabel(information.label);
     }
-    ReportHelper.Debug("2", context.log);
+    ReportHelper.Debug("2 " + information.description, context.log);
     if(information.description !== null){
       SetDescription(information.description);
     }
-    ReportHelper.Debug("3", context.log);
+    ReportHelper.Debug("3 " + information.distribution, context.log);
     if(information.distribution !== null){
       SetDistribution(information.distribution);
     }
-    ReportHelper.Debug("4", context.log);
+    ReportHelper.Debug("4 " + information.comparatorValues, context.log);
     if(information.comparatorValues !== null){
       SetComparatorValues(information.comparatorValues);
     }
-    ReportHelper.Debug("5", context.log);
+    ReportHelper.Debug("5 " + information.validN, context.log);
     if(information.validN !== null){
       SetValidN(information.validN);
     }
