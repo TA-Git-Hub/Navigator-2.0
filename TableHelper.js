@@ -28,7 +28,7 @@ static private function Debug(message, log){
   static function PopulateQuestions(context){
     //var columns = GetMainTableData(context);
     Debug("1", context.log);
-    var questionMap = CreateQuestionMap(context);
+    var questionMap = CreateQuestionMap({report: context.report});
     Debug("2", context.log);
     var rowIterator = 0;
     var columnIterator = 1;
