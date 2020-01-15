@@ -17,6 +17,21 @@ static const Wave = {
   Codes:[2016, 2015, 2014, 2013] // RP-24 Three years of Trends
 };
 
+
+//Hierarchy settings
+static var Hierarchy = {
+    SchemaId: 5078, //US - Change for your project
+//SchemaId: 3857, //EURO SERVER - Change for your project
+//SchemaId: 4237, //EURO-GER SERVER - Change for your project
+    ParentRelationName: 'parent', // *** NOTE: Case sensitive ***
+    TableName: 'Korn Ferry Report new',
+    VariableId: 'Orgcode',
+    TopNodeId: '1000',
+    Direct: false,
+    HideSelector: false,
+    HideScoresColumnName: '__l9hide'
+};
+
   static var Dimensions = [
       //{ Id:'DIM_ENG', Questions: [ 'OM12', /* 'OM01' ,*/ 'OS02', 'OM06', 'OM11'], Tier:2 } ,
       	{ Id:'DIM_ENG', Questions: ['OM11','OM12','OM01','OM06'],Tier:2},
