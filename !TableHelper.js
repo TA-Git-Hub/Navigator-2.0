@@ -43,6 +43,7 @@ static private function Debug(message, log){
       //Debug("4", context.log);
       rowIterator += questionMap[allQIds[i]];
       var validN = column[rowIterator].Value;
+      rowIterator += 1;
 
       question.Setup({distribution: distribution, validN : validN, label: allQIds[i], comparatorValues: {}, description: ""}, context);
       returnArray.push(question);
