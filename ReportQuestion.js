@@ -20,7 +20,7 @@ class ReportQuestion{
   // constructor
   public function ReportQuestion(id : String) {
     this.id = id;
-    this.scores = Config.GetDistributionIndexes(this.id);
+    //this.scores = Config.GetDistributionIndexes(this.id);
   }
 
   // -- CALCULATIONS
