@@ -34,8 +34,9 @@ static private function Debug(message, log){
     var columnIterator = 1;
     for(var i = 0; i < allQIds.length; i++){
       var column = context.report.TableUtils.GetColumnValues("source:MainTable", columnIterator);
+      Debug("3A", context.log);
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
-      Debug("3", context.log);
+      Debug("3B", context.log);
       var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
       Debug("4", context.log);
       rowIterator += questionMap[allQIds[i]];
