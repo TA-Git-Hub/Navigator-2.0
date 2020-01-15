@@ -1,9 +1,9 @@
 /*
 Current:
 - class ReportQuestion:
-      2) get score mapping from --||--
+
 - class TableHelper:
-      1) get distributions for questions
+      2) fix distribution for trends
 
 Luky & Venca --
 - class MainTable:
@@ -21,4 +21,6 @@ Finished:
            - class Config - Add wave, survey DataSources reference
 
 16.01.2020 - ReportHelper class created
+           - class ReportQuestion - get score mapping
+           - cůass TableHelper - get distributions for questions
 */
