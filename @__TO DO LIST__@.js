@@ -1,6 +1,6 @@
 /*
 Current:
-
+- class GenericHelper To be created
 - class ReportQuestion:
       2) get score mapping from --||--
 - class TableHelper:
@@ -15,7 +15,7 @@ Luky & Venca --
 
 /*
 Finished:
-15.01.2020 - get numberOfAnswers from Config.GetDistributionIndexes(Id)
+15.01.2020 - ReportQuestion class: get numberOfAnswers from Config.GetDistributionIndexes(Id)
            - class MainTable - added Horizontal & vertical expression function
                              - Main table takes data and text from GRID, not individual questions
                              - Added context object with all possible stuff we may need in the future
