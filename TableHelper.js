@@ -33,7 +33,8 @@ static private function Debug(message, log){
     var rowIterator = 0;
     var columnIterator = 1;
     for(var i = 0; i < allQIds.length; i++){
-      var column = context.report.TableUtils.GetColumnValues("source:MainTable", columnIterator);
+      Debug(context.report, context.log);
+      var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
       Debug("3A", context.log);
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
       Debug("3B", context.log);
