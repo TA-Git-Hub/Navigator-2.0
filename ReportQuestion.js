@@ -52,6 +52,26 @@ class ReportQuestion{
   	return this.id;
   }
 
+  public function GetLabel() {
+    return this.label;
+  }
+
+  public function GetDescription() {
+    return this.description;
+  }
+
+  public function GetDistribution() {
+    return this.distribution;
+  }
+
+  public function GetComparatorValues() {
+    return this.comparatorValues;
+  }
+
+  public function GetValidN() {
+    return this.scores.validN;
+  }
+
   // -- SETTERS
   public function SetLabel(label) {
       this.label = label;
