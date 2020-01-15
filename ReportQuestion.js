@@ -15,7 +15,6 @@ class ReportQuestion{
   private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   private var apLink : String = null;
   private var orgcodes : String[] = []; // to-do determines local question visibility
-  private var numberOfAnswers : int = null;
 
   // constructor
   public function ReportQuestion(id : String) {
@@ -45,6 +44,34 @@ class ReportQuestion{
     if(information.validN !== null){
       SetValidN(information.validN);
     }
+    Calculate(context);
+  }
+
+  public function Calculate(context){
+    var indexes = Config.GetDistributionIndexes(this.id);
+
+
+    for(var key in indexes){
+      if(indexes[key] !== null){
+        var count = 0;
+        for(var i = 0; i < indexes[key].length; i++){
+          count += this.distribution[indexes[key][i]];
+        }
+        switch (key) {
+          case "fav":
+              this.scores.fav = count / this.scores.validN;
+            break;
+          case "neu":
+              this.scores.neu = count / this.scores.validN;
+            break;
+          case "unfav":
+              this.scores.unfav = count / this.scores.validN;
+            break;
+          default:
+            ReportHelper.Debug("ERROR: ReportQuestion.Calculate()", context.log);
+        }
+      }
+    }
   }
 
   // -- GETTERS
@@ -70,6 +97,10 @@ class ReportQuestion{
 
   public function GetValidN() {
     return this.scores.validN;
+  }
+
+  public function GetScores() {
+    return this.scores;
   }
 
   // -- SETTERS
