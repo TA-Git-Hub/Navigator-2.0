@@ -104,28 +104,6 @@ class MainTable{
   }
 
 /*
-@@ Description: This function returns an array with all questions found in Questions Grid Structure variable in Config
-*/
-/*  static function GetAllGridQuestions(){
-
-//Array with all GRIDs
-    const allGridObjects = Config.QuestionsGridStructure;
-    var allQuestions = [];
-
-//Iterate through each Grid question. If the Grid has no QS, push Grid ID to the allQuestions array, otherwise push QS
-    for(var i = 0; i < allGridObjects.length; i++){
-      if(allGridObjects[i].Qs != null){
-	    	for(var j = 0; j < allGridObjects[i].Qs.length; j++){
-          allQuestions.push(allGridObjects[i].Qs[j]);
-        }
-      }else{
-        allQuestions.push(allGridObjects[i].Id)
-      }
-    }
-    return allQuestions;
-  }
-  */
-/*
 @@ Description: Function that returns array of grid Ids, and/or non-grid questions
 */
   static function GetAllGridIds(){
@@ -140,9 +118,4 @@ class MainTable{
     return allIds;
   }
 
-  /***********************************************************************************************************************/
-  static function Debug(log, message){
-   log.LogDebug(message);
-  }
-  /***********************************************************************************************************************/
 }

@@ -59,13 +59,13 @@ class ReportQuestion{
         }
         switch (key) {
           case "fav":
-              this.scores.fav = count / this.scores.validN;
+              this.scores.fav = Math.round((count / this.scores.validN)*100);
             break;
           case "neu":
-              this.scores.neu = count / this.scores.validN;
+              this.scores.neu = Math.round((count / this.scores.validN)*100);
             break;
           case "unfav":
-              this.scores.unfav = count / this.scores.validN;
+              this.scores.unfav = Math.round((count / this.scores.validN)*100);
             break;
           default:
             ReportHelper.Debug("ERROR: ReportQuestion.Calculate()", context.log);
