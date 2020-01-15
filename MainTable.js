@@ -1,12 +1,6 @@
 class MainTable{
 //Notes section until we have TODO
 
-    //Horizontal & vertical expression function (done)
-    //Config - Add wave, survey IDs (done)
-    //Prepare TODO list (up to Filda)
-    //Question texts - where are they taken from in curr navi (done) - Don't use questions one by one, use the whole GRID
-    //Added context (copied from Confirmit's AP) - Should we use context as entry arguments all the time? Even for functions you don't really expect to use it?
-
 /*
 @@ Description - Call this function from the aggregated table
 @@ Entry parameters - context - object, properties: table, report, confirmit, user, state, log
