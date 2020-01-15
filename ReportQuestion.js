@@ -82,7 +82,11 @@ class ReportQuestion{
   }
 
   public function SetDistribution(distribution) {
-    this.distribution = distribution;
+    this.distribution = new int[distribution.length];
+    for(var i = 0; i < distribution.length; i++){
+      this.distribution[i] = distribution[i];
+    }
+
   }
 
   public function SetComparatorValues(comparatorValues) {
