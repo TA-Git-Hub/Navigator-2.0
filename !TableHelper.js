@@ -44,8 +44,8 @@ static private function Debug(message, log){
       rowIterator += questionMap[allQIds[i]];
       var validN = column[rowIterator].Value;
       rowIterator += 1;
-
-      question.Setup({distribution: distribution, validN : validN, label: allQIds[i], comparatorValues: {}, description: ""}, context);
+      var label = ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
+      question.Setup({distribution: distribution, validN : validN, label: label, comparatorValues: {}, description: ""}, context);
       returnArray.push(question);
 
     }
