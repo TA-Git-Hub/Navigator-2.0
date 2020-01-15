@@ -38,9 +38,10 @@ static private function Debug(message, log){
     for(var i = 0; i < allQIds.length; i++){
       var qValues = {current: null, trends: [], inter: [], exter: []};
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
-        rowIterator += (i === 0) ?  0 : (/*i * questionMap[allQIds[i]] + (i * 1)*/ tempIt + questionMap[allQIds[i]] + 1);
+        rowIterator = (i === 0) ?  0 : (/*i * questionMap[allQIds[i]] + (i * 1)*/ tempIt + questionMap[allQIds[i]] + 1);
 
         Debug("rowIterator: " + rowIterator, context.log);
+        Debug("scale: " + questionMap[allQIds[i]], context.log);
         var label = questionTexts[rowIterator][1];//ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
         var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
         var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
