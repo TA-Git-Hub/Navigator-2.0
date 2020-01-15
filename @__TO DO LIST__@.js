@@ -11,6 +11,6 @@ Current:
 
 /*
 Finished:
-15.01.2020 - get numberOfAnswers from Config.GetDistributionIndexes(Id)
+15.01.2020 - ReportQuestion class: get numberOfAnswers from Config.GetDistributionIndexes(Id)
 
 */
