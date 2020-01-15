@@ -36,7 +36,7 @@ static private function Debug(message, log){
     var columnCount = Config.Wave.Codes.length;
     for(var i = 0; i < allQIds.length; i++){
       var qValues = {current: null, trends: [], inter: [], exter: []};
-      for(var columnIterator = 1; columnIterator < columnCount; columnIterator++){
+      for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
         rowIterator = (i === 0) ?  0 : (i * questionMap[allQIds[i]] + 1);
 
         Debug("rowIterator: " + rowIterator, context.log);
