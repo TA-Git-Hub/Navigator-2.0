@@ -33,11 +33,12 @@ static private function Debug(message, log){
   //  Debug("2", context.log);
     var returnArray = [];
     var rowIterator = 0;
+    var tempIt = 0;
     var columnCount = Config.Wave.Codes.length;
     for(var i = 0; i < allQIds.length; i++){
       var qValues = {current: null, trends: [], inter: [], exter: []};
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
-        rowIterator = (i === 0) ?  0 : (i * questionMap[allQIds[i]] + (i * 1));
+        rowIterator += (i === 0) ?  0 : (/*i * questionMap[allQIds[i]] + (i * 1)*/ tempIt + questionMap[allQIds[i]] + 1);
 
         Debug("rowIterator: " + rowIterator, context.log);
         var label = questionTexts[rowIterator][1];//ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
@@ -46,6 +47,8 @@ static private function Debug(message, log){
         rowIterator += questionMap[allQIds[i]];
         var validN = column[rowIterator].Value;
         rowIterator += 1;
+
+        tempIt = rowIterator;
 
         if (columnIterator === 1) {
           qValues.current = {distribution: distribution, validN: validN};
