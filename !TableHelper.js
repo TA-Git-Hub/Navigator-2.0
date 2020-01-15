@@ -29,11 +29,13 @@ static private function Debug(message, log){
     //var columns = GetMainTableData(context);
   //  Debug("1", context.log);
     var questionMap = CreateQuestionMap(context);
+    var questionTexts = context.report.TableUtils.GetRowHeaderCategoryTitles("frodo:MainTable");
   //  Debug("2", context.log);
     var returnArray = [];
     var rowIterator = 0;
     var columnIterator = 1;
     for(var i = 0; i < allQIds.length; i++){
+      var label = questionTexts[rowIterator][1];//ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
     //  Debug(context.report, context.log);
       var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
     //  Debug("3A", context.log);
@@ -44,7 +46,7 @@ static private function Debug(message, log){
       rowIterator += questionMap[allQIds[i]];
       var validN = column[rowIterator].Value;
       rowIterator += 1;
-      var label = ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
+
       question.Setup({distribution: distribution, validN : validN, label: label, comparatorValues: {}, description: ""}, context);
       returnArray.push(question);
 
