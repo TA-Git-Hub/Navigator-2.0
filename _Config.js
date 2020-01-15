@@ -54,12 +54,12 @@ static const Wave = {
 
   			// Questions with non-standard scales
   			case 'OM06':
-  				return {Fav:[3], Neu:[2], Unfav:[0,1]};
+  				return {fav:[3], neu:[2], unfav:[0,1]};
   				break;
 
   			//ENPS EXAMPLE
   			case 'NP01':
-  				return {Fav:[9,10], Neu:[7,8], Unfav:[0,1,2,3,4,5,6]};
+  				return {fav:[9,10], neu:[7,8], unfav:[0,1,2,3,4,5,6]};
   				break;
 
   			// Negatively worded questions (reverse scale)
@@ -70,7 +70,7 @@ static const Wave = {
 
   		  // Default recoding  (normal scale)
   		  default:
-  			return {Fav:[0,1], Neu:[2], Unfav:[3,4]};
+  			return {fav:[0,1], neu:[2], unfav:[3,4]};
   		}
     };
 }

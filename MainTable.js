@@ -65,7 +65,7 @@ class MainTable{
 /*
 @@ Description: This function returns an array with all questions found in Questions Grid Structure variable in Config
 */
-  static function GetAllGridQuestions(){
+/*  static function GetAllGridQuestions(){
 
 //Array with all GRIDs
     const allGridObjects = Config.QuestionsGridStructure;
@@ -82,7 +82,7 @@ class MainTable{
       }
     }
     return allQuestions;
-  }
+  }*/
 /*
 @@ Description: Function that returns array of grid Ids, and/or non-grid questions
 */

@@ -20,6 +20,7 @@ class ReportQuestion{
   // constructor
   public function ReportQuestion(id : String) {
     this.id = id;
+    this.scores = Config.GetDistributionIndexes(this.id);
   }
 
   // -- CALCULATIONS
@@ -36,8 +37,8 @@ class ReportQuestion{
     if(information.comparatorValues !== null){
       SetComparatorValues(information.comparatorValues);
     }
-    if(information.scores !== null){
-      SetScores(information.scores);
+    if(information.validN !== null){
+      SetValidN(information.validN);
     }
   }
 
@@ -70,7 +71,10 @@ class ReportQuestion{
     this.scores.fav = scores.fav;
     this.scores.neu = scores.neu;
     this.scores.unfav = scores.unfav;
-    this.scores.validN = scores.validN;
+  }
+
+  public function SetValidN(validN) {
+    this.scores.validN = validN;
   }
 
   public function SetFlags() {
