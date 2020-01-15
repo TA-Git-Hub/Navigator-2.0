@@ -2,7 +2,7 @@ class ReportQuestion{
   private var id : String = null;
   private var label : String = null;
   private var description : String = null;
-  private var distribution : int[] = []; // to-do
+  private var distribution /*: int[]*/ = []; // to-do
   private var comparatorValues = {trend:  [],
                         inter:  [],
                         exter:  []
@@ -82,10 +82,10 @@ class ReportQuestion{
   }
 
   public function SetDistribution(distribution) {
-    this.distribution = new int[distribution.length];
+    this.distribution = distribution;/*new int[distribution.length];
     for(var i = 0; i < distribution.length; i++){
       this.distribution[i] = distribution[i];
-    }
+    }*/
 
   }
 
