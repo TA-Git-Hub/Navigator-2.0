@@ -1,6 +1,6 @@
 /*
 Current:
-
+- class GenericHelper To be created
 - class ReportQuestion:
       2) get score mapping from --||--
 - class TableHelper:

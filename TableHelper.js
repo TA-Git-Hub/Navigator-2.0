@@ -28,7 +28,7 @@ static private function Debug(message, log){
   static function PopulateQuestions(context){
     //var columns = GetMainTableData(context);
     Debug("1", context.log);
-    var questionMap = CreateQuestionMap({report: context.report});
+    var questionMap = CreateQuestionMap(context);
     Debug("2", context.log);
     var rowIterator = 0;
     var columnIterator = 1;
@@ -49,9 +49,10 @@ static private function Debug(message, log){
   static function CreateQuestionMap(context){
     var questionMap = {};
     var questions = Config.QuestionsGridStructure;
-
+    Debug("1A", context.log);
     for(var i = 0; i < questions.length; i++){
-      var questionScale = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(questions[i]).GetScale().length;
+      var questionScale = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(questions[i].Id).GetScale().length;
+      Debug("1B", context.log);
       if(questions[i].Qs === null){
         questionMap[questions[i].Id] = questionScale;
       }else{
