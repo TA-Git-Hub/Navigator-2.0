@@ -71,7 +71,8 @@ static private function Debug(message, log){
     var distribution = [];
 
     for(var i = 0; i < numberOfAnswers; i++){
-      distribution.push(column[rowIterator + i]);
+      distribution.push(column[rowIterator + i].Value);
+      Debug(column[rowIterator + i].Value, context.log);
     }
 
     return distribution;
