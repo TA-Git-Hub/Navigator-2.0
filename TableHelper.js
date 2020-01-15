@@ -20,7 +20,7 @@ class TableHelper{
   }
 */
   static function PopulateQuestions(context){
-    var columns = GetMainTableData(context);
+    //var columns = GetMainTableData(context);
     var questionMap = CreateQuestionMap(context);
     var rowIterator = 0;
     var columnIterator = 1;
@@ -45,8 +45,8 @@ class TableHelper{
       if(questions[i].Qs === null){
         questionMap[questions[i].Id] = questionScale;
       }else{
-        for(var j = 0; j < question[i].Qs.length; j++){
-          questionMap[question[i].Qs[j]] = questionScale;
+        for(var j = 0; j < questions[i].Qs.length; j++){
+          questionMap[questions[i].Qs[j]] = questionScale;
         }
       }
     }
