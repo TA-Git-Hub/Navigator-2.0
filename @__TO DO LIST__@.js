@@ -1,6 +1,5 @@
 /*
 Current:
-- class GenericHelper To be created
 - class ReportQuestion:
       2) get score mapping from --||--
 - class TableHelper:
@@ -21,4 +20,5 @@ Finished:
                              - Added special function for creating filter expression
            - class Config - Add wave, survey DataSources reference
 
+16.01.2020 - ReportHelper class created
 */

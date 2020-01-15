@@ -33,23 +33,29 @@ static private function Debug(message, log){
   //  Debug("2", context.log);
     var returnArray = [];
     var rowIterator = 0;
-    var columnIterator = 1;
+    var columnCount = Config.Wave.Codes.length;
     for(var i = 0; i < allQIds.length; i++){
-      var label = questionTexts[rowIterator][1];//ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
-    //  Debug(context.report, context.log);
-      var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
-    //  Debug("3A", context.log);
+      var qValues = {current: null, trends: [], inter: [], exter: []};
+      for(var columnIterator = 1; columnIterator < columnCount; columnIterator++){
+        rowIterator = (i === 0) ?  (i * questionMap[allQIds[i]]) : (i * questionMap[allQIds[i]] + 1);
+        var label = questionTexts[rowIterator][1];//ReportHelper.GetText(Config.DataSources.MainSurvey, allQIds[i], context);
+        var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
+        var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
+        rowIterator += questionMap[allQIds[i]];
+        var validN = column[rowIterator].Value;
+        rowIterator += 1;
+
+        if (columnIterator === 1) {
+          qValues.current = {distribution: distribution, validN: validN};
+        }
+
+        if (columnIterator > 1 && columnIterator < Config.Wave.Codes.length) {
+          qValues.trends[columnIterator - 1] = {distribution: distribution, validN: validN};
+        }
+      }
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
-    //  Debug("3B", context.log);
-      var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
-      //Debug("4", context.log);
-      rowIterator += questionMap[allQIds[i]];
-      var validN = column[rowIterator].Value;
-      rowIterator += 1;
-
-      question.Setup({distribution: distribution, validN : validN, label: label, comparatorValues: {}, description: ""}, context);
+      question.Setup({distribution: qValues.current.distribution, validN : qValues.current.validN, label: label, comparatorValues: {trend: qValues.trends}, description: ""}, context);
       returnArray.push(question);
-
     }
     return returnArray;
   }
