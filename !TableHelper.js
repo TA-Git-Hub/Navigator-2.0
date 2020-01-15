@@ -30,6 +30,7 @@ static private function Debug(message, log){
   //  Debug("1", context.log);
     var questionMap = CreateQuestionMap(context);
   //  Debug("2", context.log);
+    var returnArray = [];
     var rowIterator = 0;
     var columnIterator = 1;
     for(var i = 0; i < allQIds.length; i++){
@@ -41,11 +42,13 @@ static private function Debug(message, log){
       var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
       //Debug("4", context.log);
       rowIterator += questionMap[allQIds[i]];
-      var validN = column[rowIterator];
+      var validN = column[rowIterator].Value;
 
       question.Setup({distribution: distribution, validN : validN, label: allQIds[i], comparatorValues: {}, description: ""}, context);
-      Debug("5 - success", context.log);
+      returnArray.push(question);
+
     }
+    return returnArray;
   }
 
   static function CreateQuestionMap(context){
@@ -72,7 +75,7 @@ static private function Debug(message, log){
 
     for(var i = 0; i < numberOfAnswers; i++){
       distribution.push(column[rowIterator + i].Value);
-      Debug(column[rowIterator + i].Value, context.log);
+      //Debug(column[rowIterator + i].Value, context.log);
     }
 
     return distribution;
