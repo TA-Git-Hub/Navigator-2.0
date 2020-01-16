@@ -7,7 +7,10 @@ Current:
 
 Luky & Venca --
 - class MainTable:
-//How do we get the data for internal comparators? -> Filter by InHierarchy / Current Wave (just need a smart way to implement)
+    Discuss: Implementation of Demographics
+             Should both wave and demo columns be filtered by current level?
+             If we want to have Orgcode as demo in the table, we'd need to have 'children' info somewhere in the Config
+             How to implement Norm scores
 */
 
 
@@ -18,6 +21,7 @@ Finished:
                              - Main table takes data and text from GRID, not individual questions
                              - Added context object with all possible stuff we may need in the future
                              - Added special function for creating filter expression
+                             - Added internal comparator columns
            - class Config - Add wave, survey DataSources reference
 
 16.01.2020 - ReportHelper class created
