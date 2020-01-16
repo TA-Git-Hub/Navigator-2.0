@@ -6,15 +6,15 @@ class ReportHelper{
   private var user : User = null;
 
   public static function Start(context : Object) {
-    this.report = context.report;
-    this.state = context.state;
-    this.confirmit = context.confirmit;
-    this.log = context.log;
-    this.user = context.user;
+    report = context.report;
+    state = context.state;
+    confirmit = context.confirmit;
+    log = context.log;
+    user = context.user;
   }
 
   public static function Debug(message){
-    this.log.LogDebug(message);
+    log.LogDebug(message);
   }
 
   public static function GetText(project, questionId, context){
