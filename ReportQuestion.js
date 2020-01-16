@@ -122,8 +122,8 @@ class ReportQuestion{
 
   public function SetComparatorValues(comparatorValues) {
     this.comparatorValues.trend = comparatorValues.trend;
-    this.comparatorValues.internal = comparatorValues.internal;
-    this.comparatorValues.external = comparatorValues.external;
+    this.comparatorValues.inter = comparatorValues.inter;
+    this.comparatorValues.exter = comparatorValues.exter;
 
   }
 
