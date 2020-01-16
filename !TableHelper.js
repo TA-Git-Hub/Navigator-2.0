@@ -34,7 +34,7 @@ static private function Debug(message, log){
     var returnArray = [];
     var rowIterator = 0;
     var tempIt = 0;
-    var columnCount = Config.Wave.Codes.length;
+    var columnCount = Config.Wave.Codes.length + 5; // 5 = number of internal comparators
     for(var i = 0; i < allQIds.length; i++){
       var qValues = {current: null, trends: [], inter: [], exter: []};
     //  Debug("scale: " + questionMap[allQIds[i]], context.log);
@@ -57,7 +57,12 @@ static private function Debug(message, log){
         if (columnIterator > 1 && columnIterator <= Config.Wave.Codes.length) {
           qValues.trends.push({distribution: distribution, validN: validN});
         }
+
+        if (columnIterator > Config.Wave.Codes.length && columnIterator <= Config.Wave.Codes.length + 5){
+          qValues.inter.push({distribution: distribution, validN: validN});
+        }
       }
+
 
       tempIt = rowIterator;
 
