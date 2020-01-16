@@ -52,7 +52,7 @@ class MainTable{
                 'Ethnicity', 'ExemptNon', 'UnionNon', 'Wage_Status', 'Worker', 'FullTime', 'Expat', 'Headquarters', 'Job_Function', 'Performance_Rating', 'Site' ];*/
     var demos = ['Segment_EEF', 'Orgcode'];
     for(var x = 0; x < demos.length; x++){
-        demoColumns.push(GetHorizontalExpression(demos[x], {title: 'true', totals: 'false', hierarchyInfo.NumberOfChildren:1}, context));
+        demoColumns.push(GetHorizontalExpression(demos[x], {title: 'true', totals: 'false', NumberOfChildren:hierarchyInfo.NumberOfChildren}, context));
         currWaveColumns.push(currWaveSVSyntax);
         currOrgcodeColumns.push(currOrgcodeSVSyntax);
     }
