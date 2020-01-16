@@ -20,20 +20,36 @@
 
 /**
   * [@About]      - this is an example class
-  * [@Functions]  - ExampleClass() -constructor : line 33
-                  - ExampleFunction()           : line 38
+
+  * [@Functions]  - ExampleClass() -constructor : line 39
+                  - ExampleFunction()           : line 53
                   - non-interesting getters & setters
 **/
 class ExampleClass{
   private var propertyVariable : String = "String variable.";
   private var typeArray : String[] = [];
 
-  //constructor
+  /**
+    * [@About]      - this function is constructor
+
+    * [@Parameters] - input - some explanation
+
+    * [@Return]     - none
+  **/
   public function ExampleClass(input){
     this.propertyVariable = input.variable;
   }
 
   //CALCULATIONS
+
+  /**
+    * [@About]      - this function does example stuff... for Narnia!
+
+    * [@Parameters] - name    - for example ('Frodo')
+                    - surname - for example ('Baggins')
+
+    * [@Return]     - String - (name + ' ' + surname)
+  **/
   public function ExampleFunction(name, surname){
     var outputString : String = null;
     outputString = name + " " + surname;

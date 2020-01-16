@@ -1,8 +1,9 @@
 /**
   * [@About]      - this class represents question of report
-  * [@Functions]  - ReportQuestion() -constructor : line 35
-                  - Setup()
-                  - Calculate()
+
+  * [@Functions]  - ReportQuestion() -constructor : line 36
+                  - Setup()                       : line 50
+                  - Calculate()                   : line 61
                   - non-interesting getters & setters
 **/
 class ReportQuestion{
