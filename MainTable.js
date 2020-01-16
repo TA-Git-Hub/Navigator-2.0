@@ -5,56 +5,96 @@ class MainTable{
 @@ Entry parameters - context - object, properties: table, report, confirmit, user, state, log
 */
   static function GetTable(context){
+
+    const startTime = new Date();
+
     const report = context.report;
     const table = context.table;
     const log = context.log;
+    const user = context.user;
 
     const qs = GetAllGridIds();
-    const trendInfo = Config.Wave;
+    const waveInfo = Config.Wave;
+    const hierarchyInfo = Config.Hierarchy;
 
-    var rows = [];
-    var columns = [];
+	const currWaveFilter = GetFilterExpression({variableId: waveInfo.VariableId, filterExpression: waveInfo.Codes[0]});
+    const currOrgcodeFilter = GetFilterExpression({variableId: Config.Hierarchy.VariableId, filterExpression: user.PersonalizedReportBase});
+    const currOrgcodeSVSyntax = GetVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression:currOrgcodeFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
+    const currWaveSVSyntax = GetVerticalExpression({label:'Current wave: ' + waveInfo.Codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
 
 //Get rows - Grid Questions + non-grid questions
+    var rows = [];
     for(var i = 0; i < qs.length; i++){
       rows.push(GetHorizontalExpression(qs[i], {title: 'true', totals: 'true'}));
     }
 
-//Get columns for trend
-    for(var j = 0; j < trendInfo.Codes.length; j++){
-      var filter = GetFilterExpression({variableId: trendInfo.VariableId, filterExpression:trendInfo.Codes[j]});
-      columns.push(GetVerticalExpression({label:trendInfo.Codes[j], filterExpression:filter, hideheader: 'false', headerType: 'SEGMENT'}, context));
+//Get columns for trend filtered by current orgcode
+    var waveColumns = [];
+    var currOrgcodeColumns= [];
+    for(var j = 0; j < waveInfo.Codes.length; j++){
+      var filter = GetFilterExpression({variableId: waveInfo.VariableId, filterExpression:waveInfo.Codes[j]});
+
+      waveColumns.push(GetVerticalExpression({label: waveInfo.Codes[j], filterExpression:filter, hideheader: 'false', headerType: 'SEGMENT'}, context));
+      currOrgcodeColumns.push(currOrgcodeSVSyntax);
+    }
+
+//Join trend columns together - trend / current org level
+    var waveColumnsJoined = [];
+    for(var y = 0; y < waveColumns.length; y++){
+	  	waveColumnsJoined.push([waveColumns[y], currOrgcodeColumns[y]].join("/"));
+    }
+
+//Get columns for demos filtered by current wave and current orgcode
+    var demoColumns = [];
+    var currWaveColumns = [];
+    currOrgcodeColumns = [];
+    /*var demo = ['Gender', 'Age', 'Tenure', 'Segment_EEF', 'IntentToStay', 'Country', 'Graduate', 'Region', 'Disability', 'Band', 'Manager',
+                'Ethnicity', 'ExemptNon', 'UnionNon', 'Wage_Status', 'Worker', 'FullTime', 'Expat', 'Headquarters', 'Job_Function', 'Performance_Rating', 'Site' ];*/
+    var demos = ['Segment_EEF', 'Orgcode'];
+    for(var x = 0; x < demos.length; x++){
+        demoColumns.push(GetHorizontalExpression(demos[x], {title: 'true', totals: 'false', nOfChildren:1}, context));
+        currWaveColumns.push(currWaveSVSyntax);
+        currOrgcodeColumns.push(currOrgcodeSVSyntax);
+    }
+
+//Join demo columns together - demo / curr wave / curr orgcode
+    var demoColumnsJoined = [];
+    for(var l = 0; l < demoColumns.length; l++){
+	  	demoColumnsJoined.push([demoColumns[l], currWaveColumns[l], currOrgcodeColumns[l]].join("/"));
     }
 
 //Get columns for hierarchy orgcodes filtered by current wave
     var internalColumnsOrgcodes = [];
-    var internalColumnsWave = [];
-    var orgcodes = [1000,1001,1002,1003];
-    var orgcodeSettings = Config.Hierarchy;
-    var waveFilter = GetFilterExpression({variableId: trendInfo.VariableId, filterExpression: trendInfo.Codes[0]});
+    currWaveColumns = [];
+    var orgcodes = [1000,1001,1002,1003,1004];
 
     for(var k = 0; k < orgcodes.length; k++){
-        var hierarchyFilter = GetFilterExpression({variableId: orgcodeSettings.VariableId, filterExpression: orgcodes[k]});
+        var hierarchyFilter = GetFilterExpression({variableId: hierarchyInfo.VariableId, filterExpression: orgcodes[k]});
 
         internalColumnsOrgcodes.push(GetVerticalExpression({label:'Internal orgcode: ' + orgcodes[k], filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, context));
-        internalColumnsWave.push(GetVerticalExpression({label:'Current wave: ' + trendInfo.Codes[0], filterExpression:waveFilter, hideheader: 'false', headerType: 'SEGMENT'}, context));
-        }
+        currWaveColumns.push(currWaveSVSyntax);
+    }
 
+//Join internal columns together - internal columns / curr wave
     var internalColumnsJoined = [];
     for(var l = 0; l < internalColumnsOrgcodes.length; l++){
-	  	internalColumnsJoined.push([internalColumnsOrgcodes[l], internalColumnsWave[l]].join("/"));
+	  	internalColumnsJoined.push([internalColumnsOrgcodes[l], currWaveColumns[l]].join("/"));
     }
 
 //Create one big syntax for table by connecting arrays
     rows = rows.join("+");
-    columns = columns.join("+");
+    waveColumnsJoined = waveColumnsJoined.join("+");
     internalColumnsJoined = internalColumnsJoined.join("+");
-
-    var allColumns = [columns, internalColumnsJoined].join("+");
+    demoColumnsJoined = demoColumnsJoined.join("+");
+    var allColumns = [waveColumnsJoined, internalColumnsJoined, demoColumnsJoined].join("+");
     var expr = [rows, allColumns].join('^');
 
     table.AddHeaders(report, Config.DataSources.MainSurvey, expr);
+
+    const endTime = new Date();
+    ReportHelper.Debug('MainTables - Get table took: ' + (endTime.getTime() - startTime.getTime())/1000 + 's');
 }
+
 /*
 @@ Description: This function get you filter expression you can use for example in the smartview syntax. I am not sure how many cases
 @@                there can be so I created a switch. One case for Orgcode, second case for everything else.
@@ -64,19 +104,18 @@ class MainTable{
 @@                  'Wave="2016"'
 @@
 @@ This expression should be used in report.TableUtils.EncodeJsString() function for it's magical powers
-@@
-*/  static function GetFilterExpression(properties){
+*/
+  static function GetFilterExpression(properties){
 
     switch(properties.variableId){
       case Config.Hierarchy.VariableId:
         return 'InHierarchy('+Config.Hierarchy.VariableId+',"'+ properties.filterExpression +'")';
-      break;
+        break;
 
       default:
         return properties.variableId + '="' + properties.filterExpression + '"';
-      break;
+        break;
     }
-
   }
 
 /*
@@ -100,7 +139,16 @@ class MainTable{
 @@					 properties: object, properties: title (string), totals (string) - 'true' or 'false'
 */
   static function GetHorizontalExpression(question, properties){
-    return (question + '{title:' + properties.title + '; totals:' + properties.totals+'}');
+
+    switch(question){
+      case Config.Hierarchy.VariableId:
+        return (question + '{self: true; children:'+properties.nOfChildren+';title:' + properties.title + '; totals:' + properties.totals+'}');
+        break;
+
+      default:
+        return (question + '{title:' + properties.title + '; totals:' + properties.totals+'}');
+        break;
+    }
   }
 
 /*
