@@ -1,8 +1,15 @@
+/**
+  * [@About]      - this class represents question of report
+  * [@Functions]  - ReportQuestion() -constructor : line 35
+                  - Setup()
+                  - Calculate()
+                  - non-interesting getters & setters
+**/
 class ReportQuestion{
   private var id : String = null;
   private var label : String = null;
   private var description : String = null;
-  private var distribution /*: int[]*/ = []; // to-do
+  private var distribution = [];
   private var comparatorValues = {trend:  [],
                         inter:  [],
                         exter:  []
@@ -16,40 +23,62 @@ class ReportQuestion{
   private var apLink : String = null;
   private var orgcodes : String[] = []; // to-do determines local question visibility
 
-  // constructor
+
+
+  /**
+    * [@About]      - this function is constructor
+
+    * [@Parameters] - id - id of question ('OM06')
+
+    * [@Return]     - none
+  **/
   public function ReportQuestion(id : String) {
     this.id = id;
-    //this.scores = Config.GetDistributionIndexes(this.id);
   }
 
-  // -- CALCULATIONS
+
+  /**
+    * [@About]      - this function assigns data to question, using it's setters
+                    - it calls Calculate()
+
+    * [@Parameters] - information - object with data to-be setup for question
+                    - context     - object with confirmit global variables (report, state, etc.)
+
+    * [@Return]     - none
+  **/
   public function Setup(information, context) {
-  //  ReportHelper.Debug("1 " + information.label, context.log);
     if(information.label !== null){
       SetLabel(information.label);
     }
-  //  ReportHelper.Debug("2 " + information.description, context.log);
+
     if(information.description !== null){
       SetDescription(information.description);
     }
-  //  ReportHelper.Debug("3 " + information.distribution, context.log);
+
     if(information.distribution !== null){
       SetDistribution(information.distribution);
     }
-  //  ReportHelper.Debug("4 " + information.comparatorValues, context.log);
+
     if(information.comparatorValues !== null){
       SetComparatorValues(information.comparatorValues);
     }
-  //  ReportHelper.Debug("5 " + information.validN, context.log);
+
     if(information.validN !== null){
       SetValidN(information.validN);
     }
     Calculate(context);
   }
 
+
+  /**
+    * [@About]      - this function takes distributions and validN - then calculates fav/neu/unfav
+
+    * [@Parameters] - context     - object with confirmit global variables (report, state, etc.)
+
+    * [@Return]     - none
+  **/
   public function Calculate(context){
     var indexes = Config.GetDistributionIndexes(this.id);
-
 
     for(var key in indexes){
       if(indexes[key] !== null){
@@ -59,16 +88,31 @@ class ReportQuestion{
         }
         switch (key) {
           case "fav":
+            if (this.scores.validN !== 0) {
               this.scores.fav = Math.round((count / this.scores.validN)*100);
+            }
+            else{
+              this.scores.fav = -1;
+            }
             break;
           case "neu":
+            if (this.scores.validN !== 0) {
               this.scores.neu = Math.round((count / this.scores.validN)*100);
+            }
+            else{
+              this.scores.neu = -1;
+            }
             break;
           case "unfav":
+            if (this.scores.validN !== 0) {
               this.scores.unfav = Math.round((count / this.scores.validN)*100);
+            }
+            else{
+              this.scores.unfav = -1;
+            }
             break;
           default:
-            ReportHelper.Debug("ERROR: ReportQuestion.Calculate()", context.log);
+            ReportHelper.Debug("ERROR: ReportQuestion.Calculate()");
         }
       }
     }
@@ -113,10 +157,7 @@ class ReportQuestion{
   }
 
   public function SetDistribution(distribution) {
-    this.distribution = distribution;/*new int[distribution.length];
-    for(var i = 0; i < distribution.length; i++){
-      this.distribution[i] = distribution[i];
-    }*/
+    this.distribution = distribution;
 
   }
 

@@ -17,6 +17,13 @@
 //            (all words are put together with first letter of each word being uppercase).
 // each function is declared with either "public" or "private" keyword.
 
+
+/**
+  * [@About]      - this is an example class
+  * [@Functions]  - ExampleClass() -constructor : line 33
+                  - ExampleFunction()           : line 38
+                  - non-interesting getters & setters
+**/
 class ExampleClass{
   private var propertyVariable : String = "String variable.";
   private var typeArray : String[] = [];
