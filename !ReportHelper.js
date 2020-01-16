@@ -1,9 +1,9 @@
 class ReportHelper{
-  private var report : Report = null;
-  private var state : ReportState = null;
-  private var confirmit : ConfirmitFacade = null;
-  private var log : Logger = null;
-  private var user : User = null;
+  private static var report : Report = null;
+  private static var state : ReportState = null;
+  private static var confirmit : ConfirmitFacade = null;
+  private static var log : Logger = null;
+  private static var user : User = null;
 
   public static function Start(context : Object) {
     report = context.report;
