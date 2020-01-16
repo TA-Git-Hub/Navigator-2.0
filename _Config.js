@@ -29,7 +29,8 @@ static var Hierarchy = {
     TopNodeId: '1000',
     Direct: false,
     HideSelector: false,
-    HideScoresColumnName: '__l9hide'
+    HideScoresColumnName: '__l9hide',
+    NumberOfChildren: 1
 };
 
   static var Dimensions = [
