@@ -79,7 +79,7 @@ class ReportDetails{
     }
   }
 
-  private static function CalculateMethology(count, type){
+  private function CalculateMethology(count, type){
 
     switch (type) {
       case 'count/validN':
