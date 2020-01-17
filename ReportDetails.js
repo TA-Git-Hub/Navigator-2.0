@@ -46,7 +46,14 @@ class ReportDetails{
         for(var i = 0; i < indexes[key].length; i++){
           count += this.distribution[indexes[key][i]];
         }
-        switch (key) {
+
+        if (this.validN !== 0) {
+          this[key] = Math.round((count / this.validN)*100);
+        }
+        else{
+          this[key] = -1;
+        }
+/*        switch (key) {
           case "fav":
             if (this.validN !== 0) {
               this.fav = Math.round((count / this.validN)*100);
@@ -73,7 +80,7 @@ class ReportDetails{
             break;
           default:
             ReportHelper.Debug("ERROR: ReportDetails.Calculate()");
-        }
+        }*/
       }
     }
   }

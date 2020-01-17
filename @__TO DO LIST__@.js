@@ -1,6 +1,7 @@
 /*
 Current:
 - class ReportQuestion:
+      1) question text replace ClientName (maybe other script cause Dimensions?)
 
 - class TableHelper:
       2) fix distribution for trends
@@ -16,6 +17,11 @@ Luky & Venca --
 
 /*
 Finished:
+16.01.2020 - ReportHelper class created
+           - class ReportQuestion - get score mapping
+           - cůass TableHelper - get distributions for questions
+           - class Config - Added NumberOfChildren information to the Config.Hierarchy
+
 15.01.2020 - ReportQuestion class: get numberOfAnswers from Config.GetDistributionIndexes(Id)
            - class MainTable - Added Horizontal & vertical expression function
                              - Main table takes data and text from GRID, not individual questions
@@ -25,9 +31,4 @@ Finished:
                              - Added demographics/filters
                              - Added filters for current wave and current levels
            - class Config - Add wave, survey DataSources reference
-
-16.01.2020 - ReportHelper class created
-           - class ReportQuestion - get score mapping
-           - cůass TableHelper - get distributions for questions
-           - class Config - Added NumberOfChildren information to the Config.Hierarchy
 */
