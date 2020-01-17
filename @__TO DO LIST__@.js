@@ -8,8 +8,9 @@ Current:
 Luky & Venca --
 - class MainTable:
     Discuss:
-             If we want to have Orgcode as demo in the table, we'd need to have 'children' info somewhere in the Config
+
              How to implement Norm scores
+             Hiding Orgcode demo columns in special cases - violators etc.
 */
 
 
@@ -28,4 +29,5 @@ Finished:
 16.01.2020 - ReportHelper class created
            - class ReportQuestion - get score mapping
            - cůass TableHelper - get distributions for questions
+           - class Config - Added NumberOfChildren information to the Config.Hierarchy
 */
