@@ -29,8 +29,8 @@ class JSONHelper{
         '<': '&lt;',
         '>': '&gt;',
         '&': '&amp;',
-        '\"': '\\&quot;'/*,
-    };
+        '\"': '\\&quot;'
+          };
     return str.replace(/[&<>\"]/g, function(key) {
         return entitiesMap[key];
     });
