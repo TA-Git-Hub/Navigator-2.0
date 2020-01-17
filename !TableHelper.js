@@ -11,33 +11,38 @@ class TableHelper{
     var columnCount = Config.Wave.Codes.length + 4; // 4 = number of internal comparators
 
     for(var i = 0; i < allQIds.length; i++){
-      var qValues = {current: null, trends: [], inter: [], exter: []};
-
+      //var qValues = {current: null, trends: [], inter: [], exter: []};
+      var detailsTable = {};
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
         rowIterator = tempIt;
         var label = questionTexts[rowIterator][1];
         var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
+        var details = new ReportDetails(allQIds[i]);
         var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
         rowIterator += questionMap[allQIds[i]];
         var validN = column[rowIterator].Value;
+        details.Setup({distribution: distribution, validN: validN}, context);
         rowIterator += 1;
 
         if (columnIterator === 1) {
-          qValues.current = {distribution: distribution, validN: validN};
+          detailsTable["current"] = details;
+        //  qValues.current = {distribution: distribution, validN: validN};
         }
 
         if (columnIterator > 1 && columnIterator <= Config.Wave.Codes.length) {
-          qValues.trends.push({distribution: distribution, validN: validN});
+            detailsTable["previous" + (columnIterator - 1)] = details;
+        //  qValues.trends.push({distribution: distribution, validN: validN});
         }
 
         if (columnIterator > Config.Wave.Codes.length && columnIterator <= Config.Wave.Codes.length + 4){
-          qValues.inter.push({distribution: distribution, validN: validN});
+          detailsTable["internal" + (columnIterator - Config.Wave.Codes.length -1)] = details;
+        //  qValues.inter.push({distribution: distribution, validN: validN});
         }
       }
       tempIt = rowIterator;
 
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
-      question.Setup({distribution: qValues.current.distribution, validN : qValues.current.validN, label: label, comparatorValues: {trend: qValues.trends, inter: qValues.inter}, description: ""}, context);
+      question.Setup({label: label, details: detailsTable, description: ""}, context);
 
       returnArray.push(question);
     }

@@ -10,6 +10,8 @@ class ReportQuestion{
   private var id : String = null;
   private var label : String = null;
   private var description : String = null;
+  private var details = {};
+  /*
   private var distribution = [];
   private var comparatorValues = {trend:  [],
                         inter:  [],
@@ -20,6 +22,7 @@ class ReportQuestion{
                         unfav: null,
                         validN:  null
                       };
+  */
   private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   private var apLink : String = null;
   private var orgcodes : String[] = []; // to-do determines local question visibility
@@ -67,55 +70,9 @@ class ReportQuestion{
     if(information.validN !== null){
       SetValidN(information.validN);
     }
-    Calculate(context);
-  }
 
-
-  /**
-    * [@About]      - this function takes distributions and validN - then calculates fav/neu/unfav
-
-    * [@Parameters] - context     - object with confirmit global variables (report, state, etc.)
-
-    * [@Return]     - none
-  **/
-  public function Calculate(context){
-    var indexes = Config.GetDistributionIndexes(this.id);
-
-    for(var key in indexes){
-      if(indexes[key] !== null){
-        var count = 0;
-        for(var i = 0; i < indexes[key].length; i++){
-          count += this.distribution[indexes[key][i]];
-        }
-        switch (key) {
-          case "fav":
-            if (this.scores.validN !== 0) {
-              this.scores.fav = Math.round((count / this.scores.validN)*100);
-            }
-            else{
-              this.scores.fav = -1;
-            }
-            break;
-          case "neu":
-            if (this.scores.validN !== 0) {
-              this.scores.neu = Math.round((count / this.scores.validN)*100);
-            }
-            else{
-              this.scores.neu = -1;
-            }
-            break;
-          case "unfav":
-            if (this.scores.validN !== 0) {
-              this.scores.unfav = Math.round((count / this.scores.validN)*100);
-            }
-            else{
-              this.scores.unfav = -1;
-            }
-            break;
-          default:
-            ReportHelper.Debug("ERROR: ReportQuestion.Calculate()");
-        }
-      }
+    if(information.details !== null){
+      SetDetails(information.details);
     }
   }
 
@@ -177,6 +134,10 @@ class ReportQuestion{
 
   public function SetValidN(validN) {
     this.scores.validN = validN;
+  }
+
+  public function SetDetails(details) {
+    this.details = details;
   }
 
   public function SetFlags() {
