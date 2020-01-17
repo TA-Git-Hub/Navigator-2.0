@@ -47,16 +47,10 @@ class ReportDetails{
           count += this.distribution[indexes[key][i]];
         }
 
-        if (this.validN !== 0) {
-          this[key] = Math.round((count / this.validN)*100);
-        }
-        else{
-          this[key] = -1;
-        }
-/*        switch (key) {
+        switch (key) {
           case "fav":
             if (this.validN !== 0) {
-              this.fav = Math.round((count / this.validN)*100);
+              this.fav = CalculateMethology(count, 'count/validN');
             }
             else{
               this.fav = -1;
@@ -64,7 +58,7 @@ class ReportDetails{
             break;
           case "neu":
             if (this.validN !== 0) {
-              this.neu = Math.round((count / this.validN)*100);
+              this.neu = CalculateMethology(count, 'count/validN');
             }
             else{
               this.neu = -1;
@@ -72,7 +66,7 @@ class ReportDetails{
             break;
           case "unfav":
             if (this.validN !== 0) {
-              this.unfav = Math.round((count / this.validN)*100);
+              this.unfav = CalculateMethology(count, 'count/validN');
             }
             else{
               this.unfav = -1;
@@ -80,8 +74,19 @@ class ReportDetails{
             break;
           default:
             ReportHelper.Debug("ERROR: ReportDetails.Calculate()");
-        }*/
+        }
       }
+    }
+  }
+
+  private static function CalculateMethology(count, type){
+
+    switch (type) {
+      case 'count/validN':
+        return Math.round((count / this.validN)*100);
+        break;
+      default:
+
     }
   }
 
