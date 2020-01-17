@@ -81,7 +81,7 @@ class ReportDetails{
   //Setters
 
   public function SetDistribution(distribution){
-    this.distrbution = distribution;
+    this.distribution = distribution;
   }
 
   public function SetFav(fav){

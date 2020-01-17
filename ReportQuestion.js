@@ -59,18 +59,6 @@ class ReportQuestion{
       SetDescription(information.description);
     }
 
-    if(information.distribution !== null){
-      SetDistribution(information.distribution);
-    }
-
-    if(information.comparatorValues !== null){
-      SetComparatorValues(information.comparatorValues);
-    }
-
-    if(information.validN !== null){
-      SetValidN(information.validN);
-    }
-
     if(information.details !== null){
       SetDetails(information.details);
     }
@@ -89,22 +77,6 @@ class ReportQuestion{
     return this.description;
   }
 
-  public function GetDistribution() {
-    return this.distribution;
-  }
-
-  public function GetComparatorValues() {
-    return this.comparatorValues;
-  }
-
-  public function GetValidN() {
-    return this.scores.validN;
-  }
-
-  public function GetScores() {
-    return this.scores;
-  }
-
   public function GetDetails() {
     return this.details;
   }
@@ -116,28 +88,6 @@ class ReportQuestion{
 
   public function SetDescription(description) {
     this.description = description;
-  }
-
-  public function SetDistribution(distribution) {
-    this.distribution = distribution;
-
-  }
-
-  public function SetComparatorValues(comparatorValues) {
-    this.comparatorValues.trend = comparatorValues.trend;
-    this.comparatorValues.inter = comparatorValues.inter;
-    this.comparatorValues.exter = comparatorValues.exter;
-
-  }
-
-  public function SetScores(scores) {
-    this.scores.fav = scores.fav;
-    this.scores.neu = scores.neu;
-    this.scores.unfav = scores.unfav;
-  }
-
-  public function SetValidN(validN) {
-    this.scores.validN = validN;
   }
 
   public function SetDetails(details) {
