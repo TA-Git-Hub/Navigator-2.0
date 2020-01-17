@@ -105,6 +105,10 @@ class ReportQuestion{
     return this.scores;
   }
 
+  public function GetDetails() {
+    return this.details;
+  }
+
   // -- SETTERS
   public function SetLabel(label) {
       this.label = label;

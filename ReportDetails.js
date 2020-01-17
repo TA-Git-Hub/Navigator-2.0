@@ -48,27 +48,27 @@ class ReportDetails{
         }
         switch (key) {
           case "fav":
-            if (this.scores.validN !== 0) {
-              this.scores.fav = Math.round((count / this.scores.validN)*100);
+            if (this.validN !== 0) {
+              this.fav = Math.round((count / this.validN)*100);
             }
             else{
-              this.scores.fav = -1;
+              this.fav = -1;
             }
             break;
           case "neu":
-            if (this.scores.validN !== 0) {
-              this.scores.neu = Math.round((count / this.scores.validN)*100);
+            if (this.validN !== 0) {
+              this.neu = Math.round((count / this.validN)*100);
             }
             else{
-              this.scores.neu = -1;
+              this.neu = -1;
             }
             break;
           case "unfav":
-            if (this.scores.validN !== 0) {
-              this.scores.unfav = Math.round((count / this.scores.validN)*100);
+            if (this.validN !== 0) {
+              this.unfav = Math.round((count / this.validN)*100);
             }
             else{
-              this.scores.unfav = -1;
+              this.unfav = -1;
             }
             break;
           default:
