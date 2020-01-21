@@ -22,9 +22,8 @@ class TableHelper{
         rowIterator += questionMap[allQIds[i]];
         var validN = column[rowIterator].Value;
 
-        ReportHelper.Debug('Before details.Setup');
         details.Setup({distribution: distribution, validN: validN}, context);
-        ReportHelper.Debug('After details.Setup');
+  //      ReportHelper.Debug('After details.Setup');
         rowIterator += 1;
 
         if (columnIterator === 1) {
@@ -45,9 +44,9 @@ class TableHelper{
       tempIt = rowIterator;
 
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
-      ReportHelper.Debug('Before question.Setup');
+  //    ReportHelper.Debug('Before question.Setup');
       question.Setup({label: label, details: detailsTable, description: ""}, context);
-      ReportHelper.Debug('After question.Setup');
+  //    ReportHelper.Debug('After question.Setup');
 
       returnArray.push(question);
     }
