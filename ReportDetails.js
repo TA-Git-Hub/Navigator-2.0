@@ -7,10 +7,10 @@
 **/
 class ReportDetails{
   public var distribution = [];
-  private var fav = null;
-  private var neu = null;
-  private var unfav = null;
-  private var scale = {};
+  public var fav = null;
+  public var neu = null;
+  public var unfav = null;
+  public var scale = {};
   public var validN = null;
 
   public function ReportDetails(id){
