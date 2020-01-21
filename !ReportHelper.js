@@ -22,12 +22,12 @@ class ReportHelper{
     var replacement = null;
     var returnString = text;
     if(text.indexOf(textReplace.placeholder1) !== -1){
-      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).getAnswer(textReplace.placeholder1);
+      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.placeholder1);
       returnString = text.split(textReplace.placeholder1).join(replacement);
     }
 
     if(text.indexOf(textReplace.placeholder2) !== -1){
-      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).getAnswer(textReplace.placeholder2);
+      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.placeholder2);
       returnString = text.split(textReplace.placeholder2).join(replacement);
     }
 
