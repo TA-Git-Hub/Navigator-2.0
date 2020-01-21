@@ -4,7 +4,7 @@ class ReportHelper{
   private static var confirmit : ConfirmitFacade = null;
   private static var log : Logger = null;
   private static var user : User = null;
-  private static const textReplace = {questionId: "CustomTexts", placeholder1: "^ClientName()^", placeholder2: "^ClientName2()^"};
+  private static const textReplace = {questionId: "CustomTexts", placeholder1: "^ClientName()^", placeholder2: "^ClientName2()^", replacement1: "ClientName", replacement2: "ClientName"};
 
   public static function Start(context : Object) {
     report = context.report;
@@ -22,12 +22,12 @@ class ReportHelper{
     var replacement = null;
     var returnString = text;
     if(text.indexOf(textReplace.placeholder1) !== -1){
-      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.placeholder1);
+      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement1);
       returnString = text.split(textReplace.placeholder1).join(replacement);
     }
 
     if(text.indexOf(textReplace.placeholder2) !== -1){
-      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.placeholder2);
+      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement2);
       returnString = text.split(textReplace.placeholder2).join(replacement);
     }
 
