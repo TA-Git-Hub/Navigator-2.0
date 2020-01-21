@@ -55,7 +55,11 @@ class ReportQuestion{
 
   // -- GETTERS
   public function GetJSONString(){
-    return {id: this.id, label: this.label, details: this.details.GetJSONString(), flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
+    var details = {};
+    for(var key in this.details){
+      details[key] = this.details[key].GetJSONString();
+    }
+    return {id: this.id, label: this.label, details: details, flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
   }
 
   public function GetId() {
