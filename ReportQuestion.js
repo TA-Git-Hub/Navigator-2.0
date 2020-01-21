@@ -7,25 +7,13 @@
                   - non-interesting getters & setters
 **/
 class ReportQuestion{
-  public var id : String = null;
-  public var label : String = null;
-  public var description : String = null;
-  public var details = {};
-  /*
-  private var distribution = [];
-  private var comparatorValues = {trend:  [],
-                        inter:  [],
-                        exter:  []
-                      };
-  private var scores = {fav:  null,
-                        neu: null,
-                        unfav: null,
-                        validN:  null
-                      };
-  */
-  public var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
-  public var apLink : String = null;
-  public var orgcodes : String[] = []; // to-do determines local question visibility
+  private var id : String = null;
+  private var label : String = null;
+  //private var description : String = null; //Won't be used, because Filip said so.
+  private var details = {};
+  private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
+  private var apLink : String = null;
+  private var orgcodes : String[] = []; // to-do determines local question visibility
 
 
 
@@ -55,9 +43,9 @@ class ReportQuestion{
       SetLabel(information.label);
     }
 
-    if(information.description !== null){
+    /*if(information.description !== null){
       SetDescription(information.description);
-    }
+    }*/
 
     if(information.details !== null){
     //  ReportHelper.Debug('Question validN: ' + information.details['current'].GetValidN());
@@ -66,6 +54,14 @@ class ReportQuestion{
   }
 
   // -- GETTERS
+  public function GetJSONString(){
+    var details = {};
+    for(var key in this.details){
+      details[key] = this.details[key].GetJSONString();
+    }
+    return {id: this.id, label: this.label, details: details, flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
+  }
+
   public function GetId() {
   	return this.id;
   }
@@ -74,9 +70,9 @@ class ReportQuestion{
     return this.label;
   }
 
-  public function GetDescription() {
+/*  public function GetDescription() {
     return this.description;
-  }
+  }*/
 
   public function GetDetails() {
     return this.details;
@@ -87,9 +83,9 @@ class ReportQuestion{
       this.label = label;
   }
 
-  public function SetDescription(description) {
+/*  public function SetDescription(description) {
     this.description = description;
-  }
+  }*/
 
   public function SetDetails(details) {
   //  this.details = details;

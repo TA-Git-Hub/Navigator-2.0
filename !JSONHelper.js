@@ -23,7 +23,6 @@ class JSONHelper{
             return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
         }
   }
-
   private static function EscapeEntities(str) {
     var entitiesMap = {
         '<': '&lt;',
