@@ -25,7 +25,7 @@ class ReportDetails{
     }
 
     if(information.validN !== null){
-      ReportHelper.Debug('Details validN: ' + information.validN);
+      //ReportHelper.Debug('Details validN: ' + information.validN);
       SetValidN(information.validN);
     }
 
