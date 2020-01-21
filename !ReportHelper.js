@@ -21,4 +21,13 @@ class ReportHelper{
     var question = context.report.DataSource.GetProject(project).GetQuestion(questionId);
     return question.Title;
   }
+
+  public static function QuestionHashtable(context) {
+    var questions = TableHelper.PopulateQuestions(context);
+    var returnObject = {};
+    for(var i = 0; i < questions.length; i++){
+      returnObject[questions[i].GetId()] = questions[i].GetJSONString();
+    }
+    return returnObject;
+  }
 }
