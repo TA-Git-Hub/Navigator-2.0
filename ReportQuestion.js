@@ -92,7 +92,11 @@ class ReportQuestion{
   }
 
   public function SetDetails(details) {
-    this.details = details;
+  //  this.details = details;
+
+    for (var i = 0; i < details.length; i++) {
+      this.details[details.id] = details.details;
+    }
   }
 
   public function SetFlags() {

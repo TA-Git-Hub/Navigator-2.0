@@ -8,11 +8,11 @@ class TableHelper{
     var returnArray = [];
     var rowIterator = 0;
     var tempIt = 0;
-    var columnCount = Config.Wave.Codes.length + 4; // 4 = number of internal comparators
+    var columnCount = Config.Wave.Codes.length + 5; // 4 = number of internal comparators
 
     for(var i = 0; i < allQIds.length; i++){
       //var qValues = {current: null, trends: [], inter: [], exter: []};
-      var detailsTable = {};
+      var detailsTable = [];//{};
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
         rowIterator = tempIt;
         var label = questionTexts[rowIterator][1];
@@ -27,18 +27,21 @@ class TableHelper{
         rowIterator += 1;
 
         if (columnIterator === 1) {
-          detailsTable["current"] = details;
+          //detailsTable["current"] = details;
+          detailsTable.push({details: details, id: 'current'});
         //  ReportHelper.Debug('Current: ' + details.GetValidN());
         //  qValues.current = {distribution: distribution, validN: validN};
         }
 
         if (columnIterator > 1 && columnIterator <= Config.Wave.Codes.length) {
-            detailsTable["previous" + (columnIterator - 1)] = details;
+            //detailsTable["previous" + (columnIterator - 1)] = details;
+            detailsTable.push({details: details, id: "previous" + (columnIterator - 1)});
         //  qValues.trends.push({distribution: distribution, validN: validN});
         }
 
-        if (columnIterator > Config.Wave.Codes.length && columnIterator <= Config.Wave.Codes.length + 4){
-          detailsTable["internal" + (columnIterator - Config.Wave.Codes.length -1)] = details;
+        if (columnIterator > Config.Wave.Codes.length && columnIterator <= Config.Wave.Codes.length + 5){
+          //detailsTable["internal" + (columnIterator - Config.Wave.Codes.length -1)] = details;
+          detailsTable.push({details: details, id: "internal" + (columnIterator - Config.Wave.Codes.length -1)});
         //  qValues.inter.push({distribution: distribution, validN: validN});
         }
       }
