@@ -23,6 +23,14 @@ class JSONHelper{
             return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
         }
   }
+  public static function QuestionJSON(context) {
+    var questions = TableHelper.PopulateQuestions(context);
+    var returnObject = {};
+    for(var i = 0; i < questions.length; i++){
+      returnObject[questions[i].GetId()] = questions[i].GetJSONString();
+    }
+    return returnObject;
+  }
 
   private static function EscapeEntities(str) {
     var entitiesMap = {

@@ -6,12 +6,12 @@
                   - non-interesting getters & setters
 **/
 class ReportDetails{
-  public var distribution = [];
-  public var fav = null;
-  public var neu = null;
-  public var unfav = null;
-  public var scale = {};
-  public var validN = null;
+  private var distribution = [];
+  private var fav = null;
+  private var neu = null;
+  private var unfav = null;
+  private var scale = {};
+  private var validN = null;
 
   public function ReportDetails(id){
       SetScale(id);
@@ -92,6 +92,16 @@ class ReportDetails{
     }
   }
 
+  //GETTERS
+  public function GetValidN(){
+    return this.validN;
+  }
+
+  public function GetJSONString(){
+    return {validN: this.validN, distribution: this.distribution, scale: this.scale, fav: this.fav, neu: this.neu, unfav: this.unfav};
+
+  }
+
   //Setters
 
   public function SetDistribution(distribution){
@@ -118,7 +128,4 @@ class ReportDetails{
     this.scale = Config.GetDistributionIndexes(id);
   }
 
-  public function GetValidN(){
-    return this.validN;
-  }
 }
