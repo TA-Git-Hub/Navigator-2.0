@@ -60,7 +60,7 @@ class ReportQuestion{
     }
 
     if(information.details !== null){
-    //  ReportHelper.Debug('Question validN: ' + information.details['current'].validN);
+      ReportHelper.Debug('Question validN: ' + information.details['current'].GetValidN());
       SetDetails(information.details);
     }
   }
