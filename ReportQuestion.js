@@ -93,8 +93,6 @@ class ReportQuestion{
 
   public function SetDetails(details) {
     this.details = details;
-
-    ReportHelper.Debug(this.details['current'].GetValidN());
   }
 
   public function SetFlags() {
