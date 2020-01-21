@@ -17,20 +17,18 @@ class ReportDimension{
   private var comparatorValues = {};
 //----------------------------------------------
   // constructor
-  public function ReportDimension(dim) {
+  public function ReportDimension(dim, allQ, context) {
     this.id = dim.id;
-    this.questionArray = loadQuestionsToDimension(dim);
+    this.questionArray = loadQuestionsToDimension(dim, allQ, context);
     this.description = getDimDescription()
   }
 //----------------------------------------------
   function getDimDescription(){
   };
 //----------------------------------------------
-  function loadQuestionsToDimension(dim){
+  function loadQuestionsToDimension(dim, allQ, context){
     for (var j = 0; j < dim.questions.length; j++) {
-      log.LogDebug('a');
     var qID = dim.questions[j];
-      log.LogDebug(qID);
     questionArray[qID]= allQ[qID];
     }
   }
