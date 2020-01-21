@@ -4,6 +4,7 @@ class ReportHelper{
   private static var confirmit : ConfirmitFacade = null;
   private static var log : Logger = null;
   private static var user : User = null;
+  private static const textReplace = {questionId: "CustomTexts", placeholder1: "^ClientName()^", placeholder2: "^ClientName2()^"};
 
   public static function Start(context : Object) {
     report = context.report;
@@ -17,9 +18,22 @@ class ReportHelper{
     log.LogDebug(message);
   }
 
-  public static function GetText(project, questionId, context){
-    var question = context.report.DataSource.GetProject(project).GetQuestion(questionId);
-    return question.Title;
+  public static function CleanText(text, context){
+    var replacement = null;
+    var returnString = text;
+    if(text.indexOf(textReplace.placeholder1) !== -1){
+      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).getAnswer(textReplace.placeholder1);
+      returnString = text.split(textReplace.placeholder1).join(replacement);
+    }
+
+    if(text.indexOf(textReplace.placeholder2) !== -1){
+      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).getAnswer(textReplace.placeholder2);
+      returnString = text.split(textReplace.placeholder2).join(replacement);
+    }
+
+    return returnString;
+
+
   }
 
   public static function QuestionHashtable() {

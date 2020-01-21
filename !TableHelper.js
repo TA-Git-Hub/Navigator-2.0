@@ -15,7 +15,7 @@ class TableHelper{
       var detailsTable = [];//{};
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
         rowIterator = tempIt;
-        var label = questionTexts[rowIterator][1];
+        var label = ReportHelper.CleanText(questionTexts[rowIterator][1], context);
         var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
         var details = new ReportDetails(allQIds[i]);
         var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
