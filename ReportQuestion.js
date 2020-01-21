@@ -7,10 +7,10 @@
                   - non-interesting getters & setters
 **/
 class ReportQuestion{
-  private var id : String = null;
-  private var label : String = null;
-  private var description : String = null;
-  private var details = {};
+  public var id : String = null;
+  public var label : String = null;
+  public var description : String = null;
+  public var details = {};
   /*
   private var distribution = [];
   private var comparatorValues = {trend:  [],
@@ -23,9 +23,9 @@ class ReportQuestion{
                         validN:  null
                       };
   */
-  private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
-  private var apLink : String = null;
-  private var orgcodes : String[] = []; // to-do determines local question visibility
+  public var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
+  public var apLink : String = null;
+  public var orgcodes : String[] = []; // to-do determines local question visibility
 
 
 

@@ -6,12 +6,12 @@
                   - non-interesting getters & setters
 **/
 class ReportDetails{
-  private var distribution = [];
-  private var fav = null;
-  private var neu = null;
-  private var unfav = null;
-  private var scale = {};
-  private var validN = null;
+  public var distribution = [];
+  public var fav = null;
+  public var neu = null;
+  public var unfav = null;
+  public var scale = {};
+  public var validN = null;
 
   public function ReportDetails(id){
       SetScale(id);
