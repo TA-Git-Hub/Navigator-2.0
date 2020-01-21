@@ -117,4 +117,8 @@ class ReportDetails{
   public function SetScale(id){
     this.scale = Config.GetDistributionIndexes(id);
   }
+
+  public function GetValidN(){
+    return this.validN;
+  }
 }
