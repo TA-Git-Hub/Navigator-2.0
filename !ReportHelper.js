@@ -23,7 +23,7 @@ class ReportHelper{
   }
 
   public static function QuestionHashtable() {
-    var questions = TableHelper.PopulateQuestions(report);
+    var questions = TableHelper.PopulateQuestions({report: report});
     var returnObject = {};
     for(var i = 0; i < questions.length; i++){
       returnObject[questions[i].GetId()] = questions[i].GetJSONString();
