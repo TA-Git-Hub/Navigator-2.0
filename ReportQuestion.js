@@ -95,7 +95,7 @@ class ReportQuestion{
   //  this.details = details;
 
     for (var i = 0; i < details.length; i++) {
-      this.details[details.id] = details.details;
+      this.details[details[i].id] = details[i].details;
     }
   }
 
