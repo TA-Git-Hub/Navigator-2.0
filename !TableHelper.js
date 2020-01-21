@@ -28,7 +28,7 @@ class TableHelper{
 
         if (columnIterator === 1) {
           detailsTable["current"] = details;
-          ReportHelper.Debug('Current: ' + details.GetValidN);
+          ReportHelper.Debug('Current: ' + details.GetValidN());
         //  qValues.current = {distribution: distribution, validN: validN};
         }
 
