@@ -1,4 +1,4 @@
-class ReportDimension {
+class ReportDimension{
 
   private var questionArray = {}; //Array for question objects
   private var id: String = null;
