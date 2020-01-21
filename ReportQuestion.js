@@ -60,7 +60,7 @@ class ReportQuestion{
     }
 
     if(information.details !== null){
-      ReportHelper.Debug('Question validN: ' + information.details['current'].GetValidN());
+    //  ReportHelper.Debug('Question validN: ' + information.details['current'].GetValidN());
       SetDetails(information.details);
     }
   }
@@ -93,6 +93,8 @@ class ReportQuestion{
 
   public function SetDetails(details) {
     this.details = details;
+
+    ReportHelper.Debug(this.details['current'].GetValidN());
   }
 
   public function SetFlags() {
