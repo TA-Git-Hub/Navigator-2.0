@@ -8,7 +8,7 @@ class TableHelper{
     var returnArray = [];
     var rowIterator = 0;
     var tempIt = 0;
-    var columnCount = Config.Wave.Codes.length + 5; // 4 = number of internal comparators
+    var columnCount = Config.Wave.Codes.length + 4; // 4 = number of internal comparators
 
     for(var i = 0; i < allQIds.length; i++){
       //var qValues = {current: null, trends: [], inter: [], exter: []};
@@ -39,7 +39,7 @@ class TableHelper{
         //  qValues.trends.push({distribution: distribution, validN: validN});
         }
 
-        if (columnIterator > Config.Wave.Codes.length && columnIterator <= Config.Wave.Codes.length + 5){
+        if (columnIterator > Config.Wave.Codes.length && columnIterator <= Config.Wave.Codes.length + 4){
           //detailsTable["internal" + (columnIterator - Config.Wave.Codes.length -1)] = details;
           detailsTable.push({details: details, id: "internal" + (columnIterator - Config.Wave.Codes.length -1)});
         //  qValues.inter.push({distribution: distribution, validN: validN});
