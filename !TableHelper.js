@@ -47,7 +47,7 @@ class TableHelper{
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
   //    ReportHelper.Debug('Before question.Setup');
       question.Setup({label: label, details: detailsTable, description: ""}, context);
-  //    ReportHelper.Debug('After question.Setup');
+      ReportHelper.Debug('After question.Setup: ' + question.details['current'].validN);
 
       returnArray.push(question);
     }
