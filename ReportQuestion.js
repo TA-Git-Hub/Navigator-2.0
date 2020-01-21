@@ -54,7 +54,7 @@ class ReportQuestion{
   }
 
   // -- GETTERS
-  public funtion GetJSONString(){
+  public function GetJSONString(){
     return {id: this.id, label: this.label, details: this.details.GetJSONString(), flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
   }
 
