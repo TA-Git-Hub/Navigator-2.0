@@ -20,10 +20,12 @@ class ReportDetails{
   public function Setup(information, context){
 
     if(information.distribution !== null){
+
       SetDistribution(information.distribution);
     }
 
     if(information.validN !== null){
+      ReportHelper.Debug('Details validN: ' + information.validN);
       SetValidN(information.validN);
     }
 
