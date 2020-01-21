@@ -43,9 +43,9 @@ class ReportQuestion{
       SetLabel(information.label);
     }
 
-    if(information.description !== null){
+    /*if(information.description !== null){
       SetDescription(information.description);
-    }
+    }*/
 
     if(information.details !== null){
     //  ReportHelper.Debug('Question validN: ' + information.details['current'].GetValidN());
@@ -70,9 +70,9 @@ class ReportQuestion{
     return this.label;
   }
 
-  public function GetDescription() {
+/*  public function GetDescription() {
     return this.description;
-  }
+  }*/
 
   public function GetDetails() {
     return this.details;
@@ -83,9 +83,9 @@ class ReportQuestion{
       this.label = label;
   }
 
-  public function SetDescription(description) {
+/*  public function SetDescription(description) {
     this.description = description;
-  }
+  }*/
 
   public function SetDetails(details) {
   //  this.details = details;
