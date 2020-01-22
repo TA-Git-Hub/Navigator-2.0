@@ -54,7 +54,7 @@ class ReportQuestion{
   }
 
   // -- GETTERS
-  public function GetJSONString(){
+  public function GetJSONString(context){
     var details = {};
     for(var key in this.details){
       log.LogDebug('key: ' + key)
