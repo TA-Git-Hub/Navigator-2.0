@@ -22,7 +22,7 @@ class ReportHelper{
     return question.Title;
   }
 
-  public static function QuestionHashtable() {
+  public static function QuestionHashtable(context) {
     var questions = TableHelper.PopulateQuestions({report: report});
     var returnObject = {};
     for(var i = 0; i < questions.length; i++){
