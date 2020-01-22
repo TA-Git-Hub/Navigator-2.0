@@ -57,6 +57,7 @@ class ReportQuestion{
   public function GetJSONString(){
     var details = {};
     for(var key in this.details){
+      log.LogDebug('key: ' + key)
       details[key] = this.details[key].GetJSONString();
     }
     return {id: this.id, label: this.label, details: details, flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
