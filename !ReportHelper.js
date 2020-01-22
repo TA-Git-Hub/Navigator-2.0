@@ -26,7 +26,7 @@ class ReportHelper{
     var questions = TableHelper.PopulateQuestions({report: report});
     var returnObject = {};
     for(var i = 0; i < questions.length; i++){
-      returnObject[questions[i].GetId()] = questions[i].GetJSONString();
+      returnObject[questions[i].GetId()] = questions[i].GetJSONString(context);
     }
     return returnObject;
   }
