@@ -5,7 +5,7 @@ class ReportHelper{
   private static var log : Logger = null;
   private static var user : User = null;
   private static const textReplace = {questionId: "CustomTexts", placeholder1: "^ClientName()^", placeholder2: "^ClientName2()^",
-                                                                 replacement1: "ClientName", replacement2: "ClientName"};
+                                                                 replacement1: "ClientName", replacement2: "ClientName2"};
 
   public static function Start(context : Object) {
     report = context.report;
@@ -23,14 +23,19 @@ class ReportHelper{
     var replacement = null;
     var returnString = text;
     if(text.indexOf(textReplace.placeholder1) !== -1){
-      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement1).Text;
-    //  returnString = text.split(textReplace.placeholder1).join(replacement);
+      var answer = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement1);
+      if(answer){
+        replacement = answer.Text;
+        returnString = text.split(textReplace.placeholder1).join(replacement);
+      }
     }
 
     if(text.indexOf(textReplace.placeholder2) !== -1){
-      replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement2).Text;
-      Debug(replacement);
-    //  returnString = text.split(textReplace.placeholder2).join(replacement);
+      var answer = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement2);
+      if(answer){
+        replacement = answer.Text;
+        returnString = text.split(textReplace.placeholder2).join(replacement);
+      }
     }
 
     return returnString;
