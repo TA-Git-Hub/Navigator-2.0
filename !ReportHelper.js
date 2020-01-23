@@ -4,7 +4,8 @@ class ReportHelper{
   private static var confirmit : ConfirmitFacade = null;
   private static var log : Logger = null;
   private static var user : User = null;
-  private static const textReplace = {questionId: "CustomTexts", placeholder1: "^ClientName()^", placeholder2: "^ClientName2()^", replacement1: "ClientName", replacement2: "ClientName2"};
+  private static const textReplace = {questionId: "CustomTexts", placeholder1: "^ClientName()^", placeholder2: "^ClientName2()^",
+                                                                 replacement1: "ClientName", replacement2: "ClientName2"};
 
   public static function Start(context : Object) {
     report = context.report;
