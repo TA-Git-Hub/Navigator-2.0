@@ -22,7 +22,7 @@ class ReportHelper{
   public static function CleanText(text, context){
     var replacement = null;
     var returnString = text;
-    if(text.indexOf(textReplace.placeholder1) !== -1){
+/*    if(text.indexOf(textReplace.placeholder1) !== -1){
       replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement1).Text;
       returnString = text.split(textReplace.placeholder1).join(replacement);
     }
@@ -31,7 +31,7 @@ class ReportHelper{
       replacement = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement2).Text;
       returnString = text.split(textReplace.placeholder2).join(replacement);
     }
-
+*/
     return returnString;
 
 
