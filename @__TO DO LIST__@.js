@@ -1,10 +1,11 @@
 /*
 Current:
 - class ReportQuestion:
-      1) question text replace ClientName (maybe other script cause Dimensions?)
+      1) clear question scores based on suppresions
+      2) make suppresions flags
 
-- class TableHelper:
-      2) fix distribution for trends
+- create JSON object
+- create frontend script!
 
 Luky & Venca --
 - class MainTable:
@@ -17,6 +18,8 @@ Luky & Venca --
 
 /*
 Finished:
+23.01.2020 - ReportHelper class - function CleanText() : question text replace ClientName placeholders
+           - class TableHelper - fix distribution for trends
 16.01.2020 - ReportHelper class created
            - class ReportQuestion - get score mapping
            - cůass TableHelper - get distributions for questions
