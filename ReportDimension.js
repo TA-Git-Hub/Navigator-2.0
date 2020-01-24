@@ -33,11 +33,13 @@ class ReportDimension{
     }
 
     function calculateDimResults(){
-      this.results['fav'] = setDimScore(1);
-      this.results['neu'] = setDimScore(0);
-      this.results['unfav'] = setDimScore(-1);
-      this.results['validN'] = setDimValidN();
-      this.results['comparatorValues'] = {};
+      for (i=0; i<Config.Wave.Codes.lenght; i++){
+      this.results[Config.Wave.Codes[i]]['fav'] = setDimScore(1);
+      this.results[Config.Wave.Codes[i]]['neu'] = setDimScore(0);
+      this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
+      this.results[Config.Wave.Codes[i]]['validN'] = setDimValidN();
+      this.results[Config.Wave.Codes[i]]['comparatorValues'] = {};
+      }
     }
 
     function setDimScore(score){
