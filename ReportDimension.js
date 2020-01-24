@@ -18,8 +18,9 @@ class ReportDimension{
     //context.log.LogDebug('10'+this.label);
     this.description = getDimDescription();
     //context.log.LogDebug('11'+this.description);
-    //context.log.LogDebug('12'+getDimDescription());
+    context.log.LogDebug('12'+getDimDescription());
     this.loadQuestionsToDimension(dim, allQ, context);
+    context.logLogDebug('13');
     this.calculateDimResults(context);
    }
 
