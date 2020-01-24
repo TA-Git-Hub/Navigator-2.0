@@ -1,36 +1,58 @@
 class ReportDimension{
 
   private var questionArray = {}; //Array for question objects
-  private var id: String = null;
-  private var label: String = null;
-  private var description: String = null;
-
-  private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
-  private var apLink: String = null;
-  private var orgcodes: String[] = []; // to-do determines local question visibility
-
-  //Dimension Details
-  private var fav: int = null;
-  private var neu: int = null;
-  private var unfav: int = null;
-  private var validN: int = null;
-  private var comparatorValues = {};
 //----------------------------------------------
-  // constructor
-  public function ReportDimension(dim, allQ, context) {
-    this.id = dim.id;
-    this.questionArray = loadQuestionsToDimension(dim, allQ, context);
-    this.description = getDimDescription()
-  }
+  private var id = "";
+  private var label = "";
+  private var description = "";
+  private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
+  private var apLink = "";
+
+  //Dimension Results
+  private var results = {};
+
+  // constructor---------------------------------
+  public function ReportDimension(dimID, allQ, context) {
+    this.id = dimID;
+    this.label = getDimLabel();
+    this.description = getDimDescription();
+    loadQuestionsToDimension(allQ, context);
+    calculateDimResults();
+   }
+
+
+  //fill dimension-----------------------------
+    function loadQuestionsToDimension(allQ, context){
+      for (var i = 0; i < this.Questions.length; i++) {
+        var qID = this.Questions[i];
+        this.questionArray[qID]= allQ[qID];
+      }
+    }
+
+    function calculateDimResults(){
+      this.results['fav'] = setDimScore(1);
+      this.results['neu'] = setDimScore(0);
+      this.results['unfav'] = setDimScore(-1);
+      this.results['validN'] = setDimValidN;
+      this.results['comparatorValues'] = {};
+    }
+
+    function setDimScore(score){
+      return 15*score;
+    }
+
+    function setDimValid () {
+      return 200;
+    }
+
 //----------------------------------------------
   function getDimDescription(){
+  return "Dimension description"
   };
-//----------------------------------------------
-  function loadQuestionsToDimension(dim, allQ, context){
-    for (var j = 0; j < dim.questions.length; j++) {
-    var qID = dim.questions[j];
-    questionArray[qID]= allQ[qID];
-    }
+
+  function getDimLabel(){
+  return "Dimension Label"
+  };
+
+  //----------------------------------------------
   }
-  }
-//----------------------------------------------
