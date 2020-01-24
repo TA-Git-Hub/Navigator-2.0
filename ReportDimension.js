@@ -20,7 +20,7 @@ class ReportDimension{
     //context.log.LogDebug('11'+this.description);
     //context.log.LogDebug('12'+getDimDescription());
     this.loadQuestionsToDimension(dim, allQ, context);
-    this.calculateDimResults();
+    this.calculateDimResults(context);
    }
 
 
@@ -32,8 +32,8 @@ class ReportDimension{
       }
     }
 
-    function calculateDimResults(){
-      for (var i =0; i<Config.Wave.Codes.lenght; i++){
+    function calculateDimResults(context){
+      for (var i = 0; i<Config.Wave.Codes.length; i++){
       this.results[Config.Wave.Codes[i]]['fav'] = setDimScore(1);
       //this.results[Config.Wave.Codes[i]]['neu'] = setDimScore(0);
       //this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
