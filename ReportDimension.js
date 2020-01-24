@@ -33,7 +33,7 @@ class ReportDimension{
     }
 
     function calculateDimResults(){
-      for (vari=0; i<Config.Wave.Codes.lenght; i++){
+      for (var i =0; i<Config.Wave.Codes.lenght; i++){
       this.results[Config.Wave.Codes[i]]['fav'] = setDimScore(1);
       this.results[Config.Wave.Codes[i]]['neu'] = setDimScore(0);
       this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
