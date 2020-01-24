@@ -12,19 +12,19 @@ class ReportDimension{
   private var results = {};
 
   // constructor---------------------------------
-  public function ReportDimension(dimID, allQ, context) {
-    this.id = dimID;
+  public function ReportDimension(dim, allQ, context) {
+    this.id = dim.Id;
     this.label = getDimLabel();
     this.description = getDimDescription();
-    loadQuestionsToDimension(allQ, context);
+    loadQuestionsToDimension(dim, allQ, context);
     calculateDimResults();
    }
 
 
   //fill dimension-----------------------------
-    function loadQuestionsToDimension(allQ, context){
-      for (var i = 0; i < this.Questions.length; i++) {
-        var qID = this.Questions[i];
+    function loadQuestionsToDimension(dim, allQ, context){
+      for (var i = 0; i < dim.Questions.length; i++) {
+        var qID = dim.Questions[i];
         this.questionArray[qID]= allQ[qID];
       }
     }
