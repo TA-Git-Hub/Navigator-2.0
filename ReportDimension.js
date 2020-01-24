@@ -53,11 +53,11 @@ class ReportDimension{
 
 //----------------------------------------------
   function getDimDescription(){
-  return "Dimension description";
+  return Config.Wave.Codes[0];
   };
 
   function getDimLabel(){
-  return "Dimension Label";
+  return Config.Wave.Codes[0];
 
   };
 
