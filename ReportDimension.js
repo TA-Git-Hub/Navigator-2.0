@@ -48,11 +48,12 @@ class ReportDimension{
 
 //----------------------------------------------
   function getDimDescription(){
-  return "Dimension description"
+  ReportHelper.log.LogDebug('getDimDescription');
+  return "Dimension description";
   };
 
   function getDimLabel(){
-  return "Dimension Label"
+  return "Dimension Label";
 
   };
 
