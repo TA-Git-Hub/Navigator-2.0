@@ -14,10 +14,10 @@ class ReportDimension{
   // constructor---------------------------------
   public function ReportDimension(dim, allQ, context) {
     this.id = dim.Id;
-    this.label = getDimLabel();
-    this.description = getDimDescription();
-    loadQuestionsToDimension(dim, allQ, context);
-    calculateDimResults();
+    this.label = this.getDimLabel();
+    this.description = this.getDimDescription();
+    this.loadQuestionsToDimension(dim, allQ, context);
+    this.calculateDimResults();
    }
 
 
@@ -43,6 +43,7 @@ class ReportDimension{
 
     function setDimValidN() {
       return 200;
+
     }
 
 //----------------------------------------------
@@ -52,6 +53,7 @@ class ReportDimension{
 
   function getDimLabel(){
   return "Dimension Label"
+
   };
 
   //----------------------------------------------
