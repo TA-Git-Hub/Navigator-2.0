@@ -16,7 +16,7 @@ class ReportDimension{
     this.id = dim.Id;
     this.label = this.getDimLabel();
     context.log.LogDebug('10'+this.label);
-    this.description = 'adfadfads';
+    this.description = getDimDescription();
     context.log.LogDebug('11'+this.description);
     context.log.LogDebug('12'+getDimDescription());
     this.loadQuestionsToDimension(dim, allQ, context);
