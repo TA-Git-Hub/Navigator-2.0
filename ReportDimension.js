@@ -33,15 +33,15 @@ class ReportDimension{
       this.results['fav'] = setDimScore(1);
       this.results['neu'] = setDimScore(0);
       this.results['unfav'] = setDimScore(-1);
-      this.results['validN'] = setDimValidN;
+      this.results['validN'] = setDimValidN();
       this.results['comparatorValues'] = {};
     }
 
     function setDimScore(score){
-      return 15*score;
+      return 15;
     }
 
-    function setDimValidN () {
+    function setDimValidN() {
       return 200;
     }
 
