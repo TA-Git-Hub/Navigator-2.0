@@ -16,6 +16,8 @@ class ReportDimension{
     this.id = dim.Id;
     this.label = this.getDimLabel();
     this.description = this.getDimDescription();
+    context.log.LogDebug('11'+this.getDimDescription());
+    context.log.LogDebug('12'+getDimDescription());
     this.loadQuestionsToDimension(dim, allQ, context);
     this.calculateDimResults();
    }
@@ -48,7 +50,6 @@ class ReportDimension{
 
 //----------------------------------------------
   function getDimDescription(){
-  ReportHelper.log.LogDebug('getDimDescription');
   return "Dimension description";
   };
 
