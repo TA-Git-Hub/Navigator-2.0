@@ -41,7 +41,7 @@ class ReportDimension{
       return 15*score;
     }
 
-    function setDimValid () {
+    function setDimValidN () {
       return 200;
     }
 
