@@ -9,7 +9,7 @@ class ReportDimension{
   private var apLink = "";
 
   //Dimension Results
-  private var results = {};
+  public var results = {};
 
   // constructor---------------------------------
   public function ReportDimension(dim, allQ, context) {
