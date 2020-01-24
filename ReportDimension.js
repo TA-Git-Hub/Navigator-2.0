@@ -1,12 +1,12 @@
 class ReportDimension{
 
-  private var questionArray = {}; //Array for question objects
+  public var questionArray = {}; //Array for question objects
 //----------------------------------------------
-  private var id = "";
-  private var label = "";
-  private var description = "";
-  private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
-  private var apLink = "";
+  public var id = "";
+  public var label = "";
+  public var description = "";
+  public var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
+  public var apLink = "";
 
   //Dimension Results
   public var results = {};
