@@ -28,7 +28,7 @@ class ReportDimension{
   //fill dimension-----------------------------
     function loadQuestionsToDimension(dim, allQ, context){
       for (var i = 0; i < dim.Questions.length; i++) {
-        context.log.LogDebug('i');
+
         var qID = dim.Questions[i];
         this.questionArray[qID]= allQ[qID];
       }
@@ -42,6 +42,7 @@ class ReportDimension{
       //this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
       //this.results[Config.Wave.Codes[i]]['validN'] = setDimValidN();
       //this.results[Config.Wave.Codes[i]]['comparatorValues'] = {};
+      context.log.LogDebug(i);
       }
     }
 
