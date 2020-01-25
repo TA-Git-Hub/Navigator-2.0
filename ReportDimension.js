@@ -15,7 +15,7 @@ class ReportDimension{
   public function ReportDimension(dim, allQ, context) {
     this.id = dim.Id;
     this.label = this.getDimLabel();
-    //context.log.LogDebug('10'+this.label);
+    context.log.LogDebug('10'+this.label);
     this.description = getDimDescription();
     //context.log.LogDebug('11'+this.description);
     context.log.LogDebug('12'+getDimDescription());
