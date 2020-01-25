@@ -39,10 +39,10 @@ class ReportDimension{
       for (var i = 0; i<Config.Wave.Codes.length; i++){
       this.results[Config.Wave.Codes[i]]={}
       this.results[Config.Wave.Codes[i]]['fav'] = setDimScore(1);
-      //this.results[Config.Wave.Codes[i]]['neu'] = setDimScore(0);
-      //this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
-      //this.results[Config.Wave.Codes[i]]['validN'] = setDimValidN();
-      //this.results[Config.Wave.Codes[i]]['comparatorValues'] = {};
+      this.results[Config.Wave.Codes[i]]['neu'] = setDimScore(0);
+      this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
+      this.results[Config.Wave.Codes[i]]['validN'] = setDimValidN();
+      this.results[Config.Wave.Codes[i]]['comparatorValues'] = {};
       context.log.LogDebug(i);
       }
     }
