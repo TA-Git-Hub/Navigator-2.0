@@ -28,6 +28,7 @@ class ReportDimension{
   //fill dimension-----------------------------
     function loadQuestionsToDimension(dim, allQ, context){
       for (var i = 0; i < dim.Questions.length; i++) {
+        context.logLogDebug('i');
         var qID = dim.Questions[i];
         this.questionArray[qID]= allQ[qID];
       }
