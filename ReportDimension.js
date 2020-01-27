@@ -32,9 +32,11 @@ class ReportDimension{
     function calculateDimResults(context){
       for (var i = 0; i<Config.Wave.Codes.length; i++){
       var compID = ConfigHelper.waveID(i);
+      context.log.LogDebug(11);
       this.getScores(compID);
       }
       for (var i = 0; i<Config.Internal; i++){
+      context.log.LogDebug(12);
       var compID = 'internal'+(i+1);
       this.getScores(compID);
       }
@@ -50,6 +52,7 @@ public function getScores(compID, context){
   this.results[compID]={}
   var resultsType=['fav','neu','unfav','validN'];
   for (var j=0; j<resultsType.length;j++){
+    context.log.LogDebug(13);
   var type = resultsType[j];
   this.results[compID][type] = setDimScore(type, compID, context);
   this.results[compID]['comp'] = {};
@@ -60,6 +63,7 @@ public function getScores(compID, context){
       var total = 0;
       var count = 0;
           for (var q in this.questionArray){
+                context.log.LogDebug(14);  
           total = total +  questionArray[q].details[compID][score];
         count = count + 1;
         }
