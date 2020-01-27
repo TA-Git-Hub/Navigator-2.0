@@ -63,7 +63,7 @@ class ReportDimension{
       var count = 0;
       context.log.LogDebug(waveID);
       for (var q in this.questionArray){
-        context.log.LogDebug(q.id);
+        context.log.LogDebug(questionArray[q].id);
       /*  context.log.LogDebug(q.details[waveID][score]);
       total = total +  q.details[waveID][score];
         context.log.LogDebug('18');
