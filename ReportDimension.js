@@ -38,7 +38,9 @@ class ReportDimension{
       for (var i = 0; i<Config.Wave.Codes.length; i++){
       var wave = Config.Wave.Codes[i];
       this.results[wave]={}
+      context.log.LogDebug('14');
       this.results[wave]['fav'] = setDimScore('fav', wave);
+      context.log.LogDebug('15');
       this.results[wave]['neu'] = setDimScore('neu', wave);
       this.results[wave]['unfav'] = setDimScore('unfav', wave);
       this.results[wave]['N'] = setDimValidN(wave);
@@ -54,9 +56,13 @@ class ReportDimension{
     function setDimScore(score, wave){
       var total = 0;
       var count = 0;
+      context.log.LogDebug('16');
       for (var q in this.questionArray){
+        context.log.LogDebug('17');
       total =+  q[wave].details[score];
+        context.log.LogDebug('18');
       count =+ 1;
+        context.log.LogDebug('19');
     }
     return total/count;
   }
