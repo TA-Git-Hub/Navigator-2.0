@@ -64,15 +64,10 @@ public function getScores(compID, context){
     function setDimScore(score, compID, context){
       var total = 0;
       var count = 0;
-      //context.log.LogDebug(waveID);
-      for (var q in this.questionArray){
-        //context.log.LogDebug(questionArray[q].id);
-      //  context.log.LogDebug(q.details[waveID][score]);
-      total = total +  questionArray[q].details[compID][score];
-      //  context.log.LogDebug('18');
-      count = count + 1;
-      //  context.log.LogDebug('19');
-    }
+          for (var q in this.questionArray){
+          total = total +  questionArray[q].details[compID][score];
+        count = count + 1;
+        }
     context.log.LogDebug(Math.round(total/count) + ' ' + total/count)
     return Math.round(total/count);
   }
