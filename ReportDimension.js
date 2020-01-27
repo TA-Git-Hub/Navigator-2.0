@@ -63,14 +63,14 @@ class ReportDimension{
       var count = 0;
       context.log.LogDebug(waveID);
       for (var q in this.questionArray){
-        context.log.LogDebug(questionArray[q].id);
+        //context.log.LogDebug(questionArray[q].id);
       /*  context.log.LogDebug(q.details[waveID][score]);
-      total = total +  q.details[waveID][score];
+      total = total +  questionArray[q].details[waveID][score];
         context.log.LogDebug('18');
       count = count + 1;
         context.log.LogDebug('19');*/
     }
-    return 20;
+    return total/count;
   }
 
     function setDimValidN() {
