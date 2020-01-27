@@ -33,12 +33,12 @@ class ReportDimension{
       for (var i = 0; i<Config.Wave.Codes.length; i++){
       var compID = ConfigHelper.waveID(i);
       context.log.LogDebug(11);
-      this.getScores(compID);
+      this.getScores(compID, context);
       }
       for (var i = 0; i<Config.Internal; i++){
       context.log.LogDebug(12);
       var compID = 'internal'+(i+1);
-      this.getScores(compID);
+      this.getScores(compID, context);
       }
     }
 
