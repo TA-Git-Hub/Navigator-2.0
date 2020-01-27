@@ -42,10 +42,10 @@ class ReportDimension{
       context.log.LogDebug('14');
       this.results[wave]={}
       context.log.LogDebug('14');
-      this.results[wave]['fav'] = setDimScore('fav', wave);
+      this.results[wave]['fav'] = setDimScore('fav', wave, context);
       context.log.LogDebug('15');
-      this.results[wave]['neu'] = setDimScore('neu', wave);
-      this.results[wave]['unfav'] = setDimScore('unfav', wave);
+      this.results[wave]['neu'] = setDimScore('neu', wave, context);
+      this.results[wave]['unfav'] = setDimScore('unfav', wave, context);
       this.results[wave]['N'] = setDimValidN(wave);
       this.results[wave]['comp'] = {};
 
@@ -56,7 +56,7 @@ class ReportDimension{
     }
 
 
-    function setDimScore(score, wave){
+    function setDimScore(score, wave, context){
       var total = 0;
       var count = 0;
       context.log.LogDebug('16');
