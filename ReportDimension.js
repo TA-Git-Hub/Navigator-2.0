@@ -51,12 +51,12 @@ class ReportDimension{
 
   //public function convertComp
 
-public function getScores(compID){
+public function getScores(compID, context){
   this.results[compID]={}
   var resultsType=['fav','neu','unfav','validN'];
-  for (var j=0; j<reslutsType.lenght;j++){
+  for (var j=0; j<reslutsType.length;j++){
   var type = reslutsType[j];
-  this.results[wave][type] = setDimScore(type, compID, context);
+  this.results[compID][type] = setDimScore(type, compID, context);
   this.results[compID]['comp'] = {};
   }
 }
