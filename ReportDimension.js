@@ -42,11 +42,11 @@ class ReportDimension{
       context.log.LogDebug('14');
       this.results[wave]={}
       context.log.LogDebug('14');
-      this.results[wave]['fav'] = setDimScore('fav', wave, context);
+      this.results[wave]['fav'] = setDimScore('fav', ConfigHelper.waveID(i), context);
       context.log.LogDebug('15');
-      this.results[wave]['neu'] = setDimScore('neu', wave, context);
-      this.results[wave]['unfav'] = setDimScore('unfav', wave, context);
-      this.results[wave]['N'] = setDimValidN(wave);
+      this.results[wave]['neu'] = setDimScore('neu', ConfigHelper.waveID(i), context);
+      this.results[wave]['unfav'] = setDimScore('unfav', ConfigHelper.waveID(i), context);
+      this.results[wave]['N'] = setDimValidN(ConfigHelper.waveID(i));
       this.results[wave]['comp'] = {};
 
       }
@@ -55,14 +55,16 @@ class ReportDimension{
     return {id: this.id, label: this.label, description:this.description, results: this.results, questionArray:this.questionArray, flags: this.flags, apLink: this.apLink};
     }
 
+    public function convertComp
 
-    function setDimScore(score, wave, context){
+
+    function setDimScore(score, waveID, context){
       var total = 0;
       var count = 0;
       context.log.LogDebug('16');
       for (var q in this.questionArray){
         context.log.LogDebug('17');
-      total = total +  q[wave].details[score];
+      total = total +  q.details[waveID][score];
         context.log.LogDebug('18');
       count = count + 1;
         context.log.LogDebug('19');

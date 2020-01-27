@@ -16,4 +16,11 @@ class ConfigHelper{
     }
     return allQuestions;
   }
+
+
+public static function waveID(i){
+  if (i==0){return 'current'}
+    else{return ('previous'+i)
+    }
+  }
 }
