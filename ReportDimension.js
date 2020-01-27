@@ -36,12 +36,13 @@ class ReportDimension{
 
     function calculateDimResults(context){
       for (var i = 0; i<Config.Wave.Codes.length; i++){
-      this.results[Config.Wave.Codes[i]]={}
-      this.results[Config.Wave.Codes[i]]['fav'] = setDimScore(1);
-      this.results[Config.Wave.Codes[i]]['neu'] = setDimScore(0);
-      this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
-      this.results[Config.Wave.Codes[i]]['validN'] = setDimValidN();
-      this.results[Config.Wave.Codes[i]]['comparatorValues'] = {};
+      wave = Config.Wave.Codes[i];
+      this.results[wave]={}
+      this.results[wave]['fav'] = setDimScore('fav', wave);
+      this.results[wave]['neu'] = setDimScore('neu', wave);
+      this.results[wave]['unfav'] = setDimScore('unfav', wave);
+      this.results[wave]['N'] = setDimValidN(wave);
+      this.results[wave]['comp'] = {};
 
       }
     }
@@ -50,9 +51,15 @@ class ReportDimension{
     }
 
 
-    function setDimScore(score){
-      return 15;
+    function setDimScore(score, wave){
+      var total = 0;
+      var count = 0;
+      for (var q in this.questionArray){
+      total =+  q[wave].details[score];
+      count =+ 1;
     }
+    return total/count;
+  }
 
     function setDimValidN() {
       return 200;
