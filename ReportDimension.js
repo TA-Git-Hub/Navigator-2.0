@@ -16,15 +16,10 @@ class ReportDimension{
   public function ReportDimension(dim, allQ, context) {
     this.id = dim.Id;
     this.label = this.getDimLabel();
-    context.log.LogDebug('10'+this.label);
     this.description = getDimDescription();
-    //context.log.LogDebug('11'+this.description);
-    context.log.LogDebug('12'+getDimDescription());
     this.loadQuestionsToDimension(dim, allQ, context);
-    context.log.LogDebug('13');
     this.calculateDimResults(context);
    }
-
 
   //fill dimension-----------------------------
     function loadQuestionsToDimension(dim, allQ, context){
