@@ -35,6 +35,7 @@ class ReportDimension{
     }
 
     function calculateDimResults(context){
+      context.log.LogDebug('14');
       for (var i = 0; i<Config.Wave.Codes.length; i++){
         context.log.LogDebug('14');
       var wave = Config.Wave.Codes[i];
