@@ -38,15 +38,15 @@ class ReportDimension{
       context.log.LogDebug('14');
       for (var i = 0; i<Config.Wave.Codes.length; i++){
         context.log.LogDebug('14');
-      var wave = Config.Wave.Codes[i];
+      var wave = ConfigHelper.waveID(i);
       context.log.LogDebug('14');
       this.results[wave]={}
       context.log.LogDebug('14');
-      this.results[wave]['fav'] = setDimScore('fav', ConfigHelper.waveID(i), context);
+      this.results[wave]['fav'] = setDimScore('fav',wave, context);
       context.log.LogDebug('15');
-      this.results[wave]['neu'] = setDimScore('neu', ConfigHelper.waveID(i), context);
-      this.results[wave]['unfav'] = setDimScore('unfav', ConfigHelper.waveID(i), context);
-      this.results[wave]['N'] = setDimValidN(ConfigHelper.waveID(i));
+      this.results[wave]['neu'] = setDimScore('neu', wave, context);
+      this.results[wave]['unfav'] = setDimScore('unfav', wave, context);
+      this.results[wave]['N'] = setDimValidN(wave);
       this.results[wave]['comp'] = {};
 
       }
