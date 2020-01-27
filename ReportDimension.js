@@ -66,6 +66,7 @@ public function getScores(compID, context){
       var count = 0;
           for (var q in this.questionArray){
                 context.log.LogDebug(14);
+                  context.log.LogDebug(score + compID);
           total = total +  questionArray[q].details[compID][score];
         count = count + 1;
         }
