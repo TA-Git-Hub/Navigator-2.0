@@ -37,7 +37,7 @@ class ReportDimension{
       }
       for (var i = 0; i<Config.Internal; i++){
       context.log.LogDebug(12);
-      var compID = 'internal'+(i+1);
+      var compID = 'internal'+(i);
       this.getScores(compID, context);
       }
     }
