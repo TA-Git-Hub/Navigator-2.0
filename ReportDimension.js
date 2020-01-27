@@ -55,7 +55,7 @@ class ReportDimension{
     return {id: this.id, label: this.label, description:this.description, results: this.results, questionArray:this.questionArray, flags: this.flags, apLink: this.apLink};
     }
 
-    public function convertComp
+  //public function convertComp
 
 
     function setDimScore(score, waveID, context){
