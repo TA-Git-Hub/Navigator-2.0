@@ -49,28 +49,29 @@ class ReportDimension{
   //public function convertComp
 
 public function getScores(compID, context){
-  context.log.LogDebug(111);
+  //context.log.LogDebug(111);
   this.results[compID]={}
   var resultsType=['fav','neu','unfav','validN'];
-    context.log.LogDebug(1111);
+    //context.log.LogDebug(1111);
   for (var j=0; j<resultsType.length;j++){
-    context.log.LogDebug(13);
+  //  context.log.LogDebug(13);
   var type = resultsType[j];
   this.results[compID][type] = setDimScore(type, compID, context);
+    }
   this.results[compID]['comp'] = {};
-  }
+
 }
 
     function setDimScore(score, compID, context){
       var total = 0;
       var count = 0;
           for (var q in this.questionArray){
-                context.log.LogDebug(14);
-                  context.log.LogDebug(score + compID +q);
+                //context.log.LogDebug(14);
+                //  context.log.LogDebug(score + compID +q);
           total = total +  questionArray[q].details[compID][score];
         count = count + 1;
         }
-    context.log.LogDebug(Math.round(total/count) + ' ' + total/count)
+    //context.log.LogDebug(Math.round(total/count) + ' ' + total/count)
     return Math.round(total/count);
   }
 
