@@ -50,7 +50,7 @@ public function getScores(compID, context){
   this.results[compID]={}
   var resultsType=['fav','neu','unfav','validN'];
   for (var j=0; j<resultsType.length;j++){
-  var type = reslutsType[j];
+  var type = resultsType[j];
   this.results[compID][type] = setDimScore(type, compID, context);
   this.results[compID]['comp'] = {};
   }
