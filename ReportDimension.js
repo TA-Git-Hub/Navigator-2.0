@@ -70,7 +70,7 @@ class ReportDimension{
       count = count + 1;
       //  context.log.LogDebug('19');
     }
-    contex.log.LogDebug(Math.round(total/count) + ' ' + total/count)
+    context.log.LogDebug(Math.round(total/count) + ' ' + total/count)
     return Math.round(total/count);
   }
 
