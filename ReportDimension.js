@@ -43,9 +43,13 @@ class ReportDimension{
       this.results[Config.Wave.Codes[i]]['unfav'] = setDimScore(-1);
       this.results[Config.Wave.Codes[i]]['validN'] = setDimValidN();
       this.results[Config.Wave.Codes[i]]['comparatorValues'] = {};
-      context.log.LogDebug(i);
+
       }
     }
+    public function GetJSONString(context){
+    return {id: this.id, label: this.label, results: this.results, flags: this.flags, apLink: this.apLink};
+    }
+
 
     function setDimScore(score){
       return 15;
