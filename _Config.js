@@ -18,7 +18,7 @@ static const Wave = {
 Codes:[2016,2015,2014,2013] // RP-24 Three years of Trends
 };
 
-static const Internal = 5;
+static const Internal = 4;
 
 
 //Hierarchy settings
