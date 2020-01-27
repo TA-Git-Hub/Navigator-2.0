@@ -61,7 +61,7 @@ class ReportDimension{
     function setDimScore(score, waveID, context){
       var total = 0;
       var count = 0;
-      context.log.LogDebug('waveID');
+      context.log.LogDebug(waveID);
       for (var q in this.questionArray){
         context.log.LogDebug('17');
       total = total +  q.details[waveID][score];
