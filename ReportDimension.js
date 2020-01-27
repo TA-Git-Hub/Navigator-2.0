@@ -35,37 +35,40 @@ class ReportDimension{
     }
 
     function calculateDimResults(context){
-      context.log.LogDebug('14');
       for (var i = 0; i<Config.Wave.Codes.length; i++){
-        context.log.LogDebug('14');
-      var wave = ConfigHelper.waveID(i);
-      context.log.LogDebug('14');
-      this.results[wave]={}
-      context.log.LogDebug('14');
-      this.results[wave]['fav'] = setDimScore('fav',wave, context);
-      context.log.LogDebug('15');
-      this.results[wave]['neu'] = setDimScore('neu', wave, context);
-      this.results[wave]['unfav'] = setDimScore('unfav', wave, context);
-      this.results[wave]['N'] = setDimScore('validN',wave, context);
-      this.results[wave]['comp'] = {};
-
+      var compID = ConfigHelper.waveID(i);
+      this.getScores(compID);
+      }
+      for (var i = 0; i<Config.Internal; i++){
+      var compID = 'internal'+(i+1);
+      this.getScores(compID);
       }
     }
+
     public function GetJSONString(context){
     return {id: this.id, label: this.label, description:this.description, results: this.results, questionArray:this.questionArray, flags: this.flags, apLink: this.apLink};
     }
 
   //public function convertComp
 
+public function getScores(compID){
+  this.results[compID]={}
+  var resultsType=['fav','neu','unfav','validN'];
+  for (var j=0; j<reslutsType.lenght;j++){
+  var type = reslutsType[j];
+  this.results[wave][type] = setDimScore(type, compID, context);
+  this.results[compID]['comp'] = {};
+  }
+}
 
-    function setDimScore(score, waveID, context){
+    function setDimScore(score, compID, context){
       var total = 0;
       var count = 0;
       //context.log.LogDebug(waveID);
       for (var q in this.questionArray){
         //context.log.LogDebug(questionArray[q].id);
       //  context.log.LogDebug(q.details[waveID][score]);
-      total = total +  questionArray[q].details[waveID][score];
+      total = total +  questionArray[q].details[compID][score];
       //  context.log.LogDebug('18');
       count = count + 1;
       //  context.log.LogDebug('19');
