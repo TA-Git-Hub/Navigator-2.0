@@ -29,7 +29,6 @@ class ReportDimension{
   //fill dimension-----------------------------
     function loadQuestionsToDimension(dim, allQ, context){
       for (var i = 0; i < dim.Questions.length; i++) {
-
         var qID = dim.Questions[i];
         this.questionArray[qID]= allQ[qID];
       }
@@ -47,7 +46,7 @@ class ReportDimension{
       }
     }
     public function GetJSONString(context){
-    return {id: this.id, label: this.label, results: this.results, flags: this.flags, apLink: this.apLink};
+    return {id: this.id, label: this.label, description:this.description, results: this.results, questionArray:this.questionArray, flags: this.flags, apLink: this.apLink};
     }
 
 
