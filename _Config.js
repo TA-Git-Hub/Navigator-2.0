@@ -74,29 +74,4 @@ static var Hierarchy = {
                 {Id: 'OM06', Qs:null},
                 {Id: 'NP01', Qs:null}
       ];
-
-/*  static function GetDistributionIndexes (id : String) {
-  		switch (id) {
-
-  			// Questions with non-standard scales
-  			case 'OM06':
-  				return {fav:[3], neu:[2], unfav:[0,1]};
-  				break;
-
-  			//ENPS EXAMPLE
-  			case 'NP01':
-  				return {fav:[9,10], neu:[7,8], unfav:[0,1,2,3,4,5,6]};
-  				break;
-
-  			// Negatively worded questions (reverse scale)
-  			case 'XXXX':
-  				return { Fav:[3,4], Neu:[2], Unfav:[0,1], TopBox: 4};
-  				break;
-
-
-  		  // Default recoding  (normal scale)
-  		  default:
-  			return {fav:[0,1], neu:[2], unfav:[3,4]};
-  		}
-    };*/
 }
