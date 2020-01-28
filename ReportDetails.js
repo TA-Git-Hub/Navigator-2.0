@@ -48,7 +48,9 @@ class ReportDetails{
 
       switch(this.scale[i].Weight){
         case 1 :
+        ReportHelper.Debug('==============');
         ReportHelper.Debug('Distribution: ' + this.distribution[i]);
+        ReportHelper.Debug('index: ' + i);
           this.fav += this.distribution[i];
           break;
         case 0 :
