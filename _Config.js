@@ -17,6 +17,16 @@ static const Wave = {
   Codes:[2016, 2015, 2014, 2013] // RP-24 Three years of Trends
 };
 
+static const Comparators = {
+  Internal: ['Top', 'Parent', 'Level2', 'Custom1', 'Custom2'],
+  External: [/*'AllCompany_A_16TO18_Avg'*/],
+
+  DefaultValues: {
+    Internal: ['Top'],
+    External: ['AllCompany_A_16TO18_Avg']
+  }
+};
+
 
 //Hierarchy settings
 static var Hierarchy = {
@@ -60,12 +70,12 @@ static var Hierarchy = {
                      'TR09',	'TR04',	'AV15',	'AV09',	'SP12',	'CP11',	'CP12',	'BN01',
                      'WE08',	'WE12',	'JS05',	'JS02',	'OM11',	'OM12',	'OS02',	'OM01',
                      'CQ50',	'CQ51',	'CQ52',	'CQ53',	'CQ54',	'CQ55',	'CQ56',	'CQ57',
-                     'CQ58',	'CQ59',	'CQ60',	'CQ61'], NumberOfAnswers: 6},
-                {Id: 'OM06', Qs:null, NumberOfAnswers: 4},
-                {Id: 'NP01', Qs:null, NumberOfAnswers: 11}
+                     'CQ58',	'CQ59',	'CQ60',	'CQ61']},
+                {Id: 'OM06', Qs:null},
+                {Id: 'NP01', Qs:null}
       ];
 
-  static function GetDistributionIndexes (id : String) {
+/*  static function GetDistributionIndexes (id : String) {
   		switch (id) {
 
   			// Questions with non-standard scales
@@ -79,14 +89,14 @@ static var Hierarchy = {
   				break;
 
   			// Negatively worded questions (reverse scale)
-  			/*case 'XXXX':
+  			case 'XXXX':
   				return { Fav:[3,4], Neu:[2], Unfav:[0,1], TopBox: 4};
   				break;
-  			*/
+
 
   		  // Default recoding  (normal scale)
   		  default:
   			return {fav:[0,1], neu:[2], unfav:[3,4]};
   		}
-    };
+    };*/
 }

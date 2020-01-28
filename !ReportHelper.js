@@ -4,8 +4,8 @@ class ReportHelper{
   private static var confirmit : ConfirmitFacade = null;
   private static var log : Logger = null;
   private static var user : User = null;
-  private static const textReplace = {questionId: "CustomTexts", placeholder1: "^ClientName()^", placeholder2: "^ClientName2()^",
-                                                                 replacement1: "ClientName", replacement2: "ClientName2"};
+  private static var page : Page = null;
+  private static const textReplace = {questionId: "CustomTexts", placeholders: ["^ClientName()^", "^ClientName2()^"], replacements: ["ClientName", "ClientName2"]};
 
   public static function Start(context : Object) {
     report = context.report;
@@ -13,6 +13,7 @@ class ReportHelper{
     confirmit = context.confirmit;
     log = context.log;
     user = context.user;
+    page = context.page;
   }
 
   public static function Debug(message){
@@ -20,31 +21,28 @@ class ReportHelper{
   }
 
   public static function CleanText(text, context){
-    var replacement = null;
+    var replacements = textReplace.replacements;
+    var placeholders = textReplace.placeholders;
     var returnString = text;
-    if(text.indexOf(textReplace.placeholder1) !== -1){
-      var answer = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement1);
-      if(answer){
-        replacement = answer.Text;
-        returnString = text.split(textReplace.placeholder1).join(replacement);
-      }
-    }
 
-    if(text.indexOf(textReplace.placeholder2) !== -1){
-      var answer = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(textReplace.replacement2);
-      if(answer){
-        replacement = answer.Text;
-        returnString = text.split(textReplace.placeholder2).join(replacement);
-      }
-    }
+    for(var i = 0; i < placeholders.length; i++){
 
+      if(text.indexOf(placeholders[i]) !== -1){
+        var answer = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(replacements[i]);
+        if(answer){
+          var tmpReplacement = answer.Text;
+          returnString = text.split(placeholders[i]).join(tmpReplacement);
+        }
+      }
+
+    }
     return returnString;
 
 
   }
 
   public static function QuestionHashtable() {
-    var questions = TableHelper.PopulateQuestions({report: report});
+    var questions = TableHelper.PopulateQuestions({report: report, page: page});
     var returnObject = {};
     for(var i = 0; i < questions.length; i++){
       returnObject[questions[i].GetId()] = questions[i].GetJSONString();

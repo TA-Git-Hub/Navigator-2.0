@@ -16,4 +16,14 @@ class ConfigHelper{
     }
     return allQuestions;
   }
+
+  public static function GetWaveKey(index){
+    if(index === 0){
+      return "current";
+    }
+    if(index > 0){
+      return "previous" + index;
+    }
+  }
+
 }
