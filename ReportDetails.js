@@ -125,7 +125,7 @@ class ReportDetails{
   }
 
   public function SetScale(id){
-    this.scale = underfined;
+    this.scale = undefined;
   }
 
 }
