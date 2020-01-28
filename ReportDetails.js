@@ -40,52 +40,31 @@ class ReportDetails{
     * [@Return]     - none
   **/
   public function Calculate(context){
-    var indexes = this.scale;
+    for(var i = 0; i < this.scale; i++){
+      switch(this.scale[i]){
+        case '1' :
+          this.fav += this.scale[i];
+          break;
+        case '0' :
+          this.neu += this.scale[i];
+          break;
+        case '-1':
+          this.unfav += this.scale[i];
+          break;
 
-  /*  for(var key in indexes){
-      if(indexes[key] !== null){
-        var count = 0;
-        for(var i = 0; i < indexes[key].length; i++){
-          count += this.distribution[indexes[key][i]];
-        }
-
-        switch (key) {
-          case "fav":
-            if (this.validN !== 0) {
-              this.fav = CalculateMethology(count, 'count/validN');
-            }
-            else{
-              this.fav = -1;
-            }
-            break;
-          case "neu":
-            if (this.validN !== 0) {
-              this.neu = CalculateMethology(count, 'count/validN');
-            }
-            else{
-              this.neu = -1;
-            }
-            break;
-          case "unfav":
-            if (this.validN !== 0) {
-              this.unfav = CalculateMethology(count, 'count/validN');
-            }
-            else{
-              this.unfav = -1;
-            }
-            break;
-          default:
-            ReportHelper.Debug("ERROR: ReportDetails.Calculate()");
-        }
+        default:
       }
-    }*/
+    }
+    CalculateMethology('count/validN');
   }
 
-  private function CalculateMethology(count, type){
+  private function CalculateMethology(type){
 
     switch (type) {
       case 'count/validN':
-        return Math.round((count / this.validN)*100);
+        this.fav = (this.validN === 0) ? -1 : Math.round((this.fav / this.validN)*100);
+        this.neu = (this.validN === 0) ? -1 : Math.round((this.neu / this.validN)*100);
+        this.unfav = (this.validN === 0) ? -1 : Math.round((this.unfav / this.validN)*100);
         break;
       default:
 
@@ -125,7 +104,7 @@ class ReportDetails{
   }
 
   public function SetScale(id){
-    this.scale = undefined;
+    this.scale = ReportHelper.GetQuestionScale(id);
   }
 
 }
