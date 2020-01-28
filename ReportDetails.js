@@ -65,6 +65,8 @@ class ReportDetails{
         this.fav = (this.validN === 0) ? -1 : Math.round((this.fav / this.validN)*100);
         this.neu = (this.validN === 0) ? -1 : Math.round((this.neu / this.validN)*100);
         this.unfav = (this.validN === 0) ? -1 : Math.round((this.unfav / this.validN)*100);
+
+        ReportHelper.Debug('fav: ' + this.fav);
         break;
       default:
 
