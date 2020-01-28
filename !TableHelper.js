@@ -21,7 +21,7 @@ class TableHelper{
 
   static function PopulateQuestions(context){
     var questionMap = CreateQuestionMap(context);
-    var tablePath = context.page.Id + ':' + TableMapping(context.page.Id);
+    var tablePath = context.page.CurrentPageId + ':' + TableMapping(context.page.CurrentPageId);
     var questionTexts = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);
     var returnArray = [];
     var rowIterator = 0;
