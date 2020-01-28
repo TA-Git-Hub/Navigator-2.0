@@ -49,4 +49,8 @@ class ReportHelper{
     }
     return returnObject;
   }
+
+  public static function GetQuestionScale(id){
+    return report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(id).GetScale();
+  }
 }

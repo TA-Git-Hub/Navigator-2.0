@@ -52,7 +52,7 @@ class TableHelper{
 
         if (columnIterator > Config.Wave.Codes.length && columnIterator <= columnCount){
           //detailsTable["internal" + (columnIterator - Config.Wave.Codes.length -1)] = details;
-          detailsTable.push({details: details, id: Config.Comparators.Internal[columnIterator - Config.Wave.Codes.length]});
+          detailsTable.push({details: details, id: Config.Comparators.Internal[columnIterator - Config.Wave.Codes.length - 1]});
         //  qValues.inter.push({distribution: distribution, validN: validN});
         }
       }
@@ -73,7 +73,7 @@ class TableHelper{
     var questions = Config.QuestionsGridStructure;
 
     for(var i = 0; i < questions.length; i++){
-      var questionScale = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(questions[i].Id).GetScale().length;
+      var questionScale = ReportHelper.GetQuestionScale(questions[i].Id).length;
 
       if(questions[i].Qs === null){
         questionMap[questions[i].Id] = questionScale;
