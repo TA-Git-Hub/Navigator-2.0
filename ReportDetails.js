@@ -77,8 +77,7 @@ class ReportDetails{
   }
 
   public function GetJSONString(){
-    ReportHelper.Debug('======JSON ');
-    return {validN: this.validN, distribution: this.distribution, scale: this.scale, fav: this.fav, neu: this.neu, unfav: this.unfav};
+    return {validN: this.validN, distribution: this.distribution, /*scale: this.scale,*/ fav: this.fav, neu: this.neu, unfav: this.unfav};
 
   }
 
