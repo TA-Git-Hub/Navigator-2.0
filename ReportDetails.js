@@ -43,13 +43,13 @@ class ReportDetails{
     for(var i = 0; i < this.scale.length; i++){
       switch(this.scale[i].Weight){
         case '1' :
-          this.fav += this.scale[i].Weight;
+          this.fav += this.distribution[i];
           break;
         case '0' :
-          this.neu += this.scale[i].Weight;
+          this.neu += this.distribution[i];
           break;
         case '-1':
-          this.unfav += this.scale[i].Weight;
+          this.unfav += this.distribution[i];
           break;
 
         default:
