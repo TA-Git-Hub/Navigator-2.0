@@ -48,6 +48,7 @@ class ReportDetails{
       switch(this.scale[i].Weight){
         case 1 :
           this.fav += this.distribution[i];
+          ReportHelper.Debug(fav);
           break;
         case 0 :
           this.neu += this.distribution[i];
