@@ -45,13 +45,13 @@ class ReportDetails{
 
       switch(this.scale[i].Weight){
         case '1' :
-          this.fav += this.scale[i];
+          this.fav += this.scale[i].Weight;
           break;
         case '0' :
-          this.neu += this.scale[i];
+          this.neu += this.scale[i].Weight;
           break;
         case '-1':
-          this.unfav += this.scale[i];
+          this.unfav += this.scale[i].Weight;
           break;
 
         default:
