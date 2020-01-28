@@ -48,7 +48,6 @@ class ReportDetails{
       switch(this.scale[i].Weight){
         case 1 :
           this.fav += this.distribution[i];
-          ReportHelper.Debug(fav);
           break;
         case 0 :
           this.neu += this.distribution[i];
@@ -67,8 +66,16 @@ class ReportDetails{
 
     switch (type) {
       case 'count/validN':
+      ReportHelper.Debug('favBefore: ' + this.fav);
         this.fav = (this.validN === 0) ? -1 : Math.round((this.fav / this.validN)*100);
-        this.neu = (this.validN === 0) ? -1 : Math.round((this.neu / this.validN)*100);
+
+        ReportHelper.Debug('favAfter: ' + this.fav);
+
+        ReportHelper.Debug('neuBefore: ' + this.neu);
+        var temp = this.neu;
+        this.neu = (this.validN === 0) ? -1 : Math.round((temp / this.validN)*100);
+
+        ReportHelper.Debug('neuafter: ' + this.neu);
         this.unfav = (this.validN === 0) ? -1 : Math.round((this.unfav / this.validN)*100);
         break;
       default:
