@@ -51,6 +51,7 @@ class ReportHelper{
   }
 
   public static function GetQuestionScale(id){
+    Debug('scale');
     return report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(id).GetScale();
   }
 }

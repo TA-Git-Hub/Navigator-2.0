@@ -41,8 +41,6 @@ class ReportDetails{
   **/
   public function Calculate(context){
     for(var i = 0; i < this.scale.length; i++){
-      ReportHelper.Debug('scale: ' + i + ' ' + this.scale[i].Weight);
-
       switch(this.scale[i].Weight){
         case '1' :
           this.fav += this.scale[i].Weight;
@@ -79,6 +77,7 @@ class ReportDetails{
   }
 
   public function GetJSONString(){
+    ReportHelper.Debug('======JSON ');
     return {validN: this.validN, distribution: this.distribution, scale: this.scale, fav: this.fav, neu: this.neu, unfav: this.unfav};
 
   }
