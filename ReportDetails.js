@@ -41,6 +41,8 @@ class ReportDetails{
   **/
   public function Calculate(context){
     for(var i = 0; i < this.scale; i++){
+      ReportHelper.Debug('scale: ' + i + ' ' + this.scale[i].Weight);
+
       switch(this.scale[i].Weight){
         case '1' :
           this.fav += this.scale[i];
