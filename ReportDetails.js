@@ -40,7 +40,7 @@ class ReportDetails{
     * [@Return]     - none
   **/
   public function Calculate(context){
-    for(var i = 0; i < this.scale; i++){
+    for(var i = 0; i < this.scale.length; i++){
       ReportHelper.Debug('scale: ' + i + ' ' + this.scale[i].Weight);
 
       switch(this.scale[i].Weight){
