@@ -42,7 +42,7 @@ class ReportDetails{
   public function Calculate(context){
     var indexes = this.scale;
 
-    for(var key in indexes){
+  /*  for(var key in indexes){
       if(indexes[key] !== null){
         var count = 0;
         for(var i = 0; i < indexes[key].length; i++){
@@ -78,7 +78,7 @@ class ReportDetails{
             ReportHelper.Debug("ERROR: ReportDetails.Calculate()");
         }
       }
-    }
+    }*/
   }
 
   private function CalculateMethology(count, type){
@@ -125,7 +125,7 @@ class ReportDetails{
   }
 
   public function SetScale(id){
-    this.scale = Config.GetDistributionIndexes(id);
+    this.scale = underfined;
   }
 
 }
