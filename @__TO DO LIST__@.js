@@ -16,7 +16,7 @@ Luky & Venca --
 */
 
 
-/*
+/* 
 Finished:
 23.01.2020 - ReportHelper class - function CleanText() : question text replace ClientName placeholders
            - class TableHelper - fix distribution for trends
