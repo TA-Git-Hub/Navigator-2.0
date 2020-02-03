@@ -34,5 +34,4 @@ Finished:
                              - Added demographics/filters
                              - Added filters for current wave and current levels
            - class Config - Add wave, survey DataSources reference
-           - adding note for Deny
 */
