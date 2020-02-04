@@ -9,7 +9,6 @@
 class ReportQuestion{
   private var id : String = null;
   private var label : String = null;
-  //private var description : String = null; //Won't be used, because Filip said so.
   private var details = {};
   private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   private var apLink : String = null;
@@ -43,10 +42,6 @@ class ReportQuestion{
       SetLabel(information.label);
     }
 
-    /*if(information.description !== null){
-      SetDescription(information.description);
-    }*/
-
     if(information.details !== null){
     //  ReportHelper.Debug('Question validN: ' + information.details['current'].GetValidN());
       SetDetails(information.details);
@@ -71,9 +66,6 @@ class ReportQuestion{
     return this.label;
   }
 
-/*  public function GetDescription() {
-    return this.description;
-  }*/
 
   public function GetDetails() {
     return this.details;
@@ -84,9 +76,6 @@ class ReportQuestion{
       this.label = label;
   }
 
-/*  public function SetDescription(description) {
-    this.description = description;
-  }*/
 
   public function SetDetails(details) {
   //  this.details = details;

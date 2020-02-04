@@ -2,21 +2,39 @@ class TableHelper{
   static var allQIds = ConfigHelper.GetQuestions();
   private var reportQuestionHT = {};
 
+  /**
+    * [@About]      - this function is mapping all tables to their pages
+
+    * [@Parameters] - pageId - string Id of page
+
+    * [@Return]     - string with name of table
+  **/
+  static function TableMapping(pageId){
+    switch(pageId){
+      case 'frodo' : return 'MainTable';
+      case 'gandalf' : return 'MainTable';
+      case 'boromir' : return 'TestTable';
+
+      default : return undefined;
+    }
+  }
+
   static function PopulateQuestions(context){
     var questionMap = CreateQuestionMap(context);
-    var questionTexts = context.report.TableUtils.GetRowHeaderCategoryTitles("frodo:MainTable");
+    var tablePath = context.page.CurrentPageId + ':' + TableMapping(context.page.CurrentPageId);
+    var questionTexts = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);
     var returnArray = [];
     var rowIterator = 0;
     var tempIt = 0;
-    var columnCount = Config.Wave.Codes.length + 4; // 4 = number of internal comparators
+    var columnCount = GetColumnCount(tablePath); // 4 = number of internal comparators
 
     for(var i = 0; i < allQIds.length; i++){
       //var qValues = {current: null, trends: [], inter: [], exter: []};
       var detailsTable = [];//{};
       for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
         rowIterator = tempIt;
-        var label = questionTexts[rowIterator][1];
-        var column = context.report.TableUtils.GetColumnValues("frodo:MainTable", columnIterator);
+        var label = ReportHelper.CleanText(questionTexts[rowIterator][1], context);
+        var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         var details = new ReportDetails(allQIds[i]);
         var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
         rowIterator += questionMap[allQIds[i]];
@@ -26,22 +44,15 @@ class TableHelper{
   //      ReportHelper.Debug('After details.Setup');
         rowIterator += 1;
 
-        if (columnIterator === 1) {
-          //detailsTable["current"] = details;
-          detailsTable.push({details: details, id: 'current'});
-        //  ReportHelper.Debug('Current: ' + details.GetValidN());
-        //  qValues.current = {distribution: distribution, validN: validN};
-        }
-
-        if (columnIterator > 1 && columnIterator <= Config.Wave.Codes.length) {
+        if (columnIterator <= Config.Wave.Codes.length) {
             //detailsTable["previous" + (columnIterator - 1)] = details;
-            detailsTable.push({details: details, id: "previous" + (columnIterator - 1)});
+            detailsTable.push({details: details, id: ConfigHelper.GetWaveKey(columnIterator - 1)});
         //  qValues.trends.push({distribution: distribution, validN: validN});
         }
 
-        if (columnIterator > Config.Wave.Codes.length && columnIterator <= Config.Wave.Codes.length + 4){
+        if (columnIterator > Config.Wave.Codes.length && columnIterator <= columnCount){
           //detailsTable["internal" + (columnIterator - Config.Wave.Codes.length -1)] = details;
-          detailsTable.push({details: details, id: "internal" + (columnIterator - Config.Wave.Codes.length -1)});
+          detailsTable.push({details: details, id: Config.Comparators.Internal[columnIterator - Config.Wave.Codes.length - 1]});
         //  qValues.inter.push({distribution: distribution, validN: validN});
         }
       }
@@ -49,7 +60,7 @@ class TableHelper{
 
       var question : ReportQuestion = new ReportQuestion(allQIds[i]);
   //    ReportHelper.Debug('Before question.Setup');
-      question.Setup({label: label, details: detailsTable, description: ""}, context);
+      question.Setup({label: label, details: detailsTable}, context);
     //  ReportHelper.Debug('After question.Setup: ' + question.details['current'].validN);
 
       returnArray.push(question);
@@ -62,7 +73,7 @@ class TableHelper{
     var questions = Config.QuestionsGridStructure;
 
     for(var i = 0; i < questions.length; i++){
-      var questionScale = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(questions[i].Id).GetScale().length;
+      var questionScale = ReportHelper.GetQuestionScale(questions[i].Id).length;
 
       if(questions[i].Qs === null){
         questionMap[questions[i].Id] = questionScale;
@@ -83,5 +94,14 @@ class TableHelper{
     }
 
     return distribution;
+  }
+
+  static function GetColumnCount(tablaPath){
+    switch(tablaPath){
+      case 'frodo:MainTable' :
+        return Config.Wave.Codes.length + Config.Comparators.Internal.length + Config.Comparators.External.length;
+
+      default : return undefined;
+    }
   }
 }

@@ -17,10 +17,12 @@ class ConfigHelper{
     return allQuestions;
   }
 
-
-public static function waveID(i){
-  if (i==0){return 'current'}
-    else{return ('previous'+i)
+  public static function GetWaveKey(index){
+    if(index === 0){
+      return "current";
+    }
+    if(index > 0){
+      return "previous" + index;
     }
   }
 }
