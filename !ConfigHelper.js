@@ -25,5 +25,4 @@ class ConfigHelper{
       return "previous" + index;
     }
   }
-
 }

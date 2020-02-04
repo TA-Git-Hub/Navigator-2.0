@@ -14,7 +14,8 @@ static const Wave = {
   //Current: 2016,
   //UPDATED THE BELOW TO REFLECT WAVE CODE VALUES IN SURVEY FOR YOUR PROJECT
   //Current year ALWAYS to be first in Codes!
-  Codes:[2016, 2015, 2014, 2013] // RP-24 Three years of Trends
+
+Codes:[2016,2015,2014,2013] // RP-24 Three years of Trends
 };
 
 static const Comparators = {

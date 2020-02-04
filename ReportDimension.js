@@ -1,69 +1,80 @@
-/*class ReportDimension {
+class ReportDimension {
 
-  //Array for question objects
-  private var questionArray = {};
+  var questionArray = {}; //Array for question objects
+  var id = "";
+  var label = "";
+  var description = "";
+  var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
+  var apLink = "";
+  var results = {};
 
-  //ID and texts
-  private  var id: String = null;
-  private  var label: String = null;
-  private  var description: String = null;
+  // constructor---------------------------------
+  function ReportDimension(dim, allQ, context) {
+    this.id = dim.Id;
+    this.label = this.getDimLabel();
+    this.description = getDimDescription();
+    loadQuestionsToDimension(dim, allQ, context);
+    calculateDimResults(context);
+  }
 
-  //Statistics from table
-  private var scores = {fav: int = null,
-                        neu: int = null,
-                        unfav: int = null,
-                        validN: int = null
-                      }
-
- //todo Question class includes count, valid N , fav
-
-  private var comparatorValues = {};
-
-  private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
-  private var apLink: String = null;
-  private var orgcodes: String[] = []; // to-do determines local question visibility
-
-  // constructor
-  public function ReportDimension(id : String) {
-    this.id = id;
-    questionArray = getQuestions(id);
-
-    for (var stat in scores){
-      if checkSuppression(){
-        scores.stat=getScore(stat);
-      }
-      else{
-        scores.stat=-1;
-      }
+  //fill dimension-----------------------------
+  function loadQuestionsToDimension(dim, allQ, context) {
+    for (var i = 0; i < dim.Questions.length; i++) {
+      var qID = dim.Questions[i];
+      this.questionArray[qID] = allQ[qID];
     }
   }
 
-  public function checkSuppression(){
-    return false;
+  //----------------Fill dimension scores
+  function calculateDimResults(context) {
+    for (var i = 0; i < Config.Wave.Codes.length; i++) {
+      var compID = ConfigHelper.waveID(i);
+      this.getScores(compID, context);
+    }
+    for (var i = 0; i < Config.Internal; i++) {
+      var compID = 'internal' + (i);
+      this.getScores(compID, context);
+    }
   }
 
-//Get Dimension score calculated from question scores
-  public function getScore (stat){
+  function getScores(compID, context) {
+    this.results[compID] = {}
+    var resultsType = ['fav', 'neu', 'unfav', 'validN'];
+    for (var j = 0; j < resultsType.length; j++) {
+      var type = resultsType[j];
+      this.results[compID][type] = setDimScore(type, compID, context);
+    }
+    this.results[compID]['comp'] = {};
+  }
+
+  function setDimScore(score, compID, context) {
+    var total = 0;
     var count = 0;
-      var sum = 0;
-      for (var i = 0; i < questionArray.length; i++) {
-        var q = questionArray[i];
-        sum += q.stat;
-        count ++;
-      }
-      return = Math.round(sum/count);
-  }
-
-
-//add question objects into dimension object
-  private function getQuestions (dID){
-    for (var i = 0; i < Config.Dimensions[dID].length; i++) {
-      var q = new ReportQuestion(Config.Dimensions[dID][i]);
-      questionArray.qID=q;
+    for (var q in this.questionArray) {
+      total = total + questionArray[q].details[compID][score];
+      count = count + 1;
     }
+    return Math.round(total / count);
   }
 
+  //----------------------------------------------
+  function getDimDescription() {
+    return Config.Wave.Codes[0];
+  };
 
-
+  function getDimLabel() {
+    return Config.Wave.Codes[0];
+  };
+  //----------------------------------------------
+  function GetJSONString(context) {
+    return {
+      id: this.id,
+      label: this.label,
+      description: this.description,
+      results: this.results,
+      questionArray: this.questionArray,
+      flags: this.flags,
+      apLink: this.apLink
+    };
+  }
 }
-*/

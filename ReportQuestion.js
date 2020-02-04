@@ -49,10 +49,11 @@ class ReportQuestion{
   }
 
   // -- GETTERS
-  public function GetJSONString(){
+  public function GetJSONString(context){
     var details = {};
     for(var key in this.details){
-      details[key] = this.details[key].GetJSONString();
+    //context.log.LogDebug('key: ' + key)
+      details[key] = this.details[key].GetJSONString(context);
     }
     return {id: this.id, label: this.label, details: details, flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
   }

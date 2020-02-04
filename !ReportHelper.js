@@ -41,16 +41,34 @@ class ReportHelper{
 
   }
 
+
   public static function QuestionHashtable() {
     var questions = TableHelper.PopulateQuestions({report: report, page: page});
+
     var returnObject = {};
     for(var i = 0; i < questions.length; i++){
-      returnObject[questions[i].GetId()] = questions[i].GetJSONString();
+      returnObject[questions[i].GetId()] = questions[i].GetJSONString(context);
     }
     return returnObject;
   }
 
+
   public static function GetQuestionScale(id){
     return report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(id).GetScale();
+
+  //pravdepodobne se nepouziva
+  public static function getDimensionObject(context){
+    var dimensions = {};
+    //load questions object
+    var allQ = ReportHelper.QuestionHashtable(context);
+    //list of dimensions and mapped questions
+    var dimensionList = Config.Dimensions;
+    for (var i = 0; i < dimensionList.length; i++){
+      var dimensionObject = new ReportDimension(dimensionList[i], allQ, context);
+      var JSONdimensionObject = dimensionObject.GetJSONString(context);
+      dimensions[dimensionList[i].Id] = JSONdimensionObject;
+    }
+    return dimensions;
+
   }
 }
