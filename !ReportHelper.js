@@ -78,7 +78,7 @@ class ReportHelper{
     var returnObject = {};
 
     for (var i = 0; i < question.length; i++) {
-      returnObject[question[i].GetId()] = question[i].GetJSONString(context);
+      returnObject[question[i].GetId()] = question[i].GetJSONString({report: report, page: page});
     }
 
     return returnObject;

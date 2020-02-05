@@ -47,7 +47,7 @@ class TableHelper{
         // get rid of 'WildCardReplacements'
         var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
         // prepare question detail
-        var detail = new ReportDetail(allQuestionID[i]);
+        var detail = new ReportDetails(allQuestionID[i]);
 
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         // get data from the column segment
@@ -62,19 +62,19 @@ class TableHelper{
         details.setup({distribution: distribution, validN: validN}, context);
 
         // if we are in trend column
-        if (columnIterator <= Config.wave.code.length) {
+        if (columnIterator <= Config.wave.codes.length) {
             detailTable.push({detail: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
         }
 
         // if we are past trend column and below end - internal column
-        if (columnIterator > Config.wave.code.length && columnIterator <= columnCount){
-          detailTable.push({detail: details, id: Config.comparators.internal[columnIterator - Config.wave.codes.length - 1]});
+        if (columnIterator > Config.wave.codes.length && columnIterator <= columnCount){
+          detailTable.push({detail: details, id: Config.comparators.internals[columnIterator - Config.wave.codes.length - 1]});
         }
       }
       tempIt = rowIterator;
 
       // we have all the information needed, create question and fill it
-      var question : ReportQuestion = new ReportQuestion(allQuestionIDs[i]);
+      var question : ReportQuestion = new ReportQuestion(allQuestionID[i]);
       question.setup({label: label, detail: detailTable}, context);
 
       returnArray.push(question);
