@@ -1,3 +1,7 @@
+/**
+ * This class serves for testing of provided settings
+ * checks wheter the project can be created using them
+ */
 class AutoTester{
   private var report : Report = null;
   private var state : ReportState = null;
@@ -5,6 +9,11 @@ class AutoTester{
   private var log : Logger = null;
   private var user : User = null;
 
+/**
+ * Create object of Autotester and set it's properties via the global properties
+ * @param       {Object} context wrapper of global properties
+ * @constructor
+ */
   public function AutoTester(context : Object) {
     this.report = context.report;
     this.state = context.state;
@@ -13,11 +22,15 @@ class AutoTester{
     this.user = context.user;
   }
 
-  public function TestQuestions() {
-    var qIds : String[] = CollectQuestionIds();
-    for(var i = 0; i < qIds.length; i++){
+  /**
+   * This function tests question IDs in Config and tries whether they are present in survey
+   * @return {[Boolean]} true if all ids found / false if any ID not found or any other issue
+   */
+  public function testQuestion() {
+    var qID : String[] = collectQuestionID();
+    for(var i = 0; i < qID.length; i++){
       try{
-        new ReportQuestion(qIds[i]);
+        new ReportQuestion(qID[i]);
       }catch(e){
         return false;
       }
@@ -25,40 +38,47 @@ class AutoTester{
     return true;
   }
 
-  private function Debug(message){
-    this.log.LogDebug(message);
-  }
+/**
+ * This function gathers all the question IDs provided via Config
+ * @return {[type]} [description]
+ */
+  private function collectQuestionID(){
+    var testSubject : Object = {dimensions: Config.dimensions, grid: Config.questionGridStructure};
+    var questionID : Object = {};
 
-  private function CollectQuestionIds(){
-    var testSubjects : Object = {dimensions: Config.Dimensions, grid: Config.QuestionsGridStructure};
-    var questionIds : Object = {};
-    for (var i = 0; i < testSubjects.dimensions.length; i++) {
-      var dimension = testSubjects.dimensions[i];
-      if (dimension.Questions !== null){
-        for (var j = 0; j < dimension.Questions.length; j++) {
-          if (questionIds[dimension.Questions[j]] === undefined){
-            questionIds[dimension.Questions[j]] = dimension.Questions[j];
+    // get IDs from dimensions
+    for (var i = 0; i < testSubject.dimensions.length; i++) {
+      var dimension = testSubject.dimensions[i];
+      if (dimension.question !== null){
+        for (var j = 0; j < dimension.question.length; j++) {
+          if (questionID[dimension.question[j]] === undefined){
+            questionID[dimension.question[j]] = dimension.question[j];
           }
         }
       }
     }
-    for (var i = 0; i < testSubjects.grid.length; i++) {
-      var grid = testSubjects.grid[i];
-      if (grid.Qs !== null) {
-        for (var j = 0; j < grid.Qs.length; j++) {
-          if (questionIds[grid.Qs[j]] === undefined){
-            questionIds[grid.Qs[j]] = grid.Qs[j];
+
+    //  get IDs from grid structure
+    for (var i = 0; i < testSubject.grid.length; i++) {
+      var grid = testSubject.grid[i];
+      if (grid.question !== null) {
+        for (var j = 0; j < grid.question.length; j++) {
+          if (questionID[grid.question[j]] === undefined){
+            questionID[grid.question[j]] = grid.question[j];
           }
         }
-      }else {
-        if (questionIds[grid.Id] === undefined){
-          questionIds[grid.Id] = grid.Id;
+      }
+      else {
+        if (questionID[grid.id] === undefined){
+          questionID[grid.id] = grid.id;
         }
       }
     }
+
+    // convert hashtable to Array
     var returnArray = [];
-    for(var key in questionIds) {
-      returnArray.push(questionIds[key]);
+    for(var key in questionID) {
+      returnArray.push(questionID[key]);
     }
     return returnArray;
   }

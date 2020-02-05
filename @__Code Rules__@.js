@@ -19,54 +19,60 @@
 
 
 /**
-  * [@About]      - this is an example class
-
-  * [@Functions]  - ExampleClass() -constructor : line 39
-                  - ExampleFunction()           : line 53
-                  - non-interesting getters & setters
-**/
+ * [ExampleClass description]
+ */
 class ExampleClass{
   private var propertyVariable : String = "String variable.";
   private var typeArray : String[] = [];
 
   /**
-    * [@About]      - this function is constructor
-
-    * [@Parameters] - input - some explanation
-
-    * [@Return]     - none
-  **/
+   * [ExampleClass description]
+   * @param       {[type]} input [description]
+   * @constructor
+   */
   public function ExampleClass(input){
     this.propertyVariable = input.variable;
   }
 
   //CALCULATIONS
-
   /**
-    * [@About]      - this function does example stuff... for Narnia!
-
-    * [@Parameters] - name    - for example ('Frodo')
-                    - surname - for example ('Baggins')
-
-    * [@Return]     - String - (name + ' ' + surname)
-  **/
-  public function ExampleFunction(name, surname){
+   * [ExampleFunction description]
+   * @param       {[type]} name    [description]
+   * @param       {[type]} surname [description]
+   * @constructor
+   */
+  public function exampleFunction(name, surname){
     var outputString : String = null;
     outputString = name + " " + surname;
+
     return outputString;
   }
 
   //GETTERS
-  public function GetPropertyVariable(){
+  /**
+   * [GetPropertyVariable description]
+   * @constructor
+   */
+  public function getPropertyVariable(){
     return this.propertyVariable;
   }
 
   //SETTERS
-  public function SetPropertyVariable(input){
+  /**
+   * [SetPropertyVariable description]
+   * @param       {[type]} input [description]
+   * @constructor
+   */
+  public function setPropertyVariable(input){
     this.propertyVariable = input;
   }
 
-  public function TypeArrayHandlingExample(listOfNames){
+  /**
+   * [TypeArrayHandlingExample description]
+   * @param       {[type]} listOfNames [description]
+   * @constructor
+   */
+  public function typeArrayHandlingExample(listOfNames){
     this.typeArray = new String[listOfNames.length];  //This is how Array needs to be declared.
     for(var i = 0; i < listOfNames.length; i++){      //You need to have length when declaring.
       this.typeArray[i] = listOfNames[i];

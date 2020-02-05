@@ -1,27 +1,43 @@
+/**
+ * This class contains methods to process information inside Config
+ */
 class ConfigHelper{
-  public static function GetQuestions(){
+  /**
+   * This function goes over Config.questionsGridStructure, ignores Grids and saves questionIDs
+   * @return {[Array]} String IDs of questions
+   */
+  public static function getQuestionArray(){
     //Array with all GRIDs
-    const allGridObjects = Config.QuestionsGridStructure;
-    var allQuestions = [];
+    const allGridObject = Config.questionsGridStructure;
+    var allQuestion = [];
 
-    //Iterate through each Grid question. If the Grid has no QS, push Grid ID to the allQuestions array, otherwise push QS
-    for(var i = 0; i < allGridObjects.length; i++){
-      if(allGridObjects[i].Qs != null){
-    	 	for(var j = 0; j < allGridObjects[i].Qs.length; j++){
-          allQuestions.push(allGridObjects[i].Qs[j]);
+    //Iterate through each Grid question.
+    //If the Grid has no question, push Grid ID to the allQuestions array, otherwise push question
+    for (var i = 0; i < allGridObject.length; i++) {
+      if (allGridObject[i].question !== null) {
+        // this grid has questions inside it, we need those
+    	 	for (var j = 0; j < allGridObject[i].question.length; j++) {
+          allQuestion.push(allGridObject[i].question[j]);
         }
-      }else{
-        allQuestions.push(allGridObjects[i].Id)
+      }
+      else {
+        allQuestion.push(allGridObject[i].id);
       }
     }
-    return allQuestions;
+
+    return allQuestion;
   }
 
-  public static function GetWaveKey(index){
-    if(index === 0){
+  /**
+   * This function returns ID of wave based on it's position in Array
+   * @param  {integer} index
+   * @return {String}  ID
+   */
+  public static function getWaveID(index){
+    if (index === 0){
       return "current";
     }
-    if(index > 0){
+    if (index > 0){
       return "previous" + index;
     }
   }

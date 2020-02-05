@@ -1,11 +1,6 @@
 /**
-  * [@About]      - this class represents question of report
-
-  * [@Functions]  - ReportQuestion() -constructor : line 36
-                  - Setup()                       : line 50
-                  - Calculate()                   : line 61
-                  - non-interesting getters & setters
-**/
+ * This class represents a single question for report
+ */
 class ReportQuestion{
   private var id : String = null;
   private var label : String = null;
@@ -17,75 +12,68 @@ class ReportQuestion{
 
 
   /**
-    * [@About]      - this function is constructor
-
-    * [@Parameters] - id - id of question ('OM06')
-
-    * [@Return]     - none
-  **/
+   * Constructor for Object of ReportQuestion
+   * @param       {[String]} id survey question ID
+   * @constructor
+   */
   public function ReportQuestion(id : String) {
     this.id = id;
   }
 
 
   /**
-    * [@About]      - this function assigns data to question, using it's setters
-                    - it calls Calculate()
-
-    * [@Parameters] - information - object with data to-be setup for question
-                    - context     - object with confirmit global variables (report, state, etc.)
-
-    * [@Return]     - none
-  **/
-  public function Setup(information, context) {
-    if(information.label !== null){
-      SetLabel(information.label);
+   * This function takes raw information and sets the ReportQuestion
+   * @param       {[Object]} information raw data
+   * @param       {[Object]} context     global properties wrapper
+   * @constructor
+   */
+  public function setup(information, context) {
+    if (information.label !== null) {
+      setLabel(information.label);
     }
 
-    if(information.details !== null){
-    //  ReportHelper.Debug('Question validN: ' + information.details['current'].GetValidN());
-      SetDetails(information.details);
+    if (information.details !== null) {
+      setDetails(information.details);
     }
   }
 
-  // -- GETTERS
-  public function GetJSONString(context){
+  public function getJSONString(context){
     var details = {};
     for(var key in this.details){
     //context.log.LogDebug('key: ' + key)
-      details[key] = this.details[key].GetJSONString(context);
+      details[key] = this.details[key].getJSONString(context);
     }
     return {id: this.id, label: this.label, details: details, flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
   }
 
-  public function GetId() {
+  public function getID() {
   	return this.id;
   }
 
-  public function GetLabel() {
+  public function getLabel() {
     return this.label;
   }
 
 
-  public function GetDetails() {
+  public function getDetails() {
     return this.details;
   }
 
   // -- SETTERS
-  public function SetLabel(label) {
+  public function setLabel(label) {
       this.label = label;
   }
 
 
-  public function SetDetails(details) {
-  //  this.details = details;
+  public function setDetails(details) {
+   this.details = details;
 
-    for (var i = 0; i < details.length; i++) {
+    /*for (var i = 0; i < details.length; i++) {
       this.details[details[i].id] = details[i].details;
-    }
+    }*/
   }
 
-  public function SetFlags() {
+  public function setFlags() {
 
   }
 

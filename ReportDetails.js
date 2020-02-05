@@ -1,10 +1,6 @@
 /**
-  * [@About]      - this class represents report information
-
-  * [@Functions]  - Setup()         : line 16
-                  - Calculate()     : line 30
-                  - non-interesting getters & setters
-**/
+ * This class represents details such as score, distribution, scale, validN
+ */
 class ReportDetails{
   private var distribution = [];
   private var fav = null;
@@ -13,39 +9,44 @@ class ReportDetails{
   private var scale = {};
   private var validN = null;
 
+  /**
+   * Constructor for object of ReportDetails, provide ID and get scale from survey
+   * @param       {[String]} id question ID
+   * @constructor
+   */
   public function ReportDetails(id){
-      SetScale(id);
-  }
-
-  public function Setup(information, context){
-
-    if(information.distribution !== null){
-
-      SetDistribution(information.distribution);
-    }
-
-    if(information.validN !== null){
-      //ReportHelper.Debug('Details validN: ' + information.validN);
-      SetValidN(information.validN);
-    }
-
-    Calculate(context);
+      setScale(id);
   }
 
   /**
-    * [@About]      - this function takes distributions and validN - then calculates fav/neu/unfav
+   * This function takes in raw information and changes them into proper format
+   * @param       {Object} information raw data from table, includes distribution, score, validN etc
+   * @param       {[Object]} context     wrapper of global properties
+   */
+  public function setup(information, context){
 
-    * [@Parameters] - context     - object with confirmit global variables (report, state, etc.)
+    if (information.distribution !== null) {
+      setDistribution(information.distribution);
+    }
 
-    * [@Return]     - none
-  **/
-  public function Calculate(context){
+    if (information.validN !== null) {
+      setValidN(information.validN);
+    }
+
+    calculate(context);
+  }
+
+/**
+ * This function calculates the score of question
+ * @param       {[Object]} context wrapper of global properties
+ * @constructor
+ */
+  public function calculate(context){
     this.fav = 0;
     this.neu = 0;
     this.unfav = 0;
 
-    for(var i = 0; i < this.scale.length; i++){
-
+    for (var i = 0; i < this.scale.length; i++) {
       switch(this.scale[i].Weight){
         case 1 :
           this.fav += this.distribution[i];
@@ -58,13 +59,17 @@ class ReportDetails{
           break;
 
         default:
+        ReportHelper.debug('ReportDetails.calculate() - unknown scale weight');
       }
     }
-    CalculateMethology('count/validN');
+    calculateMethology('count/validN');
   }
 
-  private function CalculateMethology(type){
-
+  /**
+   * In the future we may want to offer clients different ways to calculate data
+   * @param  {[String]} type expression how to calculate scores
+  */
+  private function calculateMethology(type){
     switch (type) {
       case 'count/validN':
         this.fav = (this.validN === 0) ? -1 : Math.round((this.fav / this.validN)*100);
@@ -72,44 +77,44 @@ class ReportDetails{
         this.unfav = (this.validN === 0) ? -1 : Math.round((this.unfav / this.validN)*100);
         break;
       default:
-
+      ReportHelper.debug('ReportDetails.calculateMethology() - unknown calculate methology');
     }
   }
 
   //GETTERS
-  public function GetValidN(){
+  public function getValidN(){
     return this.validN;
   }
 
-  public function GetJSONString(){
-    return {validN: this.validN, distribution: this.distribution, /*scale: this.scale,*/ fav: this.fav, neu: this.neu, unfav: this.unfav};
+  public function getJSONString(){
+    return {validN: this.validN, distribution: this.distribution, fav: this.fav, neu: this.neu, unfav: this.unfav};
 
   }
 
   //Setters
 
-  public function SetDistribution(distribution){
+  public function setDistribution(distribution){
     this.distribution = distribution;
   }
 
-  public function SetFav(fav){
+  public function setFav(fav){
     this.fav = fav;
   }
 
-  public function SetNeu(neu){
+  public function setNeu(neu){
     this.neu = neu;
   }
 
-  public function SetUnfav(unfav){
+  public function setUnfav(unfav){
     this.unfav = unfav;
   }
 
-  public function SetValidN(validN){
+  public function setValidN(validN){
     this.validN = validN;
   }
 
-  public function SetScale(id){
-    this.scale = ReportHelper.GetQuestionScale(id);
+  public function setScale(id){
+    this.scale = ReportHelper.getQuestionScale(id);
   }
 
 }

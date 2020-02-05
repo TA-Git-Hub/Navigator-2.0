@@ -1,3 +1,7 @@
+/**
+ * This class serves as a global class. It holds Confirmit properties.
+ * It also has some basic methods.
+ */
 class ReportHelper{
   private static var report : Report = null;
   private static var state : ReportState = null;
@@ -5,59 +9,92 @@ class ReportHelper{
   private static var log : Logger = null;
   private static var user : User = null;
   private static var page = null;
-  private static const textReplace = {questionId: "CustomTexts", placeholders: ["^ClientName()^", "^ClientName2()^"], replacements: ["ClientName", "ClientName2"]};
+  private static var pageContext = null;
+  private static const textReplace = {questionID: ["CustomTexts"],
+                                      placeholder: ["^ClientName()^", "^ClientName2()^"],
+                                      replacement: ["ClientName", "ClientName2"]
+                                    };
 
-  public static function Start(context : Object) {
+  /**
+   * This function starts the ReportHelper on page - allows all scripts to use global properties
+   * @param  {object} context wrapper of global properties
+   */
+  public static function start(context : Object) {
     report = context.report;
     state = context.state;
     confirmit = context.confirmit;
     log = context.log;
     user = context.user;
     page = context.page;
+    pageContext = context.pageContext;
   }
 
-  public static function Debug(message){
+  /**
+   * This allows for log.debug outside of page scripts
+   * @param  {whatever} message works best if String or integer
+   */
+  public static function debug(message){
     log.LogDebug(message);
   }
 
-  public static function CleanText(text, context){
-    var replacements = textReplace.replacements;
-    var placeholders = textReplace.placeholders;
+  /**
+   * This function takes Text and searches it for 'WildCardReplacements'
+   * @param  {String} text    question text
+   * @param  {Object} context wrapper of global properties
+   * @return {String}         question text without 'WildCardReplacements'
+   */
+  public static function cleanText(text, context){
+    var replacement = textReplace.replacement;
+    var placeholder = textReplace.placeholder;
+    var questionID = textReplace.questionID;
     var returnString = text;
 
-    for(var i = 0; i < placeholders.length; i++){
-
-      if(text.indexOf(placeholders[i]) !== -1){
-        var answer = context.report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(textReplace.questionId).GetAnswer(replacements[i]);
-        if(answer){
-          var tmpReplacement = answer.Text;
-          returnString = text.split(placeholders[i]).join(tmpReplacement);
+    // for every question
+    for (var i = 0; i < questionID.length; i++) {
+      // try every placeholder
+      for (var j = 0; j < placeholder.length; j++) {
+        // if you find it in text
+        if (text.indexOf(placeholder[j]) !== -1) {
+          var answer = context.report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(questionID[i]).GetAnswer(replacement[j]);
+          // and find it's replacement
+          if (answer) {
+            // replace it
+            var tmpReplacement = answer.Text;
+            returnString = text.split(placeholder[j]).join(tmpReplacement);
+          }
         }
       }
-
     }
+
     return returnString;
-
-
   }
 
-
-  public static function QuestionHashtable() {
-    var questions = TableHelper.PopulateQuestions({report: report, page: page});
-
+  /**
+   * This function creates hashtable out of ReportQuestions (they have all the information)
+   * @return {Object}      All ReportQuestions
+   */
+  public static function questionHashtable() {
+    var question = TableHelper.populateQuestion({report: report, page: page});
     var returnObject = {};
-    for(var i = 0; i < questions.length; i++){
-      returnObject[questions[i].GetId()] = questions[i].GetJSONString(context);
+
+    for (var i = 0; i < question.length; i++) {
+      returnObject[question[i].GetId()] = question[i].GetJSONString(context);
     }
+
     return returnObject;
   }
 
-
-  public static function GetQuestionScale(id){
-    return report.DataSource.GetProject(Config.DataSources.MainSurvey).GetQuestion(id).GetScale();
+/**
+ * This function returns scale of question from survey
+ * @param       {String} id survey question ID
+ * @returns     {Array}  scale
+ */
+  public static function getQuestionScale(id){
+    return report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(id).GetScale();
+  }
 
   //pravdepodobne se nepouziva
-  public static function getDimensionObject(context){
+  /*public static function getDimensionObject(context){
     var dimensions = {};
     //load questions object
     var allQ = ReportHelper.QuestionHashtable(context);
@@ -70,5 +107,5 @@ class ReportHelper{
     }
     return dimensions;
 
-  }
+  }*/
 }

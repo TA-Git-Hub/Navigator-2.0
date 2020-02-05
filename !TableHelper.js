@@ -1,16 +1,17 @@
+/**
+ * This class is meant for working with tables
+ */
 class TableHelper{
-  static var allQIds = ConfigHelper.GetQuestions();
+  static var allQuestionID = ConfigHelper.getQuestion();
   private var reportQuestionHT = {};
 
   /**
-    * [@About]      - this function is mapping all tables to their pages
+   * This function maps pageID to it's table
+   * @param       {[type]} pageId [description]
+   */
+  static function tableMapping(pageID){
 
-    * [@Parameters] - pageId - string Id of page
-
-    * [@Return]     - string with name of table
-  **/
-  static function TableMapping(pageId){
-    switch(pageId){
+    switch(pageID){
       case 'frodo' : return 'MainTable';
       case 'gandalf' : return 'MainTable';
       case 'boromir' : return 'TestTable';
@@ -19,74 +20,101 @@ class TableHelper{
     }
   }
 
-  static function PopulateQuestions(context){
-    var questionMap = CreateQuestionMap(context);
-    var tablePath = context.page.CurrentPageId + ':' + TableMapping(context.page.CurrentPageId);
-    var questionTexts = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);
+  /**
+   * This function returns ReportQuestion based on what page you are currently using
+   * These ReportQuestion are filled with all infomation from table
+   * @param  {Object} context  wrapper of global properties
+   * @return {Array}         array of ReportQuestion
+   */
+  static function populateQuestion(context){
+    // create map where questionID is key and Scale length is value
+    var questionMap = createQuestionMap(context);
+    // get the path of table we want
+    var tablePath = context.page.CurrentPageId + ':' + tableMapping(context.page.CurrentPageId);
+    // all question texts from table
+    var questionText = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);
     var returnArray = [];
     var rowIterator = 0;
     var tempIt = 0;
-    var columnCount = GetColumnCount(tablePath); // 4 = number of internal comparators
+    var columnCount = getColumnCount(tablePath);
 
-    for(var i = 0; i < allQIds.length; i++){
-      //var qValues = {current: null, trends: [], inter: [], exter: []};
-      var detailsTable = [];//{};
-      for(var columnIterator = 1; columnIterator <= columnCount; columnIterator++){
+    // for questions
+    for (var i = 0; i < allQuestionID.length; i++) {
+      var detailTable = [];
+      // start at 1 - Confirmit indexes from 1 - go over columns
+      for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
         rowIterator = tempIt;
-        var label = ReportHelper.CleanText(questionTexts[rowIterator][1], context);
-        var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
-        var details = new ReportDetails(allQIds[i]);
-        var distribution = GetDistribution(rowIterator, questionMap[allQIds[i]], column, context);
-        rowIterator += questionMap[allQIds[i]];
-        var validN = column[rowIterator].Value;
+        // get rid of 'WildCardReplacements'
+        var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
+        // prepare question detail
+        var detail = new ReportDetail(allQuestionID[i]);
 
-        details.Setup({distribution: distribution, validN: validN}, context);
-  //      ReportHelper.Debug('After details.Setup');
+        var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
+        // get data from the column segment
+        var distribution = getDistribution(rowIterator, questionMap[allQuestionID[i]], column, context);
+        // update current column position with question answer scale length
+        rowIterator += questionMap[allQuestionID[i]];
+        var validN = column[rowIterator].Value;
+        // for validN row
         rowIterator += 1;
 
-        if (columnIterator <= Config.Wave.Codes.length) {
-            //detailsTable["previous" + (columnIterator - 1)] = details;
-            detailsTable.push({details: details, id: ConfigHelper.GetWaveKey(columnIterator - 1)});
-        //  qValues.trends.push({distribution: distribution, validN: validN});
+        // set data in details that weren't set yet
+        details.setup({distribution: distribution, validN: validN}, context);
+
+        // if we are in trend column
+        if (columnIterator <= Config.wave.code.length) {
+            detailTable.push({detail: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
         }
 
-        if (columnIterator > Config.Wave.Codes.length && columnIterator <= columnCount){
-          //detailsTable["internal" + (columnIterator - Config.Wave.Codes.length -1)] = details;
-          detailsTable.push({details: details, id: Config.Comparators.Internal[columnIterator - Config.Wave.Codes.length - 1]});
-        //  qValues.inter.push({distribution: distribution, validN: validN});
+        // if we are past trend column and below end - internal column
+        if (columnIterator > Config.wave.code.length && columnIterator <= columnCount){
+          detailTable.push({detail: details, id: Config.comparators.internal[columnIterator - Config.wave.codes.length - 1]});
         }
       }
       tempIt = rowIterator;
 
-      var question : ReportQuestion = new ReportQuestion(allQIds[i]);
-  //    ReportHelper.Debug('Before question.Setup');
-      question.Setup({label: label, details: detailsTable}, context);
-    //  ReportHelper.Debug('After question.Setup: ' + question.details['current'].validN);
+      // we have all the information needed, create question and fill it
+      var question : ReportQuestion = new ReportQuestion(allQuestionIDs[i]);
+      question.setup({label: label, detail: detailTable}, context);
 
       returnArray.push(question);
     }
     return returnArray;
   }
 
-  static function CreateQuestionMap(context){
+  /**
+   * This function creates map - 'questionID' : 'number of answers'
+   * @param  {Object} context wrapper of global properties
+   * @return {Object}         Map
+   */
+  static function createQuestionMap(context){
     var questionMap = {};
-    var questions = Config.QuestionsGridStructure;
+    var question = Config.questionGridStructure;
 
-    for(var i = 0; i < questions.length; i++){
-      var questionScale = ReportHelper.GetQuestionScale(questions[i].Id).length;
+    for(var i = 0; i < question.length; i++){
+      var questionScale = ReportHelper.getQuestionScale(question[i].id).length;
 
-      if(questions[i].Qs === null){
-        questionMap[questions[i].Id] = questionScale;
-      }else{
-        for(var j = 0; j < questions[i].Qs.length; j++){
-          questionMap[questions[i].Qs[j]] = questionScale;
+      if(question[i].question === null){
+        questionMap[question[i].id] = questionScale;
+      }
+      else{
+        for(var j = 0; j < question[i].question.length; j++){
+          questionMap[question[i].question[j]] = questionScale;
         }
       }
     }
     return questionMap;
   }
 
-  static function GetDistribution(rowIterator, numberOfAnswers, column, context){
+  /**
+   * Thi function takes column from certain point and takes information from it until certain point
+   * @param  {[integer]} rowIterator     Start point
+   * @param  {[integer]} numberOfAnswers End point
+   * @param  {[Array]} column           data
+   * @param  {[Object]} context         wrapper of global properties
+   * @return {[Object]}                 distribution
+   */
+  static function getDistribution(rowIterator, numberOfAnswers, column, context){
     var distribution = [];
 
     for(var i = 0; i < numberOfAnswers; i++){
@@ -96,10 +124,15 @@ class TableHelper{
     return distribution;
   }
 
-  static function GetColumnCount(tablaPath){
-    switch(tablaPath){
+  /**
+   * This function returns number of columns in table based on table name and it's page
+   * @param  {[String]} tablePath pageID:tableName
+   * @return {[integer]}           number of columns
+   */
+  static function getColumnCount(tablePath){
+    switch(tablePath){
       case 'frodo:MainTable' :
-        return Config.Wave.Codes.length + Config.Comparators.Internal.length + Config.Comparators.External.length;
+        return Config.wave.code.length + Config.comparator.internal.length + Config.comparator.external.length;
 
       default : return undefined;
     }

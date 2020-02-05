@@ -1,3 +1,6 @@
+/**
+ * So far not used - if not used in first draft release - DELETE
+ */
 class JSONHelper{
   public static function GetJSON(obj){
 
