@@ -132,7 +132,7 @@ class TableHelper{
   static function getColumnCount(tablePath){
     switch(tablePath){
       case 'frodo:MainTable' :
-        return Config.wave.code.length + Config.comparator.internal.length + Config.comparator.external.length;
+        return Config.wave.codes.length + Config.comparators.internals.length + Config.comparators.externals.length;
 
       default : return undefined;
     }

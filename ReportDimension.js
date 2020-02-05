@@ -10,7 +10,7 @@ class ReportDimension {
 
   // constructor---------------------------------
   function ReportDimension(dim, allQ, context) {
-    this.id = dim.Id;
+    this.id = dim.id;
     this.label = this.getDimLabel();
     this.description = getDimDescription();
     loadQuestionsToDimension(dim, allQ, context);
@@ -19,19 +19,19 @@ class ReportDimension {
 
   //fill dimension-----------------------------
   function loadQuestionsToDimension(dim, allQ, context) {
-    for (var i = 0; i < dim.Questions.length; i++) {
-      var qID = dim.Questions[i];
+    for (var i = 0; i < dim.question.length; i++) {
+      var qID = dim.question[i];
       this.questionArray[qID] = allQ[qID];
     }
   }
 
   //----------------Fill dimension scores
   function calculateDimResults(context) {
-    for (var i = 0; i < Config.Wave.Codes.length; i++) {
-      var compID = ConfigHelper.waveID(i);
+    for (var i = 0; i < Config.wave.codes.length; i++) {
+      var compID = ConfigHelper.getWaveID(i);
       this.getScores(compID, context);
     }
-    for (var i = 0; i < Config.Internal; i++) {
+    for (var i = 0; i < Config.comparators.internals; i++) {
       var compID = 'internal' + (i);
       this.getScores(compID, context);
     }
@@ -59,11 +59,11 @@ class ReportDimension {
 
   //----------------------------------------------
   function getDimDescription() {
-    return Config.Wave.Codes[0];
+    return Config.wave.codes[0];
   };
 
   function getDimLabel() {
-    return Config.Wave.Codes[0];
+    return Config.wave.codes[0];
   };
   //----------------------------------------------
   function GetJSONString(context) {
