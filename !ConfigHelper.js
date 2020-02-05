@@ -8,7 +8,7 @@ class ConfigHelper{
    */
   public static function getQuestionArray(){
     //Array with all GRIDs
-    const allGridObject = Config.questionsGridStructure;
+    const allGridObject = Config.questionGridStructure;
     var allQuestion = [];
 
     //Iterate through each Grid question.

@@ -2,7 +2,7 @@
  * This class is meant for working with tables
  */
 class TableHelper{
-  static var allQuestionID = ConfigHelper.getQuestion();
+  static var allQuestionID = ConfigHelper.getQuestionArray();
   private var reportQuestionHT = {};
 
   /**

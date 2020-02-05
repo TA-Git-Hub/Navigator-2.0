@@ -174,15 +174,15 @@ class MainTable{
 /*
 @@ Description: Function that returns array of grid Ids, and/or non-grid questions
 */
-  static function getAllGridIds(){
+  static function getAllGridID(){
 //Array with all GRIDs
     const allGridObjects = Config.questionGridStructure;
-    var allIds= [];
+    var allIDs = [];
 
     for(var i = 0; i < allGridObjects.length; i++){
-      allIds.push(allGridObjects[i].id);
+      allIDs.push(allGridObjects[i].id);
     }
 
-    return allIds;
+    return allIDs;
   }
 }
