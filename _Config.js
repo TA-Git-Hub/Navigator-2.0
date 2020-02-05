@@ -36,8 +36,8 @@ static var hierarchy = {
 //SchemaId: 4237, //EURO-GER SERVER - Change for your project
     parentRelationName: 'parent', // *** NOTE: Case sensitive ***
     tableName: 'Korn Ferry Report new',
-    variableId: 'Orgcode',
-    topNodeId: '1000',
+    variableID: 'Orgcode',
+    topNodeID: '1000',
     direct: false,
     hideSelector: false,
     hideScoresColumnName: '__l9hide',
