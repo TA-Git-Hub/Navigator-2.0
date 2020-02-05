@@ -66,11 +66,11 @@ class ReportQuestion{
 
 
   public function setDetails(details) {
-   this.details = details;
+   //this.details = details;
 
-    /*for (var i = 0; i < details.length; i++) {
+    for (var i = 0; i < details.length; i++) {
       this.details[details[i].id] = details[i].details;
-    }*/
+    }
   }
 
   public function setFlags() {
