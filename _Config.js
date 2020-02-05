@@ -9,7 +9,7 @@ class Config {
 
   // Wave (for Historical Data)
 static const wave = {
-  variableId: 'Wave',
+  variableID: 'Wave',
   //Current wave year
   //Current: 2016,
   //UPDATED THE BELOW TO REFLECT WAVE CODE VALUES IN SURVEY FOR YOUR PROJECT

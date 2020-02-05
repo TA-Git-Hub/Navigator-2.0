@@ -16,7 +16,7 @@ class MainTable{
     const waveInfo = Config.wave;
     const hierarchyInfo = Config.hierarchy;
 
-    const currWaveFilter = getFilterExpression({variableID: waveInfo.VariableID, filterExpression: waveInfo.codes[0]});
+    const currWaveFilter = getFilterExpression({variableID: waveInfo.variableID, filterExpression: waveInfo.codes[0]});
     const currOrgcodeFilter = getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: user.PersonalizedReportBase});
     const currOrgcodeSVSyntax = getVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression:currOrgcodeFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
     const currWaveSVSyntax = getVerticalExpression({label:'Current wave: ' + waveInfo.codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
