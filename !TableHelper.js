@@ -47,7 +47,7 @@ class TableHelper{
         // get rid of 'WildCardReplacements'
         var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
         // prepare question detail
-        var detail = new ReportDetails(allQuestionID[i]);
+        var details = new ReportDetails(allQuestionID[i]);
 
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         // get data from the column segment
