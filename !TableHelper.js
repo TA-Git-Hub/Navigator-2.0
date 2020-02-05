@@ -63,19 +63,19 @@ class TableHelper{
 
         // if we are in trend column
         if (columnIterator <= Config.wave.codes.length) {
-            detailTable.push({detail: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
+            detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
         }
 
         // if we are past trend column and below end - internal column
         if (columnIterator > Config.wave.codes.length && columnIterator <= columnCount){
-          detailTable.push({detail: details, id: Config.comparators.internals[columnIterator - Config.wave.codes.length - 1]});
+          detailTable.push({details: details, id: Config.comparators.internals[columnIterator - Config.wave.codes.length - 1]});
         }
       }
       tempIt = rowIterator;
 
       // we have all the information needed, create question and fill it
       var question : ReportQuestion = new ReportQuestion(allQuestionID[i]);
-      question.setup({label: label, detail: detailTable}, context);
+      question.setup({label: label, details: detailTable}, context);
 
       returnArray.push(question);
     }
