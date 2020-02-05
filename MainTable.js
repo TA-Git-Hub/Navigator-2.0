@@ -78,7 +78,7 @@ class MainTable{
         for (var i = 0; i < columns.length; i++) {
        	 	var hierarchyFilter = getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: columns[i]});
 
-        	helperArray1.push(getVerticalExpression({label:'Internal orgcode: ' + columns[i], filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, context, true));
+        	helperArray1.push(getVerticalExpression({label:'Internal orgcode: ' + columns[i], filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, context, false));
         	helperArray2.push(smartViewSyntax.waveSyntax);
         }
 
