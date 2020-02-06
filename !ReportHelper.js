@@ -13,7 +13,7 @@ class ReportHelper{
   public static var context = null;
 
   // all ReportQuestion objects
-  private static var questionObject = null;
+  private static var allQuestionObject = null;
   private static const textReplace = {questionID: ["CustomTexts"],
                                       placeholder: ["^ClientName()^", "^ClientName2()^"],
                                       replacement: ["ClientName", "ClientName2"]
@@ -101,7 +101,7 @@ class ReportHelper{
 
   public static function getDimensionObject(context){
     var dimensionObject = {};
-    var allQuestionObject = ReportHelper.getAllQuestionObject();
+    allQuestionObject = ReportHelper.setAllQuestionObject();
     var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
       var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
@@ -114,10 +114,10 @@ class ReportHelper{
 
 
   public static function getAllQuestionObject(){
-    return questionObject;
+    return allQuestionObject;
   }
 
   public static function setAllQuestionObject(){
-    questionObject = ReportHelper.createQuestionHashtable();
+    allQuestionObject = ReportHelper.createQuestionHashtable();
   }
 }
