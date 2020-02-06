@@ -48,7 +48,7 @@ class ConfigHelper{
    * @return {[String]}      ID
    */
   public static function getInternalID(index){
-    if (index >= 0)) {
+    if (index >= 0) {
       return "internal" + index;
     }
   }
