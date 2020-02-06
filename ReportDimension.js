@@ -1,6 +1,6 @@
 class ReportDimension {
 
-  var questionArray = {}; //Array for question objects
+  var questionObject = {}; //Array for question objects
   var id = "";
   var label = "";
   var description = "";
@@ -8,72 +8,139 @@ class ReportDimension {
   var apLink = "";
   var results = {};
 
-  // constructor---------------------------------
-  function ReportDimension(dim, allQ, context) {
-    this.id = dim.id;
+  /**---------------------------------------------------------------------
+ * [ReportDimension description]
+ * @param       {[ReportDimension]} dimension  [description]
+ * @param       {[Object]} allQuestion [object with all questions and their results]
+ * @constructor
+ */
+  function ReportDimension(dimension, allQuestion) {
+    this.id = dimension.id;
     this.label = this.getDimLabel();
     this.description = getDimDescription();
-    loadQuestionsToDimension(dim, allQ, context);
-    calculateDimResults(context);
+    loadQuestionsToDimension(dimension, allQuestion);
+    calculateDimResult(context);
   }
 
-  //fill dimension-----------------------------
-  function loadQuestionsToDimension(dim, allQ, context) {
+
+/**---------------------------------------------------------------------
+ * [loadQuestionsToDimension description]
+ * @param  {[type]} dim         [description]
+ * @param  {[type]} allQuestion [description]
+ * @return {[type]}             [description]
+ */
+  function loadQuestionsToDimension(dim, allQuestion) {
     for (var i = 0; i < dim.question.length; i++) {
       var qID = dim.question[i];
-      this.questionArray[qID] = allQ[qID];
+      this.questionObject[qID] = allQuestion[qID];
     }
   }
 
-  //----------------Fill dimension scores
-  function calculateDimResults(context) {
+/**---------------------------------------------------------------------
+ * [calculateDimResult description]
+ * @method calculateDimResult
+ * @return {[type]}                   [description]
+ */
+  function calculateDimResult() {
     for (var i = 0; i < Config.wave.codes.length; i++) {
-      var compID = ConfigHelper.getWaveID(i);
-      this.getScores(compID, context);
+      var comparatorID = ConfigHelper.getWaveID(i);
+      this.getScores(comparatorID, context);
     }
     for (var i = 0; i < Config.comparators.internals; i++) {
-      var compID = 'internal' + (i);
-      this.getScores(compID, context);
+      var comparatorID = 'internal' + (i);
+      this.getScores(comparatorID);
     }
   }
 
-  function getScores(compID, context) {
-    this.results[compID] = {}
-    var resultsType = ['fav', 'neu', 'unfav', 'validN'];
-    for (var j = 0; j < resultsType.length; j++) {
-      var type = resultsType[j];
-      this.results[compID][type] = setDimScore(type, compID, context);
+
+/**---------------------------------------------------------------------
+ * [getScores description]
+ * @method getScores
+ * @param  {[type]}  comparatorID [description]
+ */
+  function getScores(comparatorID) {
+    this.results[comparatorID] = {}
+    var statisticArray = ['fav', 'neu', 'unfav'];
+
+    for (var j = 0; j < statisticArray.length; j++) {
+      var statistic = statisticArray[j];
+      this.detail[comparatorID][statistic] = setDimScore(statistic, comparatorID);
     }
-    this.results[compID]['comp'] = {};
+    this.detail[comparatorID]['validN'] = setDimValidN(comparatorID);
+    this.detail[comparatorID]['comp'] = {};
   }
 
-  function setDimScore(score, compID, context) {
-    var total = 0;
-    var count = 0;
-    for (var q in this.questionArray) {
-      total = total + questionArray[q].details[compID][score];
-      count = count + 1;
-    }
-    return Math.round(total / count);
-  }
 
-  //----------------------------------------------
+        /**---------------------------------------------------------------------
+         * returns average score of questions in dimension (Confirmit NVG 1.0 methodology)
+         * @method setDimScore
+         * @param  {string}    statistic        [type of statistic]
+         * @param  {string}    comparatorID [wave, level]
+         */
+
+        function setDimScore(statistic, comparatorID) {
+          var total = 0;
+          var count = 0;
+          for (var question in this.questionObject) {
+            total = total + questionObject[question].detail[comparatorID][statistic];
+            count = count + 1;
+          }
+          return Math.round(total / count);
+        }
+
+
+        /**---------------------------------------------------------------------
+         * Returns max validN of dimenison questions (Confirmit NVG 1.0 methodology)
+         * @method setDimValidN
+         * @param  {string}    comparatorID [wave, level]
+         */
+          function setDimValidN (comparatorID) {
+            var maxValidN = 0;
+            for (var question in this.questionObject) {
+            var questionValidN = questionObject[question].detail[comparatorID]['validN'];
+            if (questionValidN > maxValidN) {
+              maxValidN = questionValidN;
+            }
+            return maxValidN;
+          }
+
+
+  /**---------------------------------------------------------------------
+   * NOT READY --- Gets dimension description text from resource text survey
+   * @method getDimDescription
+   * @return {String}
+   */
+
   function getDimDescription() {
-    return Config.wave.codes[0];
+    return Config.wave.code[0];
   };
+
+
+
+/**---------------------------------------------------------------------
+ *  NOT READY Gets dimension label from resource text survey
+ * @method getDimLabel
+ * @return {String}
+ */
 
   function getDimLabel() {
-    return Config.wave.codes[0];
+    return Config.wave.code[0];
   };
-  //----------------------------------------------
-  function GetJSONString(context) {
+
+/**---------------------------------------------------------------------
+ * Returns object in serializable format
+ * @param  {Object} context confirmit functions
+ * @return {Object}
+ */
+
+  function getJSONString(context) {
     return {
       id: this.id,
       label: this.label,
       description: this.description,
-      results: this.results,
-      questionArray: this.questionArray,
-      flags: this.flags,
+      detail: this.detail,
+      questionObject: this.questionObject,
+      flag: this.flag,
       apLink: this.apLink
     };
   }
