@@ -43,7 +43,7 @@ class AutoTester{
  * @return {[type]} [description]
  */
   private function collectQuestionID(){
-    var testSubject : Object = {dimensions: Config.dimensions, grid: Config.questionGridStructure};
+    var testSubject : Object = {dimensions: Config.dimensionArray, grid: Config.questionGridStructure};
     var questionID : Object = {};
 
     // get IDs from dimensions
