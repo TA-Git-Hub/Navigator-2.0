@@ -10,7 +10,7 @@ class ReportHelper{
   private static var user : User = null;
   private static var page = null;
   private static var pageContext = null;
-  private static var context = null;
+  public static var context = null;
 
   // all ReportQuestion objects
   private static var questionObject = null;
