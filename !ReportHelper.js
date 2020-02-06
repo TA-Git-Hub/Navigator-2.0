@@ -93,13 +93,11 @@ class ReportHelper{
     return report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(id).GetScale();
   }
 
-  //pravdepodobne se nepouziva
-  /*public static function getDimensionObject(context){
-    var dimensions = {};
-    //load questions object
-    var allQ = ReportHelper.QuestionHashtable(context);
-    //list of dimensions and mapped questions
-    var dimensionList = Config.Dimensions;
+
+  public static function getDimensionObject(context){
+    var dimensionObject = {};
+    var allQuestion = ReportHelper.QuestionHashtable(context);
+    var dimensionList = Config.dimension;
     for (var i = 0; i < dimensionList.length; i++){
       var dimensionObject = new ReportDimension(dimensionList[i], allQ, context);
       var JSONdimensionObject = dimensionObject.GetJSONString(context);
@@ -107,5 +105,5 @@ class ReportHelper{
     }
     return dimensions;
 
-  }*/
+  }
 }

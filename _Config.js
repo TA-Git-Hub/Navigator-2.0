@@ -44,7 +44,7 @@ static var hierarchy = {
     numberOfChildren: 1
 };
 
-  static var dimensions = [
+  static var dimension = [
       //{ Id:'DIM_ENG', Questions: [ 'OM12', /* 'OM01' ,*/ 'OS02', 'OM06', 'OM11'], Tier:2 } ,
       	{ id:'DIM_ENG', question: ['OM11', 'OM12', 'OM01', 'OM06'], tier:2},
         { id:'DIM_ENA', question: ['WE08', 'WE12', 'JS05', 'JS02'], tier:2},
