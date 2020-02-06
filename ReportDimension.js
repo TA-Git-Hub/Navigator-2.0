@@ -19,7 +19,7 @@ public function ReportDimension(dimension, allQuestionObject) {
     this.label = this.getDimLabel();
     this.description = this.getDimDescription();
     loadQuestionsToDimension(dimension, allQuestionObject);
-    calculateDimResult(context);
+    calculateDimResult();
   }
 
 
@@ -44,7 +44,7 @@ public function ReportDimension(dimension, allQuestionObject) {
   function calculateDimResult() {
     for (var i = 0; i < Config.wave.codes.length; i++) {
       var comparatorID = ConfigHelper.getWaveID(i);
-      this.getScores(comparatorID, context);
+      this.getScores(comparatorID);
     }
     for (var i = 0; i < Config.comparators.internals; i++) {
       var comparatorID = 'internal' + (i);
@@ -71,38 +71,39 @@ public function ReportDimension(dimension, allQuestionObject) {
   }
 
 
-        /**---------------------------------------------------------------------
-         * returns average score of questions in dimension (Confirmit NVG 1.0 methodology)
-         * @method setDimScore
-         * @param  {string}    statistic        [type of statistic]
-         * @param  {string}    comparatorID [wave, level]
-         */
+  /**---------------------------------------------------------------------
+   * returns average score of questions in dimension (Confirmit NVG 1.0 methodology)
+   * @method setDimScore
+   * @param  {string}    statistic        [type of statistic]
+   * @param  {string}    comparatorID [wave, level]
+   */
 
-        function setDimScore(statistic, comparatorID) {
-          var total = 0;
-          var count = 0;
-          for (var question in this.questionObject) {
-            total = total + questionObject[question].detail[comparatorID][statistic];
-            count = count + 1;
-          }
-          return Math.round(total / count);
-        }
+  function setDimScore(statistic, comparatorID) {
+    var total = 0;
+    var count = 0;
+    for (var question in this.questionObject) {
+      total = total + questionObject[question].detail[comparatorID][statistic];
+      count = count + 1;
+    }
+    return Math.round(total / count);
+  }
 
 
-        /**---------------------------------------------------------------------
-         * Returns max validN of dimenison questions (Confirmit NVG 1.0 methodology)
-         * @method setDimValidN
-         * @param  {string}    comparatorID [wave, level]
-         */
-          function setDimValidN (comparatorID) {
-            var maxValidN = 0;
-            for (var question in this.questionObject) {
-            var questionValidN = questionObject[question].detail[comparatorID]['validN'];
-            if (questionValidN > maxValidN) {
-              maxValidN = questionValidN;
-            }
-            return maxValidN;
-          }
+  /**---------------------------------------------------------------------
+   * Returns max validN of dimenison questions (Confirmit NVG 1.0 methodology)
+   * @method setDimValidN
+   * @param  {string}    comparatorID [wave, level]
+   */
+    function setDimValidN (comparatorID) {
+      var maxValidN = 0;
+      for (var question in this.questionObject) {
+      var questionValidN = questionObject[question].detail[comparatorID]['validN'];
+      if (questionValidN > maxValidN) {
+        maxValidN = questionValidN;
+      }
+      return maxValidN;
+    }
+  }
 
 
   /**---------------------------------------------------------------------
@@ -113,7 +114,7 @@ public function ReportDimension(dimension, allQuestionObject) {
 
   function getDimDescription() {
     return Config.wave.code[0];
-  };
+  }
 
 
 
@@ -125,14 +126,13 @@ public function ReportDimension(dimension, allQuestionObject) {
 
   function getDimLabel() {
     return 'Planice je vesnice';
-  };
+  }
 
 /**---------------------------------------------------------------------
  * Returns object in serializable format
  * @param  {Object} context confirmit functions
  * @return {Object}
  */
-
   function getJSONString() {
     return {
       id: this.id,
