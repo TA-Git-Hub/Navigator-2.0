@@ -13,7 +13,7 @@ class ReportHelper{
   public static var context = null;
 
   // all ReportQuestion objects
-  private static var questionHashtable = null;
+  public static var questionHashtable = null;
 
   private static const textReplace = {questionID: ["CustomTexts"],
                                       placeholder: ["^ClientName()^", "^ClientName2()^"],
