@@ -10,7 +10,7 @@ class ReportHelper{
   private static var user : User = null;
   private static var page = null;
   private static var pageContext = null;
-  public static var contextA = null;
+  public static var context = null;
 
   // all ReportQuestion objects
   private static var allQuestionObject = null;
@@ -23,15 +23,15 @@ class ReportHelper{
    * This function starts the ReportHelper on page - allows all scripts to use global properties
    * @param  {object} context wrapper of global properties
    */
-  public static function start(context : Object) {
-    contextA = context;
-    report = context.report;
-    state = context.state;
-    confirmit = context.confirmit;
-    log = context.log;
-    user = context.user;
-    page = context.page;
-    pageContext = context.pageContext;
+  public static function start(input : Object) {
+    context = input;
+    report = input.report;
+    state = input.state;
+    confirmit = input.confirmit;
+    log = input.log;
+    user = input.user;
+    page = input.page;
+    pageContext = input.pageContext;
   }
 
   /**
@@ -79,16 +79,13 @@ class ReportHelper{
    * @return {Object}      All ReportQuestions
    */
   public static function createQuestionHashtable() {
-    debug('a');
-    var question = TableHelper.populateQuestion(contextA);
+    var question = TableHelper.populateQuestion(context);
     var returnObject = {};
 
-    debug('1a');
     for (var i = 0; i < question.length; i++) {
-      returnObject[question[i].getID()] = question[i].getJSONString(contextA);
+      returnObject[question[i].getID()] = question[i].getJSONString(context);
     }
 
-    debug('1b');
     allQuestionObject = returnObject;
     return returnObject;
   }
@@ -108,8 +105,8 @@ class ReportHelper{
     var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
       var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
-      var JSONdimensionObject = dimension.getJSONString(contextA);
-      dimensionObject[dimensionList[i].id] = JSONdimensionObject;
+      var jsonDIM = dimension.getJSONString(context);
+      dimensionObject[dimensionList[i].id] = jsonDIM;
     }
     return dimensionObject;
 
