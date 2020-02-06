@@ -86,6 +86,7 @@ class ReportHelper{
       returnObject[question[i].getID()] = question[i].getJSONString(context);
     }
 
+    allQuestionObject = returnObject;
     return returnObject;
   }
 
@@ -99,9 +100,8 @@ class ReportHelper{
   }
 
 
-  public static function getDimensionObject(context){
+  public static function getDimensionObject(){
     var dimensionObject = {};
-    allQuestionObject = setAllQuestionObject();
     var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
       var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
@@ -115,9 +115,5 @@ class ReportHelper{
 
   public static function getAllQuestionObject(){
     return allQuestionObject;
-  }
-
-  public static function setAllQuestionObject(){
-    allQuestionObject = createQuestionHashtable();
   }
 }
