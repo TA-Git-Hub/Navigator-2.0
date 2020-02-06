@@ -14,7 +14,7 @@ class ReportDimension {
  * @param       {[Object]} allQuestion [object with all questions and their results]
  * @constructor
  */
-  function ReportDimension(dimension, allQuestionObject) {
+public function ReportDimension(dimension, allQuestionObject) {
     this.id = dimension.id;
     this.label = this.getDimLabel();
     this.description = this.getDimDescription();
@@ -133,7 +133,7 @@ class ReportDimension {
  * @return {Object}
  */
 
-  function getJSONString(context) {
+  function getJSONString() {
     return {
       id: this.id,
       label: this.label,
