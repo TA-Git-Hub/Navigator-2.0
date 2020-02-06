@@ -102,7 +102,7 @@ class ReportHelper{
 
   public static function getDimensionObject(context){
     var dimensionObject = {};
-    var allQuestionObject = ReportHelper.questionHashtable(context);
+    var allQuestionObject = ReportHelper.getAllQuestionObject();
     var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
       var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
