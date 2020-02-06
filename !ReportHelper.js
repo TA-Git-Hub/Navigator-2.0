@@ -112,12 +112,12 @@ class ReportHelper{
 
   }
 
-/*
+
   public static function getAllQuestionObject(){
     return questionObject;
   }
 
   public static function setAllQuestionObject(){
     questionObject = ReportHelper.createQuestionHashtable();
-  }*/
+  }
 }
