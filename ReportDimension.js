@@ -65,10 +65,10 @@ public function ReportDimension(dimension, allQuestionObject) {
 
     for (var j = 0; j < statisticArray.length; j++) {
       var statistic = statisticArray[j];
-      this.detail[comparatorID][statistic] = setDimScore(statistic, comparatorID);
+      this.details[comparatorID][statistic] = setDimScore(statistic, comparatorID);
     }
-    this.detail[comparatorID]['validN'] = setDimValidN(comparatorID);
-    this.detail[comparatorID]['comp'] = {};
+    this.details[comparatorID]['validN'] = setDimValidN(comparatorID);
+    this.details[comparatorID]['comp'] = {};
   }
 
 
@@ -83,7 +83,7 @@ public function ReportDimension(dimension, allQuestionObject) {
     var total = 0;
     var count = 0;
     for (var question in this.questionObject) {
-      total = total + questionObject[question].detail[comparatorID][statistic];
+      total = total + questionObject[question].details[comparatorID][statistic];
       count = count + 1;
     }
     return Math.round(total / count);
@@ -98,7 +98,7 @@ public function ReportDimension(dimension, allQuestionObject) {
     function setDimValidN (comparatorID) {
       var maxValidN = 0;
       for (var question in this.questionObject) {
-      var questionValidN = questionObject[question].detail[comparatorID]['validN'];
+      var questionValidN = questionObject[question].details[comparatorID]['validN'];
       if (questionValidN > maxValidN) {
         maxValidN = questionValidN;
       }

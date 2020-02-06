@@ -2,7 +2,7 @@
  * This class serves as a global class. It holds Confirmit properties.
  * It also has some basic methods.
  */
-class ReportHelpers{
+class ReportHelper{
   private static var report : Report = null;
   private static var state : ReportState = null;
   private static var confirmit : ConfirmitFacade = null;
