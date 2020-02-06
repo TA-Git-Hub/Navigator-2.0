@@ -25,7 +25,7 @@ class ReportHelper{
    * @param  {object} context wrapper of global properties
    */
   public static function start(context : Object) {
-    context = context;
+    //context = context;
     report = context.report;
     state = context.state;
     confirmit = context.confirmit;
