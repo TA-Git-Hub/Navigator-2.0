@@ -118,6 +118,6 @@ class ReportHelper{
   }
 
   public static function setAllQuestionObject(){
-    questionObject = createQuestionHashtable();
+    questionObject = ReportHelper.createQuestionHashtable();
   }
 }

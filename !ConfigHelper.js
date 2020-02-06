@@ -41,4 +41,15 @@ class ConfigHelper{
       return "previous" + index;
     }
   }
+
+  /**
+   * This function returns ID of internal based on it's position in Array
+   * @param  {[integer]} index
+   * @return {[String]}      ID
+   */
+  public static function getInternalID(index){
+    if (index >= 0)) {
+      return "internal" + index;
+    }
+  }
 }
