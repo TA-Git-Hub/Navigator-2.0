@@ -17,7 +17,7 @@ class ReportDimension {
   function ReportDimension(dimension, allQuestion) {
     this.id = dimension.id;
     this.label = this.getDimLabel();
-    this.description = getDimDescription();
+    this.description = this.getDimDescription();
     loadQuestionsToDimension(dimension, allQuestion);
     calculateDimResult(context);
   }
