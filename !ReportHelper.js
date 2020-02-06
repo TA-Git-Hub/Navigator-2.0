@@ -101,12 +101,12 @@ class ReportHelper{
 
   public static function getDimensionObject(context){
     var dimensionObject = {};
-    var allQuestionObject = questionObject;//ReportHelper.getAllQuestionObject();
+    var allQuestionObject = ReportHelper.getAllQuestionObject();
     var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
       var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
       var JSONdimensionObject = dimension.getJSONString(context);
-      dimensionObject[dimensionList[i].Id] = JSONdimensionObject;
+      dimensionObject[dimensionList[i].id] = JSONdimensionObject;
     }
     return dimensionObject;
 
