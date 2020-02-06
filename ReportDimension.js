@@ -7,6 +7,7 @@ class ReportDimension {
   var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
   var results = {};
+  var detail = "";
 
   /**---------------------------------------------------------------------
  * [ReportDimension description]
@@ -44,7 +45,7 @@ public function ReportDimension(dimension, allQuestionObject) {
   function calculateDimResult() {
     for (var i = 0; i < Config.wave.codes.length; i++) {
       var comparatorID = ConfigHelper.getWaveID(i);
-      this.getScores(comparatorID);
+      this.getScore(comparatorID);
     }
     for (var i = 0; i < Config.comparators.internals; i++) {
       var comparatorID = 'internal' + (i);
