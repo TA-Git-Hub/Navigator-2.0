@@ -10,7 +10,7 @@ class ReportHelper{
   private static var user : User = null;
   private static var page = null;
   private static var pageContext = null;
-  public static var context = null;
+  public static var contextA = null;
 
   // all ReportQuestion objects
   private static var allQuestionObject = null;
@@ -24,7 +24,7 @@ class ReportHelper{
    * @param  {object} context wrapper of global properties
    */
   public static function start(context : Object) {
-    context = context;
+    contextA = context;
     report = context.report;
     state = context.state;
     confirmit = context.confirmit;
@@ -79,12 +79,13 @@ class ReportHelper{
    * @return {Object}      All ReportQuestions
    */
   public static function createQuestionHashtable() {
-    var question = TableHelper.populateQuestion(context);
+    debug('a');
+    var question = TableHelper.populateQuestion(contextA);
     var returnObject = {};
 
     debug('1a');
     for (var i = 0; i < question.length; i++) {
-      returnObject[question[i].getID()] = question[i].getJSONString(context);
+      returnObject[question[i].getID()] = question[i].getJSONString(contextA);
     }
 
     debug('1b');
