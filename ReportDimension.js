@@ -17,8 +17,8 @@ class ReportDimension {
  */
 public function ReportDimension(dimension, allQuestionObject) {
     this.id = dimension.id;
-    this.label = this.getDimLabel();
-    this.description = this.getDimDescription();
+    this.label = getDimLabel();
+    this.description = getDimDescription();
     loadQuestionsToDimension(dimension, allQuestionObject);
     calculateDimResult();
   }
@@ -45,11 +45,11 @@ public function ReportDimension(dimension, allQuestionObject) {
   function calculateDimResult() {
     for (var i = 0; i < Config.wave.codes.length; i++) {
       var comparatorID = ConfigHelper.getWaveID(i);
-      this.getScore(comparatorID);
+      getScore(comparatorID);
     }
     for (var i = 0; i < Config.comparators.internals; i++) {
       var comparatorID = 'internal' + (i);
-      this.getScore(comparatorID);
+      getScore(comparatorID);
     }
   }
 

@@ -68,7 +68,7 @@ class TableHelper{
 
         // if we are past trend column and below end - internal column
         if (columnIterator > Config.wave.codes.length && columnIterator <= columnCount){
-          detailTable.push({details: details, id: Config.comparators.internals[columnIterator - Config.wave.codes.length - 1]});
+          detailTable.push({details: details, id: ConfigHelper.getInternalID(columnIterator - Config.wave.codes.length - 1)});
         }
       }
       tempIt = rowIterator;

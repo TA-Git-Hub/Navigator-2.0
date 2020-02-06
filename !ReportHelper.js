@@ -112,7 +112,6 @@ class ReportHelper{
 
   }
 
-
   public static function getAllQuestionObject(){
     return allQuestionObject;
   }
