@@ -13,8 +13,7 @@ class ReportHelper{
   public static var context = null;
 
   // all ReportQuestion objects
-  public static var questionHashtable = null;
-
+  public static var questionObject = null;
   private static const textReplace = {questionID: ["CustomTexts"],
                                       placeholder: ["^ClientName()^", "^ClientName2()^"],
                                       replacement: ["ClientName", "ClientName2"]
@@ -79,7 +78,7 @@ class ReportHelper{
    * This function creates hashtable out of ReportQuestions (they have all the information)
    * @return {Object}      All ReportQuestions
    */
-  public static function questionHashtable() {
+  public static function createQuestionHashtable() {
     var question = TableHelper.populateQuestion({report: report, page: page});
     var returnObject = {};
 
@@ -115,10 +114,10 @@ class ReportHelper{
 
 
   public static function getAllQuestionObject(){
-    return questionHashtable;
+    return createQuestionHashtable();
   }
 
   public static function setAllQuestionObject(){
-    questionHashtable = TableHelper.populateQuestion(context);
+    questionObject = TableHelper.populateQuestion(context);
   }
 }
