@@ -82,10 +82,12 @@ class ReportHelper{
     var question = TableHelper.populateQuestion(context);
     var returnObject = {};
 
+    debug('1a');
     for (var i = 0; i < question.length; i++) {
       returnObject[question[i].getID()] = question[i].getJSONString(context);
     }
 
+    debug('1b');
     allQuestionObject = returnObject;
     return returnObject;
   }
