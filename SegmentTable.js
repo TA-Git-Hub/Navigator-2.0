@@ -13,13 +13,13 @@ class SegmentTable{
     const segment = 'Segment_EEF';
     const rows = MainTables.getHorizontalExpression(segment, {title: 'true', totals: 'false'}, context);
 
-    const waveInfo = Config.Wave;
-    const hierarchyInfo = Config.Hierarchy;
+    const waveInfo = Config.wave;
+    const hierarchyInfo = Config.hierarchy;
 
-	  const currWaveFilter = MainTables.getFilterExpression({variableId: waveInfo.VariableId, filterExpression: waveInfo.Codes[0]});
-    const currOrgcodeFilter = MainTables.getFilterExpression({variableId: Config.Hierarchy.VariableId, filterExpression: user.PersonalizedReportBase});
-    const currOrgcodeSVSyntax = MainTables.getVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression:currOrgcodeFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
-    const currWaveSVSyntax = MainTables.getVerticalExpression({label:'Current wave: ' + waveInfo.Codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
+	  const currWaveFilter = MainTables.getFilterExpression({variableID: waveInfo.variableID, filterExpression: waveInfo.codes[0]});
+    const currOrgcodeFilter = MainTables.getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: user.PersonalizedReportBase});
+    const currOrgcodeSVSyntax = MainTables.getVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression: currOrgcodeFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
+    const currWaveSVSyntax = MainTables.getVerticalExpression({label:'Current wave: ' + waveInfo.codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
 
     const syntaxObject = {
       waveSyntax: currWaveSVSyntax,
@@ -30,7 +30,7 @@ class SegmentTable{
      var waveColumnsJoined = MainTables.getColumnSyntax('wave', syntaxObject, context)
 
 //Get columns for demos filtered by current wave and current orgcode
-     var demos = [ Config.Hierarchy.VariableId ];
+     var demos = [ Config.hierarchy.variableID ];
      var demoColumnsJoined = MainTables.getColumnSyntax('demos', syntaxObject, context, demos);
 
 //Get columns for hierarchy orgcodes filtered by current wave
@@ -42,6 +42,6 @@ class SegmentTable{
     var allColumns = [waveColumnsJoined, internalColumnsJoined, demoColumnsJoined].join("+");
     var expr = [rows, allColumns].join('^');
 
-    table.AddHeaders(report, Config.DataSources.MainSurvey, expr);
+    table.AddHeaders(report, Config.dataSources.mainSurvey, expr);
   }
 }

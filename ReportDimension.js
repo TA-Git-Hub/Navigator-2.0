@@ -7,7 +7,7 @@ class ReportDimension {
   var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
   var results = {};
-  var detail = "";
+  var details = "";
 
   /**---------------------------------------------------------------------
  * [ReportDimension description]
@@ -139,9 +139,9 @@ public function ReportDimension(dimension, allQuestionObject) {
       id: this.id,
       label: this.label,
       description: this.description,
-      detail: this.detail,
+      details: this.details,
       questionObject: this.questionObject,
-      flag: this.flag,
+      flags: this.flags,
       apLink: this.apLink
     };
   }
