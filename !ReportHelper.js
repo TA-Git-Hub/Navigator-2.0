@@ -102,10 +102,10 @@ class ReportHelper{
 
   public static function getDimensionObject(context){
     var dimensionObject = {};
-    var allQuestion = ReportHelper.QuestionHashtable(context);
-    var dimensionList = Config.dimension;
+    var allQuestionObject = ReportHelper.questionHashtable(context);
+    var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
-      var dimension = new ReportDimension(dimensionList[i], allQuestion);
+      var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
       var JSONdimensionObject = dimension.getJSONString(context);
       dimensionObject[dimensionList[i].Id] = JSONdimensionObject;
     }
@@ -114,11 +114,11 @@ class ReportHelper{
   }
 
 
-  public static function getAllQuestions(){
+  public static function getAllQuestionObject(){
     return questionHashtable;
   }
 
-  public static function setAllQuestions(){
+  public static function setAllQuestionObject(){
     questionHashtable = TableHelper.populateQuestion(context);
   }
 }

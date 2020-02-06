@@ -14,11 +14,11 @@ class ReportDimension {
  * @param       {[Object]} allQuestion [object with all questions and their results]
  * @constructor
  */
-  function ReportDimension(dimension, allQuestion) {
+  function ReportDimension(dimension, allQuestionObject) {
     this.id = dimension.id;
     this.label = this.getDimLabel();
     this.description = this.getDimDescription();
-    loadQuestionsToDimension(dimension, allQuestion);
+    loadQuestionsToDimension(dimension, allQuestionObject);
     calculateDimResult(context);
   }
 
@@ -29,10 +29,10 @@ class ReportDimension {
  * @param  {[type]} allQuestion [description]
  * @return {[type]}             [description]
  */
-  function loadQuestionsToDimension(dim, allQuestion) {
+  function loadQuestionsToDimension(dim, allQuestionObject) {
     for (var i = 0; i < dim.question.length; i++) {
       var qID = dim.question[i];
-      this.questionObject[qID] = allQuestion[qID];
+      this.questionObject[qID] = allQuestionObject[qID];
     }
   }
 
@@ -48,7 +48,7 @@ class ReportDimension {
     }
     for (var i = 0; i < Config.comparators.internals; i++) {
       var comparatorID = 'internal' + (i);
-      this.getScores(comparatorID);
+      this.getScore(comparatorID);
     }
   }
 
@@ -58,7 +58,7 @@ class ReportDimension {
  * @method getScores
  * @param  {[type]}  comparatorID [description]
  */
-  function getScores(comparatorID) {
+  function getScore(comparatorID) {
     this.results[comparatorID] = {}
     var statisticArray = ['fav', 'neu', 'unfav'];
 
@@ -124,7 +124,7 @@ class ReportDimension {
  */
 
   function getDimLabel() {
-    return Config.wave.code[0];
+    return 'Planice je vesnice';
   };
 
 /**---------------------------------------------------------------------
