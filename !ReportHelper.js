@@ -10,6 +10,11 @@ class ReportHelper{
   private static var user : User = null;
   private static var page = null;
   private static var pageContext = null;
+  public static var context = null;
+
+  // all ReportQuestion objects
+  private static var questionHashtable = null;
+
   private static const textReplace = {questionID: ["CustomTexts"],
                                       placeholder: ["^ClientName()^", "^ClientName2()^"],
                                       replacement: ["ClientName", "ClientName2"]
@@ -20,6 +25,7 @@ class ReportHelper{
    * @param  {object} context wrapper of global properties
    */
   public static function start(context : Object) {
+    context = context;
     report = context.report;
     state = context.state;
     confirmit = context.confirmit;
@@ -105,5 +111,14 @@ class ReportHelper{
     }
     return dimensions;
 
+  }
+
+
+  public static function getAllQuestions(){
+    return questionHashtable;
+  }
+
+  public static function setAllQuestions(){
+    questionHashtable = TableHelper.populateQuestion(context);
   }
 }
