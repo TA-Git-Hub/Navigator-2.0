@@ -101,7 +101,7 @@ class ReportHelper{
 
   public static function getDimensionObject(context){
     var dimensionObject = {};
-    allQuestionObject = ReportHelper.setAllQuestionObject();
+    allQuestionObject = setAllQuestionObject();
     var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
       var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
@@ -118,6 +118,6 @@ class ReportHelper{
   }
 
   public static function setAllQuestionObject(){
-    allQuestionObject = ReportHelper.createQuestionHashtable();
+    allQuestionObject = createQuestionHashtable();
   }
 }
