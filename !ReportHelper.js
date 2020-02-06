@@ -105,11 +105,11 @@ class ReportHelper{
     var allQuestion = ReportHelper.QuestionHashtable(context);
     var dimensionList = Config.dimension;
     for (var i = 0; i < dimensionList.length; i++){
-      var dimensionObject = new ReportDimension(dimensionList[i], allQ, context);
-      var JSONdimensionObject = dimensionObject.GetJSONString(context);
-      dimensions[dimensionList[i].Id] = JSONdimensionObject;
+      var dimension = new ReportDimension(dimensionList[i], allQuestion);
+      var JSONdimensionObject = dimension.getJSONString(context);
+      dimensionObject[dimensionList[i].Id] = JSONdimensionObject;
     }
-    return dimensions;
+    return dimensionObject;
 
   }
 
