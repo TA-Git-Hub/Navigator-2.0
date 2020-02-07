@@ -121,7 +121,7 @@ public function ReportDimension(dimension, allQuestionObject) {
    */
 
   function getDimDescription() {
-    return Config.wave.code[0];
+    return Config.wave.codes[0];
   }
 
 
