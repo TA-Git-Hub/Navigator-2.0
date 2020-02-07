@@ -105,7 +105,7 @@ class ReportHelper{
     var dimensionList = Config.dimensionArray;
     for (var i = 0; i < dimensionList.length; i++){
       var dimension = new ReportDimension(dimensionList[i], allQuestionObject);
-      var jsonDIM = dimension.getJSONString(context);
+      var jsonDIM = dimension.getJSONString();
       dimensionObject[dimensionList[i].id] = jsonDIM;
     }
     return dimensionObject;
