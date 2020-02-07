@@ -63,6 +63,7 @@ class ReportDetails{
           break;
 
         default:
+        ReportHelper.debug(this.scale[i].Weight);
         ReportHelper.debug('ReportDetails.calculate() - unknown scale weight');
       }
     }
