@@ -17,10 +17,17 @@ class ReportDimension {
  */
 public function ReportDimension(dimension, allQuestionObject) {
     this.id = dimension.id;
+
+    ReportHelper.debug('getDimLabel() -  before');
     this.label = getDimLabel();
+    ReportHelper.debug('getDimLabel() -  after');
+
     this.description = getDimDescription();
+    ReportHelper.debug('getDimDescription() -  after');
     loadQuestionsToDimension(dimension, allQuestionObject);
+    ReportHelper.debug('loadQuestionsToDimension() -  after');
     calculateDimResult();
+    ReportHelper.debug('calculateDimResult() -  after');
   }
 
 
