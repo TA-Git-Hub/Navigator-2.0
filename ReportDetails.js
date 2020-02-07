@@ -58,12 +58,11 @@ class ReportDetails{
           this.unfav += this.distribution[i];
           break;
 
-        case '':
+        case undefined:
           // don't know
           break;
 
         default:
-        ReportHelper.debug(this.scale[i].Weight);
         ReportHelper.debug('ReportDetails.calculate() - unknown scale weight');
       }
     }
