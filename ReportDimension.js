@@ -55,7 +55,7 @@ public function ReportDimension(dimension, allQuestionObject) {
       getScore(comparatorID);
     }
     for (var i = 0; i < Config.comparators.internals; i++) {
-      var comparatorID = ConfigHelper.getInternalID(i);//'internal' + (i);
+      var comparatorID =/* ConfigHelper.getInternalID(i);*/'internal' + (i);
       getScore(comparatorID);
     }
   }
