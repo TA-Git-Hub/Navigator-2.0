@@ -48,7 +48,7 @@ public function ReportDimension(dimension, allQuestionObject) {
       getScore(comparatorID);
     }
     for (var i = 0; i < Config.comparators.internals; i++) {
-      var comparatorID = 'internal' + (i);
+      var comparatorID = ConfigHelper.getInternalID(i);//'internal' + (i);
       getScore(comparatorID);
     }
   }
@@ -60,7 +60,7 @@ public function ReportDimension(dimension, allQuestionObject) {
  * @param  {[type]}  comparatorID [description]
  */
   function getScore(comparatorID) {
-    this.results[comparatorID] = {}
+    this.details[comparatorID] = {};
     var statisticArray = ['fav', 'neu', 'unfav'];
 
     for (var j = 0; j < statisticArray.length; j++) {
