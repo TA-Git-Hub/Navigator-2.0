@@ -7,7 +7,7 @@ class ReportDimension {
   var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
   var results = {};
-  var details = "";
+  var details = {};
 
   /**---------------------------------------------------------------------
  * [ReportDimension description]
@@ -83,7 +83,7 @@ public function ReportDimension(dimension, allQuestionObject) {
     var total = 0;
     var count = 0;
     for (var question in this.questionObject) {
-      total = total + questionObject[question].details[comparatorID][statistic];
+      total = total + this.questionObject[question].details[comparatorID][statistic];
       count = count + 1;
     }
     return Math.round(total / count);
@@ -98,7 +98,7 @@ public function ReportDimension(dimension, allQuestionObject) {
     function setDimValidN (comparatorID) {
       var maxValidN = 0;
       for (var question in this.questionObject) {
-      var questionValidN = questionObject[question].details[comparatorID]['validN'];
+      var questionValidN = this.questionObject[question].details[comparatorID]['validN'];
       if (questionValidN > maxValidN) {
         maxValidN = questionValidN;
       }
