@@ -115,7 +115,7 @@ public function ReportDimension(dimension, allQuestionObject) {
    */
 
   function getDimDescription(dimensionID) {
-    return ReportHelper.getTextRT('dimensionDescription',dimensionID)+'Planice je vesnice';
+    return ReportHelper.getTextRT('dimensionDescription',dimensionID)+' in Painnice';
   }
 
 
