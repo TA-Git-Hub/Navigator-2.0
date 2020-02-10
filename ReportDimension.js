@@ -144,7 +144,7 @@ public function ReportDimension(dimension, allQuestionObject) {
       details: this.details,
       questionObject: this.questionObject,
       tier: this.tier,
-      flags: this.flags
+      flags: this.flags,
       apLink: this.apLink
     };
   }
