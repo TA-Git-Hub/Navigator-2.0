@@ -109,10 +109,73 @@ class ReportHelper{
       dimensionObject[dimensionList[i].id] = jsonDIM;
     }
     return dimensionObject;
-
   }
 
   public static function getAllQuestionObject(){
     return allQuestionObject;
+  }
+
+/**-------------------------------------------------------------------------
+ * returns question text from RT survey
+ * @method getTextRT/getTextSV
+ * @param  {String}  qID   ID of Survey question
+ * @param  {String}  code  ID of question answer
+ * @return {String}
+ */
+
+  public static function getTextRT(qID,code){
+    var project = report.DataSource.GetProject(Config.dataSources.rtSurvey);
+    return getText(project,qID,code)
+  };
+
+/*  public static function getTextRT(qID){
+    var project = report.DataSource.GetProject(Config.dataSources.rtSurvey);
+    var code = null;
+    return getText(project,id,code)
+  };*/
+
+  /**-------------------------------------------------------------------------
+   * returns question text from SV survey
+   * @method getTextSV
+   * @param  {String}  qID   ID of Survey question
+   * @param  {String}  code  ID of question answer
+   * @return {String}
+   */
+
+/*  public static function getTextSV(id,code){
+    var project = report.DataSource.GetProject(Config.dataSources.svSurvey);
+    return getText(project,id,code)
+  };
+
+  public static function getTextSV(id){
+    var project = report.DataSource.GetProject(Config.dataSources.svSurvey);
+    var code = null;
+    return getText(project,id,code)
+  };*/
+
+  /**-------------------------------------------------------------------------
+   * Inner function of getTextSV, getTextRT, returns question text from survey
+   * @method getText
+   * @param  {String}  qID   ID of Survey question
+   * @param  {String}  code  ID of question answer
+   * @return {String}
+   */
+
+  public static function getText(project, qID, code){
+    try{
+      if (code == null) {
+          var question = project.GetQuestion(qID);
+          var returnValue = question.HtmlText;
+      }
+      else {
+          var answer : Answer = project.GetQuestion(qID).GetAnswer(code);
+          var returnValue = answer.HtmlText;
+      }
+      return returnValue;
+    }
+    catch (e) {
+      ReportHelper.debug ('[MISSING RESOURCE TEXT: ' + qID + '.' + code + ']');
+      return '[MISSING RESOURCE TEXT: ' + qID + '.' + code + ']';
+    }
   }
 }

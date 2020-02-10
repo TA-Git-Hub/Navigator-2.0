@@ -1,52 +1,50 @@
 class ReportDimension {
 
-  var questionObject = {}; //Array for question objects
+  var questionObject = {};//object with all questions from this dimension and references to question objects
   var id = "";
   var label = "";
   var description = "";
   var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
-  var results = {};
   var details = {};
 
   /**---------------------------------------------------------------------
- * [ReportDimension description]
+ * @constructor
  * @param       {[ReportDimension]} dimension  [description]
  * @param       {[Object]} allQuestion [object with all questions and their results]
- * @constructor
  */
 public function ReportDimension(dimension, allQuestionObject) {
     this.id = dimension.id;
-    this.label = getDimLabel();
+    this.label = getDimLabel(this.id);
     this.description = getDimDescription();
-    loadQuestionsToDimension(dimension, allQuestionObject);
+    loadQuestionToDimension(dimension, allQuestionObject);
     calculateDimResult();
   }
 
 
 /**---------------------------------------------------------------------
- * [loadQuestionsToDimension description]
- * @param  {[type]} dim         [description]
- * @param  {[type]} allQuestion [description]
- * @return {[type]}             [description]
+ * assign question objects to dimension instance
+ * @param  {Object} dimension selected dimension from config dimension list(has attributes "id" and "question")
+ * @param  {Object} allQuestionObject results of all questions
  */
-  function loadQuestionsToDimension(dim, allQuestionObject) {
-    for (var i = 0; i < dim.question.length; i++) {
-      var qID = dim.question[i];
-      this.questionObject[qID] = allQuestionObject[qID];
+  function loadQuestionToDimension(dimension, allQuestionObject) {
+    for (var i = 0; i < dimension.question.length; i++) {
+      var questionID = dimension.question[i];
+      this.questionObject[questionID] = allQuestionObject[questionID];
     }
   }
 
 /**---------------------------------------------------------------------
- * [calculateDimResult description]
+ * Set dimension values for all trends and internal comparators *
  * @method calculateDimResult
- * @return {[type]}                   [description]
  */
   function calculateDimResult() {
+    //Trends
     for (var i = 0; i < Config.wave.codes.length; i++) {
       var comparatorID = ConfigHelper.getWaveID(i);
       getScore(comparatorID);
     }
+    //Internal comparators
     for (var i = 0; i < Config.comparators.internals.length; i++) {
       var comparatorID = ConfigHelper.getInternalID(i);
       getScore(comparatorID);
@@ -55,7 +53,8 @@ public function ReportDimension(dimension, allQuestionObject) {
 
 
 /**---------------------------------------------------------------------
- * [getScores description]
+ * Inner function of calculateDimResults
+ * Loops through statistics and sets dim values
  * @method getScores
  * @param  {[type]}  comparatorID [description]
  */
@@ -73,7 +72,8 @@ public function ReportDimension(dimension, allQuestionObject) {
 
 
   /**---------------------------------------------------------------------
-   * returns average score of questions in dimension (Confirmit NVG 1.0 methodology)
+   * Returns average score of questions in dimension
+   * (Confirmit NVG 1.0 methodology)
    * @method setDimScore
    * @param  {string}    statistic        [type of statistic]
    * @param  {string}    comparatorID [wave, level]
@@ -91,7 +91,8 @@ public function ReportDimension(dimension, allQuestionObject) {
 
 
   /**---------------------------------------------------------------------
-   * Returns max validN of dimenison questions (Confirmit NVG 1.0 methodology)
+   * Returns max validN of dimenison questions
+   * (Confirmit NVG 1.0 methodology)
    * @method setDimValidN
    * @param  {string}    comparatorID [wave, level]
    */
@@ -114,7 +115,7 @@ public function ReportDimension(dimension, allQuestionObject) {
    */
 
   function getDimDescription() {
-    return Config.wave.codes[0];
+    return 'Planice je vesnice';
   }
 
 
@@ -125,8 +126,8 @@ public function ReportDimension(dimension, allQuestionObject) {
  * @return {String}
  */
 
-  function getDimLabel() {
-    return 'Planice je vesnice';
+  function getDimLabel(dimensionID) {
+    return getTextRT('dimensions',dimensionID);
   }
 
 /**---------------------------------------------------------------------
