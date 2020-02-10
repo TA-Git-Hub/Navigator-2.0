@@ -15,6 +15,7 @@ class TableHelper{
       case 'frodo' : return 'MainTable';
       case 'gandalf' : return 'MainTable';
       case 'boromir' : return 'TestTable';
+      case 'theoden' : return 'MainTable';
 
       default : return undefined;
     }
