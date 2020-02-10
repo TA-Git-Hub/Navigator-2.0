@@ -114,8 +114,8 @@ public function ReportDimension(dimension, allQuestionObject) {
    * @return {String}
    */
 
-  function getDimDescription() {
-    return ReportHelper.getTextRT('dimensionDescription',dimensionID)+'Planice je vesnice';  
+  function getDimDescription(dimensionID) {
+    return ReportHelper.getTextRT('dimensionDescription',dimensionID)+'Planice je vesnice';
   }
 
 
