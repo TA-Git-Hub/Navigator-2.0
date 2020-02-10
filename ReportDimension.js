@@ -5,7 +5,7 @@ class ReportDimension {
   var label = "";
   var description = "";
   var tier = "1"
-  var flag = {dimensionScore: true}
+  var flags = {dimensionScore: true}
                 }; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
   var detail = {};
