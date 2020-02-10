@@ -16,7 +16,7 @@ class ReportDimension {
 public function ReportDimension(dimension, allQuestionObject) {
     this.id = dimension.id;
     this.label = getDimLabel(this.id);
-    this.description = getDimDescription();
+    this.description = getDimDescription(this.id);
     loadQuestionToDimension(dimension, allQuestionObject);
     calculateDimResult();
   }
@@ -127,7 +127,7 @@ public function ReportDimension(dimension, allQuestionObject) {
  */
 
   function getDimLabel(dimensionID) {
-    return ReportHelper.getTextRT('dimensions',dimensionID);
+    return ReportHelper.getTextRT('dimension',dimensionID);
   }
 
 /**---------------------------------------------------------------------
