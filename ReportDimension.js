@@ -4,9 +4,11 @@ class ReportDimension {
   var id = "";
   var label = "";
   var description = "";
-  var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
+  var tier = "1"
+  var flag = {dimensionScore: true}
+                }; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
-  var details = {};
+  var detail = {};
 
   /**---------------------------------------------------------------------
  * @constructor
@@ -142,7 +144,8 @@ public function ReportDimension(dimension, allQuestionObject) {
       description: this.description,
       details: this.details,
       questionObject: this.questionObject,
-      flags: this.flags,
+      tier: this.tier,
+      flags: this.flags
       apLink: this.apLink
     };
   }
