@@ -1,8 +1,2 @@
-#testDiv{
-width: 100px;
-height: 100px;
-background-color: red;
-position: absolute;
-top: 50px;
-left: 50px;
-}
+.dd-target-button{height:30px!important; line-height: 0px!important;}
+.dd-target-button-arrow{padding-top:18px!important;}
