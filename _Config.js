@@ -28,9 +28,18 @@ static const comparators = {
   }
 };
 
+static const filter = ['Segment_EEF','intenttostay','Gender','Country','Region','Graduate','Disability','White_Blue_Collar',
+                  'Band','Manager','Occupation','Ethnicity','exemptnon','unionnon','wage_status','Age','Worker','Tenure',
+                  'FullTime','Expat','Headquarters','job_function','performance_rating','Site'];
+
+static const demographic = ['Orgcode', 'Segment_EEF','intenttostay','Gender','Country','Region','Graduate',
+                       'Disability','White_Blue_Collar','Band','Manager','Occupation','Ethnicity','exemptnon',
+                       'unionnon','wage_status','Age','Worker','Tenure','FullTime','Expat','Headquarters',
+                       'job_function','performance_rating','Site'];
+
 
 //Hierarchy settings
-static var hierarchy = {
+static const hierarchy = {
     schemaId: 5078, //US - Change for your project
 //SchemaId: 3857, //EURO SERVER - Change for your project
 //SchemaId: 4237, //EURO-GER SERVER - Change for your project
@@ -44,7 +53,7 @@ static var hierarchy = {
     numberOfChildren: 1
 };
 
-  static var dimensionArray = [
+  static const dimensionArray = [
       //{ Id:'DIM_ENG', Questions: [ 'OM12', /* 'OM01' ,*/ 'OS02', 'OM06', 'OM11'], Tier:2 } ,
       	{ id:'DIM_ENG', question: ['OM11', 'OM12', 'OM01', 'OM06'], tier:2},
         { id:'DIM_ENA', question: ['WE08', 'WE12', 'JS05', 'JS02'], tier:2},
@@ -63,7 +72,7 @@ static var hierarchy = {
       	{ id:'DIM_ENPS', question: ['NP01'], suppressScoring: false, tier:2}
   	];
 
-    static var questionGridStructure = [
+    static const questionGridStructure = [
                 {id: 'GRID1', question: ['SD03',	'SD04',	'SD05',	'GP07',	'GP12',	'LD04',	'LD09',	'IV04',
                      'DM02',	'VC04',	'PE03',	'PE06',	'PE09',	'CP14',	'GP09',	'TW06',
                      'TW04',	'GP10',	'WL01',	'ER01',	'RC01',	'ST01',	'IV02',	'WE01',
