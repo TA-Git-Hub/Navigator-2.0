@@ -2,6 +2,34 @@
  * So far not used - if not used in first draft release - DELETE
  */
 class JSONHelper{
+
+
+  /**
+   * This function sends items from backend to front-end with JSON
+   * @param  {Object} context global properties wrapper
+   * @return {Object}         data, labels, languages...
+   */
+  public static function pageJSON(context){
+    switch (context.pageID) {
+      case 'resultsSummary':
+        return {
+          dimensions: ReportHelper.getDimensionObject(),
+          label: ReportHelper.getLabels(context.pageID),
+          language: {current: context.report.CurrentLanguage,
+                     active: context.report.Languages
+                    }
+        };
+        break;
+      default:
+
+    }
+  }
+
+    /**
+     * DOESNT WORK ATM
+     * @param       {[type]} obj [description]
+     * @constructor
+     */
   public static function GetJSON(obj){
 
         var t = typeof (obj);

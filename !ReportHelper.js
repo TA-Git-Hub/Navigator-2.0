@@ -178,4 +178,33 @@ class ReportHelper{
       return '[MISSING RESOURCE TEXT: ' + qID + '.' + code + ']';
     }
   }
+
+  /**
+   * This function is used to get labels and translations for page
+   * @param  {String} pageID id of page we wish to translate
+   * @return {Object} object with all the labels needed
+   */
+  public static function getLabels(pageID){
+    switch (pageID) {
+      case 'resultsSummary':
+        var labels = {tableHeaders: {'fav': getTextRT(pageID, 'fav'),
+                                      'unfav': getTextRT(pageID, 'unfav'),
+                                      'neu': getTextRT(pageID, 'neu'),
+                                      'trend': getTextRT(pageID, 'trend'),
+                                      'description': getTextRT(pageID, 'description'),
+                                      'text': getTextRT(pageID, 'text'),
+                                      'questionID': getTextRT(pageID, 'questionID'),
+                                      'distribution': getTextRT(pageID, 'distribution'),
+                                      'validN': getTextRT(pageID, 'validN')
+                                    },
+                       preamble: getTextRT('pagePreamble', pageID),
+                       title: getTextRT('pageTitle', pageID)
+                  };
+
+          return labels;
+        break;
+      default:
+
+    }
+  }
 }

@@ -128,7 +128,7 @@ public function ReportDimension(dimension, allQuestionObject) {
  */
 
   function getDimLabel(dimensionID) {
-    return ReportHelper.getTextRT('dimension',dimensionID);
+    return ReportHelper.getTextRT('dimensionLabel',dimensionID);
   }
 
 /**---------------------------------------------------------------------
