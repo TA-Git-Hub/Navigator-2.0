@@ -28,11 +28,11 @@ static const comparators = {
   }
 };
 
-static const filter = ['Segment_EEF','intenttostay','Gender','Country','Region','Graduate','Disability','White_Blue_Collar',
+static const filters = ['Segment_EEF','intenttostay','Gender','Country','Region','Graduate','Disability','White_Blue_Collar',
                   'Band','Manager','Occupation','Ethnicity','exemptnon','unionnon','wage_status','Age','Worker','Tenure',
                   'FullTime','Expat','Headquarters','job_function','performance_rating','Site'];
 
-static const demographic = ['Orgcode', 'Segment_EEF','intenttostay','Gender','Country','Region','Graduate',
+static const demographics = ['Orgcode', 'Segment_EEF','intenttostay','Gender','Country','Region','Graduate',
                        'Disability','White_Blue_Collar','Band','Manager','Occupation','Ethnicity','exemptnon',
                        'unionnon','wage_status','Age','Worker','Tenure','FullTime','Expat','Headquarters',
                        'job_function','performance_rating','Site'];
