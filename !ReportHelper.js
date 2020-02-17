@@ -185,18 +185,20 @@ class ReportHelper{
    * @return {Object} object with all the labels needed
    */
   public static function getLabels(pageID){
+    var defaultTableHeaders = {'fav': getTextRT(pageID, 'fav'),
+                              'unfav': getTextRT(pageID, 'unfav'),
+                              'neu': getTextRT(pageID, 'neu'),
+                              'trend': getTextRT(pageID, 'trend'),
+                              'description': getTextRT(pageID, 'description'),
+                              'text': getTextRT(pageID, 'text'),
+                              'questionID': getTextRT(pageID, 'questionID'),
+                              'distribution': getTextRT(pageID, 'distribution'),
+                              'validN': getTextRT(pageID, 'validN')
+                            };
+
     switch (pageID) {
       case 'resultsSummary':
-        var labels = {tableHeaders: {'fav': getTextRT(pageID, 'fav'),
-                                      'unfav': getTextRT(pageID, 'unfav'),
-                                      'neu': getTextRT(pageID, 'neu'),
-                                      'trend': getTextRT(pageID, 'trend'),
-                                      'description': getTextRT(pageID, 'description'),
-                                      'text': getTextRT(pageID, 'text'),
-                                      'questionID': getTextRT(pageID, 'questionID'),
-                                      'distribution': getTextRT(pageID, 'distribution'),
-                                      'validN': getTextRT(pageID, 'validN')
-                                    },
+        var labels = {tableHeaders: defaultTableHeaders,
                        preamble: getTextRT('pagePreamble', pageID),
                        title: getTextRT('pageTitle', pageID)
                   };
