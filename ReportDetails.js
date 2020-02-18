@@ -76,9 +76,9 @@ class ReportDetails{
   private function calculateMethology(type){
     switch (type) {
       case 'count/validN':
-        this.fav = (this.validN === 0) ? -1 : Math.round((this.fav / this.validN)*100);
-        this.neu = (this.validN === 0) ? -1 : Math.round((this.neu / this.validN)*100);
-        this.unfav = (this.validN === 0) ? -1 : Math.round((this.unfav / this.validN)*100);
+        this.fav = (this.validN === 0) ? 0 : Math.round((this.fav / this.validN)*100);
+        this.neu = (this.validN === 0) ? 0 : Math.round((this.neu / this.validN)*100);
+        this.unfav = (this.validN === 0) ? 0 : Math.round((this.unfav / this.validN)*100);
         break;
       default:
       ReportHelper.debug('ReportDetails.calculateMethology() - unknown calculate methology');
