@@ -12,11 +12,11 @@ class TableHelper{
   static function tableMapping(pageID){
 
     switch(pageID){
-      case 'frodo' : return 'MainTable';
-      case 'gandalf' : return 'MainTable';
-      case 'boromir' : return 'TestTable';
-      case 'theoden' : return 'MainTable';
-      case 'resultsSummary' : return 'MainTable';
+      case 'dataPage' : return 'dataPage:MainTable';
+      case 'gandalf' : return 'dataPage:MainTable';
+      case 'boromir' : return 'dataPage:TestTable';
+      case 'theoden' : return 'dataPage:MainTable';
+      case 'resultsSummary' : return 'dataPage:MainTable';
 
       default : return undefined;
     }
@@ -32,7 +32,7 @@ class TableHelper{
     // create map where questionID is key and Scale length is value
     var questionMap = createQuestionMap(context);
     // get the path of table we want
-    var tablePath = context.page.CurrentPageId + ':' + tableMapping(context.page.CurrentPageId);
+    var tablePath = tableMapping(context.page.CurrentPageId);
     // all question texts from table
     var questionText = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);
     var returnArray = [];
@@ -133,8 +133,7 @@ class TableHelper{
    */
   static function getColumnCount(tablePath){
     switch(tablePath){
-      case 'frodo:MainTable' :
-      case 'resultsSummary:MainTable' :
+      case 'dataPage:MainTable' :
         return Config.wave.codes.length + Config.comparators.internals.length + Config.comparators.externals.length;
 
       default : return undefined;
