@@ -16,6 +16,7 @@ class TableHelper{
       case 'gandalf' : return 'MainTable';
       case 'boromir' : return 'TestTable';
       case 'theoden' : return 'MainTable';
+      case 'resultsSummary' : return 'MainTable';
 
       default : return undefined;
     }
@@ -133,6 +134,7 @@ class TableHelper{
   static function getColumnCount(tablePath){
     switch(tablePath){
       case 'frodo:MainTable' :
+      case 'resultsSummary:MainTable' :
         return Config.wave.codes.length + Config.comparators.internals.length + Config.comparators.externals.length;
 
       default : return undefined;

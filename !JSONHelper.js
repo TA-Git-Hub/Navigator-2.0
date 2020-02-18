@@ -10,15 +10,15 @@ class JSONHelper{
    * @return {Object}         data, labels, languages...
    */
   public static function pageJSON(context){
-    switch (context.pageID) {
+    switch (ReportHelper.context.page.CurrentPageId) {
       case 'resultsSummary':
         return {
           dimensions: ReportHelper.getDimensionObject(),
-          label: ReportHelper.getLabels(context.pageID),
+          label: ReportHelper.getLabels(ReportHelper.context.page.CurrentPageId),
           language: {current: context.report.CurrentLanguage,
                      active: context.report.Languages
                    },
-          page: {current: context.pageID,
+          page: {current: ReportHelper.context.page.CurrentPageId,
                  all: []
                 }
         };
