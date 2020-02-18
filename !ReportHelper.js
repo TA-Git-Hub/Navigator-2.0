@@ -32,6 +32,16 @@ class ReportHelper{
     user = input.user;
     page = input.page;
     pageContext = input.pageContext;
+
+    switch (page.SubmitSource) {
+      case 'Apply Filters':
+        page.NextPageId = page.CurrentPageId;
+
+        debug('========================APPLY FILTEEEEEEEEEEEEEEEEEERS');
+        break;
+      default:
+
+    }
   }
 
   /**
