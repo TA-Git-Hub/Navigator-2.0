@@ -17,7 +17,10 @@ class JSONHelper{
           label: ReportHelper.getLabels(context.pageID),
           language: {current: context.report.CurrentLanguage,
                      active: context.report.Languages
-                    }
+                   },
+          page: {current: context.pageID,
+                 all: []
+                }
         };
         break;
       default:
