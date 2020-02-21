@@ -49,7 +49,7 @@ class MainTable{
     var expr = [rows, allColumns].join('^');
 
     table.AddHeaders(report, Config.dataSources.mainSurvey, expr);
-ReportHelper.debug(expr);
+
     const endTime = new Date();
     ReportHelper.debug('MainTables - Get table took: ' + (endTime.getTime() - startTime.getTime())/1000 + 's');
 }
