@@ -77,8 +77,8 @@ class MainTable{
       case 'orgcode':
         for (var i = 0; i < columns.length; i++) {
        	 	var hierarchyFilter = getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: columns[i].orgcode});
-
-        	helperArray1.push(getVerticalExpression({label: columns[i].label, filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, columns[i].isHidden));
+          var label = columns[i].label + ' ('+columns[i].orgcode+')'
+        	helperArray1.push(getVerticalExpression({label: label, filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, columns[i].isHidden));
         	helperArray2.push(smartViewSyntax.waveSyntax);
         }
 
