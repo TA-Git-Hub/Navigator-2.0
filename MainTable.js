@@ -4,13 +4,12 @@ class MainTable{
 @@ Description - Call this function from the aggregated table, it will generate this awesome table in a smartview syntax
 @@ Entry parameters - context - object, properties: table, report, confirmit, user, state, log
 */
-  static function getTable(context){
+  static function getTable(table){
 
     const startTime = new Date();
 
-    const report = context.report;
-    const table = context.table;
-    const user = context.user;
+    const report = ReportHelper.context.report;
+    const user = ReportHelper.context.user;
 
     const qs = getAllGridID();
     const waveInfo = Config.wave;
@@ -18,8 +17,8 @@ class MainTable{
 
     const currWaveFilter = getFilterExpression({variableID: waveInfo.variableID, filterExpression: waveInfo.codes[0]});
     const currOrgcodeFilter = getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: user.PersonalizedReportBase});
-    const currOrgcodeSVSyntax = getVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression:currOrgcodeFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
-    const currWaveSVSyntax = getVerticalExpression({label:'Current wave: ' + waveInfo.codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: 'SEGMENT'}, context);
+    const currOrgcodeSVSyntax = getVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression:currOrgcodeFilter, hideheader: 'false', headerType: 'SEGMENT'});
+    const currWaveSVSyntax = getVerticalExpression({label:'Current wave: ' + waveInfo.codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: 'SEGMENT'});
 
     const syntaxObject = {
       waveSyntax: currWaveSVSyntax,
@@ -33,15 +32,16 @@ class MainTable{
      }
 
 //Get columns for trends filtered by current orgcode
-     var waveColumnsJoined = getColumnSyntax('wave', syntaxObject, context)
+     var waveColumnsJoined = getColumnSyntax('wave', syntaxObject)
 
 //Get columns for demos filtered by current wave and current orgcode
      var demos = ['Segment_EEF', 'Orgcode'];
-     var demoColumnsJoined = getColumnSyntax('demos', syntaxObject, context, demos);
+     var demoColumnsJoined = getColumnSyntax('demos', syntaxObject, demos);
 
+    var comps = ComparatorUtil.getComparatorsButBetter();
 //Get columns for hierarchy orgcodes filtered by current wave
-    var orgcodes = [1000, 1001, 1002, 1003, 1004];
-    var internalColumnsJoined = getColumnSyntax('orgcode', syntaxObject, context, orgcodes);
+ //   var orgcodes = [1000, 1001, 1002, 1003, 1004];
+    var internalColumnsJoined = getColumnSyntax('orgcode', syntaxObject, comps);
 
 //Create one big syntax for table by connecting arrays
     rows = rows.join("+");
@@ -49,12 +49,12 @@ class MainTable{
     var expr = [rows, allColumns].join('^');
 
     table.AddHeaders(report, Config.dataSources.mainSurvey, expr);
-
+ReportHelper.debug(expr);
     const endTime = new Date();
     ReportHelper.debug('MainTables - Get table took: ' + (endTime.getTime() - startTime.getTime())/1000 + 's');
 }
 
-  static function getColumnSyntax(id, smartViewSyntax, context, columns){
+  static function getColumnSyntax(id, smartViewSyntax, columns){
     var helperArray1 = [];
     var helperArray2 = [];
     var helperArray3 = [];
@@ -65,7 +65,7 @@ class MainTable{
         for (var i = 0; i < Config.wave.codes.length; i++) {
           var filter = getFilterExpression({variableID: Config.wave.variableID, filterExpression: Config.wave.codes[i]});
 
-          helperArray1.push(getVerticalExpression({label: Config.wave.codes[i], filterExpression:filter, hideheader: 'false', headerType: 'SEGMENT'}, context));
+          helperArray1.push(getVerticalExpression({label: Config.wave.codes[i], filterExpression:filter, hideheader: 'false', headerType: 'SEGMENT'}));
           helperArray2.push(smartViewSyntax.orgcodeSyntax);
         }
 
@@ -76,9 +76,9 @@ class MainTable{
 
       case 'orgcode':
         for (var i = 0; i < columns.length; i++) {
-       	 	var hierarchyFilter = getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: columns[i]});
+       	 	var hierarchyFilter = getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: columns[i].orgcode});
 
-        	helperArray1.push(getVerticalExpression({label:'Internal orgcode: ' + columns[i], filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, context, false));
+        	helperArray1.push(getVerticalExpression({label: columns[i].label, filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, columns[i].isHidden));
         	helperArray2.push(smartViewSyntax.waveSyntax);
         }
 
@@ -89,7 +89,7 @@ class MainTable{
 
       case 'demos':
         for (var i = 0; i < columns.length; i++) {
-            helperArray1.push(getHorizontalExpression(columns[i], {title: 'true', totals: 'false', nOfChildren:Config.hierarchy.numberOfChildren}, context));
+            helperArray1.push(getHorizontalExpression(columns[i], {title: 'true', totals: 'false', nOfChildren:Config.hierarchy.numberOfChildren}));
        	 	helperArray2.push(smartViewSyntax.waveSyntax);
        	 	helperArray3.push(smartViewSyntax.orgcodeSyntax);
     	}
@@ -136,20 +136,20 @@ class MainTable{
 @@ Entry parameters: properties - object, properties: label, filterExpression (string), hideheader (string) 'true' or 'false', headerType (string) 'SEGMENT', 'CONTENT' etc.
 @@					 context - object, properties: table, report, confirmit, user, state, log
 */
-  static function getVerticalExpression(properties, context, hidden){
+  static function getVerticalExpression(properties, hidden){
 
-	  const report = context.report;
+	  const report = ReportHelper.context.report;
       if (hidden) {
     	return ('[CONTENT]{' +
-              'label: "Schovaný sloupec"' +
-              '}');
+                'label: "Hidden: ' + properties.label + '"' +
+                '}');
       }
       else{
         return ('['+ properties.headerType +']{' +
-              'label: "'+ properties.label +'";' +
-              'hideheader:' + properties.hideheader + ';' +
-              'expression:' + report.TableUtils.EncodeJsString(properties.filterExpression)+
-              '}');
+                'label: "'+ properties.label +'";' +
+                'hideheader:' + properties.hideheader + ';' +
+                'expression:' + report.TableUtils.EncodeJsString(properties.filterExpression)+
+                '}');
       }
   }
 
