@@ -31,10 +31,10 @@ class SegmentTable{
 //Get columns for demos filtered by current wave and current orgcode
      var demos = [ Config.hierarchy.variableID ];
      var demoColumnsJoined = MainTable.getColumnSyntax('demos', syntaxObject, demos);
-
+     var comps = ComparatorUtil.getComparators();
 //Get columns for hierarchy orgcodes filtered by current wave
-    var orgcodes = [1000,1001,1002,1003,1004];
-    var internalColumnsJoined = MainTable.getColumnSyntax('orgcode', syntaxObject, orgcodes);
+//    var orgcodes = [1000,1001,1002,1003,1004];
+    var internalColumnsJoined = MainTable.getColumnSyntax('orgcode', syntaxObject, comps);
 
 //Create one big syntax for table by connecting arrays
 //    rows = rows.join("+");

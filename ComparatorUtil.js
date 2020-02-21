@@ -9,7 +9,7 @@ class ComparatorUtil{
 -getHierarchyColumn(schemaID, tableName, columnName, compareColumnName, compareColumnValue)
 -getHierarchyColumn(schemaID, tableName, columnName)
 */
-  static function getComparatorsButBetter(){
+  static function getComparators(){
 
     var internalComps = Config.comparators.internals;
     var alreadyAdded = {};

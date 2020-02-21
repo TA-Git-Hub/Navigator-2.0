@@ -38,7 +38,7 @@ class MainTable{
      var demos = ['Segment_EEF', 'Orgcode'];
      var demoColumnsJoined = getColumnSyntax('demos', syntaxObject, demos);
 
-    var comps = ComparatorUtil.getComparatorsButBetter();
+    var comps = ComparatorUtil.getComparators();
 //Get columns for hierarchy orgcodes filtered by current wave
  //   var orgcodes = [1000, 1001, 1002, 1003, 1004];
     var internalColumnsJoined = getColumnSyntax('orgcode', syntaxObject, comps);
