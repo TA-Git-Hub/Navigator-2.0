@@ -82,7 +82,7 @@ class ComparatorUtil{
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
-            isHidden: (alreadyAdded[thanos] == 1)
+            isHidden: (alreadyAdded[customComparator] == 1)
           };
        break;
       }
