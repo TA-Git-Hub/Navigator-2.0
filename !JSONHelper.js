@@ -11,7 +11,7 @@ class JSONHelper{
    */
   public static function pageJSON(context){
     switch (ReportHelper.context.page.CurrentPageId) {
-      case 'resultsSummary':
+      /*case 'resultsSummary':
         return {
           dimensions: ReportHelper.getDimensionObject(),
           label: ReportHelper.getLabels(ReportHelper.context.page.CurrentPageId),
@@ -22,9 +22,18 @@ class JSONHelper{
                  all: []
                 }
         };
-        break;
+        break;*/
       default:
-
+         return {
+          dimensions: ReportHelper.getDimensionObject(),
+          label: ReportHelper.getLabels(ReportHelper.context.page.CurrentPageId),
+          language: {current: context.report.CurrentLanguage,
+                     active: context.report.Languages
+                   },
+          page: {current: ReportHelper.context.page.CurrentPageId,
+                 all: []
+                }
+        };
     }
   }
 
