@@ -197,16 +197,21 @@ class ReportHelper{
                             };
 
     switch (pageID) {
-      case 'resultsSummary':
+     /* case 'resultsSummary':
         var labels = {tableHeaders: defaultTableHeaders,
                        preamble: getTextRT('pagePreamble', pageID),
                        title: getTextRT('pageTitle', pageID)
                   };
 
           return labels;
-        break;
+        break;*/
       default:
+        var labels = {tableHeaders: defaultTableHeaders,
+                       preamble: getTextRT('pagePreamble', pageID),
+                       title: getTextRT('pageTitle', pageID)
+                  };
 
+          return labels;
     }
   }
 }
