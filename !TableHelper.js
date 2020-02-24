@@ -18,7 +18,7 @@ class TableHelper{
       case 'theoden' : return 'dataPage:MainTable';
       case 'resultsSummary' : return 'dataPage:MainTable';
 
-      default : return undefined;
+      default : return 'dataPage:MainTable';
     }
   }
 
