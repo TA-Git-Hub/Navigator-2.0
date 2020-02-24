@@ -107,18 +107,6 @@ static function getTopNodeID() {
  return null;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
   static function getTopNode(){
 
     var confirmit = ReportHelper.context.confirmit;
@@ -136,22 +124,6 @@ static function getTopNodeID() {
 
    // return (overrideResult == '') ? topNode : overrideResult
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**-----------------------------------------------------------------------------------------------------------------------------
  * Get hierarchy ID of parent node
@@ -186,21 +158,21 @@ return null;
  */
 static function getHierarchyColumn(schemaID, tableName, columnName, compareColumnName, compareColumnValue) {
 
-  /*  var key = [schemaID, tableName, columnName, compareColumnName, compareColumnValue].join('.');
+    var key = [schemaID, tableName, columnName, compareColumnName, compareColumnValue].join('.');
 
-    if ( hashtable [ key ] == null) {*/
-    /* hashtable [ key ] = */return loadColumn (schemaID, tableName, columnName, compareColumnName, compareColumnValue);
-    /*}
-    return hashtable [ key ];*/
+    if ( hashtable [ key ] == null) {
+     hashtable [ key ] =  loadColumn (schemaID, tableName, columnName, compareColumnName, compareColumnValue);
+    }
+    return hashtable [ key ];
 }
 
 //overloaded function, gets whole column
 static function getHierarchyColumn(schemaID, tableName, columnName) {
-  /*  var key = [schemaID, tableName, columnName].join('.');
-    if ( hashtable [ key ] == null) {*/
-      /* hashtable [ key ] =*/ return loadColumn (schemaID, tableName, columnName);
-    /*}
-    return hashtable [ key ];*/
+    var key = [schemaID, tableName, columnName].join('.');
+    if ( hashtable [ key ] == null) {
+       hashtable [ key ] = loadColumn (schemaID, tableName, columnName);
+    }
+    return hashtable [ key ];
 }
 
 
