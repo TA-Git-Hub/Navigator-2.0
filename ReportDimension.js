@@ -8,7 +8,6 @@ class ReportDimension {
   var flags = {dimensionScore: true} ; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
   var details = {};
-  var questionMapping=[];
 
   /**---------------------------------------------------------------------
  * @constructor
@@ -19,7 +18,6 @@ public function ReportDimension(dimension, allQuestionObject) {
     this.id = dimension.id;
     this.label = getDimLabel(this.id);
     this.description = getDimDescription(this.id);
-    this.questionMapping = dimension.question
     loadQuestionToDimension(dimension, allQuestionObject);
     calculateDimResult();
   }
@@ -145,7 +143,6 @@ public function ReportDimension(dimension, allQuestionObject) {
       description: this.description,
       details: this.details,
       questionObject: this.questionObject,
-      questionMapping: this.questionMapping,
       tier: this.tier,
       flags: this.flags,
       apLink: this.apLink
