@@ -26,6 +26,7 @@ class JSONHelper{
       default:
          return {
           dimensions: ReportHelper.getDimensionObject(),
+          question: ReportHelper.allQuestionObject,
           label: ReportHelper.getLabels(ReportHelper.context.page.CurrentPageId),
           language: {current: context.report.CurrentLanguage,
                      active: context.report.Languages
