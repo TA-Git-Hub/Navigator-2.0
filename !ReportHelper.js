@@ -239,7 +239,7 @@ static function setReportBase(unit){
   var stringArray=[];
   var unitArray=unit.split(',');
   for(var i =0; i<unitArray.length; i++){
-    stringArray.push(unitArray[i]+'§'+Config.hierarchyName+'§'+Config.parentRelationName);
+    stringArray.push(unitArray[i]+'§'+Config.hierarchy.hierarchyName+'§'+Config.hierarchy.parentRelationName);
   }
   user.SetReportBase(stringArray);
 }
