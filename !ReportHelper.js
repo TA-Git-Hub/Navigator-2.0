@@ -233,7 +233,7 @@ static function getProperties(object){
 /**
  * Setting of hierarchy selector
  * @method setReportBase
- * @param  {string}  units separated by coma (1000,1001,1002)
+ * @param  {string}  units separated by comma in one string('1000,1001,1002')
  */
 static function setReportBase(unit){
   var stringArray=[];
