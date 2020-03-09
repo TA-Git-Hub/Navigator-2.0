@@ -57,7 +57,7 @@ class ComparatorUtil{
           break;
 
         case 'LEVEL':
-         var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(fullPath.length - internalComp[1])] : user.PersonalizedReportBase.split(',');
+         var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(fullPath.length - internalComp[1])] : user.PersonalizedReportBase.split(',')[0];
 
          return {
             orgcode: orgcode,
@@ -67,7 +67,7 @@ class ComparatorUtil{
           break;
 
         case 'PARENT':
-          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase.split(',');
+          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase.split(',')[0];
 
           return {
             orgcode: orgcode,
