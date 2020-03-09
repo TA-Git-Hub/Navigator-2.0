@@ -67,7 +67,7 @@ class ComparatorUtil{
           break;
 
         case 'PARENT':
-          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase;.split(',')
+          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase.split(',');
 
           return {
             orgcode: orgcode,
