@@ -19,7 +19,7 @@ static const wave = {
 };
 
 static const comparators = {
-  internals: ['Top', 'Parent', 'Level2', 'Custom1', 'Custom2'],
+  internals: ['REportBase','TopLevel','Parent:1','Parent:2','internal4'],
   externals: [/*'AllCompany_A_16TO18_Avg'*/],
 
   defaultValues: {

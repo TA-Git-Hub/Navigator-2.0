@@ -10,74 +10,89 @@ class ComparatorUtil{
 -getHierarchyColumn(schemaID, tableName, columnName)
 */
   static function getComparators(){
-
     var internalComps = Config.comparators.internals;
     var alreadyAdded = {};
-    alreadyAdded[ReportHelper.context.user.PersonalizedReportBase] = 1;
+    alreadyAdded[ReportHelper.context.user.PersonalizedReportBase.split(',')[0]] = 1;
 
     var finalArrayOfComps = [];
 
     for(var i = 0; i < internalComps.length; i++){
-     finalArrayOfComps.push(getCase(i, alreadyAdded, internalComps));
-     alreadyAdded[finalArrayOfComps[i].orgcode] = 1;
+      finalArrayOfComps.push(getCase(alreadyAdded, internalComps[i]));
+      alreadyAdded[finalArrayOfComps[i].orgcode] = 1;
     }
+
     return finalArrayOfComps;
   }
 
-  static function getCase(i, alreadyAdded, internalComps){
+  static function contains(array, value){
+    var found = false;
+    for(var i =  0; i < array.length; i++){
+      if(array[i] == value){
+        found = true;
+      }
+    }
+    return found;
+  }
 
+  static function getCase(alreadyAdded, internalComps){
+
+     var state = ReportHelper.context.state;
      var user = ReportHelper.context.user;
-     var topNode = HierarchyUtil.getTopNode();
+     var internalComp = internalComps.split(':');
+     var multiSelect = (user.PersonalizedReportBase.split(',').length > 1) ? true : false;
+     var fullPath = HierarchyUtil.getPathByNodeID(user.PersonalizedReportBase);
 
-  	 switch(internalComps[i]){
-        case 'Top':
-          var overrideResult = getOverride(user.PersonalizedReportBase, i);
-          topNode = (overrideResult == '') ? topNode : overrideResult;
-          return {
-            orgcode: topNode,
-            label: HierarchyUtil.getHierarchyValue('', topNode, false),
-            isHidden: (alreadyAdded[topNode] == 1)
+  	 switch(internalComp[0].toUpperCase()){
+        case 'TOPLEVEL':
+        var orgcode = HierarchyUtil.getTopNode();
+
+         if(multiSelect){
+           return {
+            orgcode: orgcode,
+            label: HierarchyUtil.getHierarchyValue('', orgcode, false),
+            isHidden: contains(user.PersonalizedReportBase.split(','), orgcode)
+          }
+         }else{
+           return {
+            orgcode: orgcode,
+            label: HierarchyUtil.getHierarchyValue('', orgcode, false),
+            isHidden: (alreadyAdded[orgcode] == 1)
+          }
+         }
+          break;
+
+        case 'LEVEL':
+         var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(fullPath.length - internalComp[1])] : user.PersonalizedReportBase;
+
+         return {
+            orgcode: orgcode,
+            label: HierarchyUtil.getHierarchyValue('', orgcode, false),
+            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
           };
           break;
 
-        case 'Parent':
-          var parentId = HierarchyUtil.getParentID(user.PersonalizedReportBase)
-          var overrideResult = getOverride(user.PersonalizedReportBase, i);
-          if(overrideResult == ''){
-            parentId = (parentId == 'undefined') ? topNode : parentId;
-          }else{
-            parentId = overrideResult;
-          }
+        case 'PARENT':
+          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase;
 
           return {
-            orgcode: parentId,
-            label: HierarchyUtil.getHierarchyValue('', parentId, false),
-            isHidden: (alreadyAdded[parentId] == 1)
+            orgcode: orgcode,
+            label: HierarchyUtil.getHierarchyValue('', orgcode, false),
+            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
          };
           break;
 
-        case 'Level2':
-          var fullPath = HierarchyUtil.getPathByNodeID(user.PersonalizedReportBase);
-          var level2Node = topNode;
-          var overrideResult = getOverride(user.PersonalizedReportBase, i);
-
-          if(overrideResult == ''){
-          	if(fullPath.length > 2){
-              level2Node = fullPath[2];
-         	 }
-          }else{
-            level2Node = overrideResult;
-          }
-
+          case 'REPORTBASE':
+          var orgcode = state.Parameters.GetString('REPORT_BASE_CURRENT');
           return {
-            orgcode: level2Node,
-            label: HierarchyUtil.getHierarchyValue('', level2Node, false),
-            isHidden: (alreadyAdded[level2Node] == 1)
-          };
-        break;
+            orgcode: orgcode,
+            label: HierarchyUtil.getHierarchyValue('', orgcode, false),
+            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+         };
+          break;
+
        default:
-         var overrideResult = getOverride(user.PersonalizedReportBase, i);
-         var customComparator = (overrideResult == '') ? topNode : overrideResult;
+         var overrideResult = getOverride(fullPath[0], internalComp[0]);
+         var customComparator = (overrideResult == '') ? fullPath[0] : overrideResult;
 
          return {
             orgcode: customComparator,
@@ -88,9 +103,9 @@ class ComparatorUtil{
       }
   }
 
-  static function getOverride(nodeId, index){
-     var overrideNode = HierarchyUtil.getHierarchyValue('internal'+(index+1), nodeId, false);
-     nodeId = (overrideNode == '' || overrideNode == null) ? '' : overrideNode;
+  static function getOverride(nodeId, hierarchyColumn){
+    var overrideNode = HierarchyUtil.getHierarchyValue(hierarchyColumn, nodeId, false);
+    nodeId = (overrideNode == '' || overrideNode == null) ? '' : overrideNode;
 
     return nodeId;
   }

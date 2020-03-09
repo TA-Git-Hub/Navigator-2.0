@@ -39,15 +39,20 @@ class MainTable{
      var demoColumnsJoined = getColumnSyntax('demos', syntaxObject, demos);
 
     var comps = ComparatorUtil.getComparators();
+
 //Get columns for hierarchy orgcodes filtered by current wave
- //   var orgcodes = [1000, 1001, 1002, 1003, 1004];
-    var internalColumnsJoined = getColumnSyntax('orgcode', syntaxObject, comps);
+    if(comps.length > 0){
+      var internalColumnsJoined = getColumnSyntax('orgcode', syntaxObject, comps);
+    }
 
 //Create one big syntax for table by connecting arrays
     rows = rows.join("+");
-    var allColumns = [waveColumnsJoined, internalColumnsJoined, demoColumnsJoined].join("+");
+    if(internalColumnsJoined != undefined){
+      var allColumns = [waveColumnsJoined, internalColumnsJoined, demoColumnsJoined].join("+");
+    }else{
+      var allColumns = [waveColumnsJoined, demoColumnsJoined].join("+");
+    }
     var expr = [rows, allColumns].join('^');
-
     table.AddHeaders(report, Config.dataSources.mainSurvey, expr);
 
     const endTime = new Date();
@@ -77,7 +82,7 @@ class MainTable{
       case 'orgcode':
         for (var i = 0; i < columns.length; i++) {
        	 	var hierarchyFilter = getFilterExpression({variableID: Config.hierarchy.variableID, filterExpression: columns[i].orgcode});
-          var label = columns[i].label + ' ('+columns[i].orgcode+')'
+			var label = columns[i].label + '(' + columns[i].orgcode + ')'
         	helperArray1.push(getVerticalExpression({label: label, filterExpression:hierarchyFilter, hideheader: 'false', headerType: 'SEGMENT'}, columns[i].isHidden));
         	helperArray2.push(smartViewSyntax.waveSyntax);
         }
@@ -122,7 +127,17 @@ class MainTable{
 
     switch (properties.variableID) {
       case Config.hierarchy.variableID:
-        return 'InHierarchy('+Config.hierarchy.variableID+',"'+ properties.filterExpression +'")';
+        var reportBase = properties.filterExpression.split(',');
+        if(reportBase.length == 1 ){
+          return 'InHierarchy('+Config.hierarchy.variableID+',"'+ reportBase +'")';
+        }else{
+          var expression = [];
+          for(var i = 0; i < reportBase.length; i++)
+          {
+            expression.push('InHierarchy('+Config.hierarchy.variableID+',"'+ reportBase[i] +'")')
+          }
+          return expression.join(" OR ");
+        }
         break;
 
       default:
