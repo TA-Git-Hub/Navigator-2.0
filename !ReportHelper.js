@@ -231,6 +231,23 @@ static function getProperties(object){
 }
 
 /**
+ * Returns true if a value was found in the array. Otherview returns false
+ * @param  {[array]} array [Array you are searching in]
+ * @param  {[whatever]} value [Value you are looking for in the array]
+ * @return true/false
+ */
+static function contains(array, value){
+  var found = false;
+  for(var i =  0; i < array.length; i++){
+    if(array[i] == value){
+      found = true;
+    }
+  }
+  return found;
+}
+
+
+/**
  * Setting of hierarchy selector
  * @method setReportBase
  * @param  {string}  units separated by comma in one string('1000,1001,1002')

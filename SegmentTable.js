@@ -1,7 +1,7 @@
 class SegmentTable{
 /**
- * [GetSegmentTable description]
- * @param       {object} context [Contains all the basic stuff - report, table, state, user, confirmit, table, log]
+ * This function generates the segment table, basically the same way as the main table
+ * @param       {table} context [contains table property]
  * @constructor
  */
   static function getSegmentTable(table){

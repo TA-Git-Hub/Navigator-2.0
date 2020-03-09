@@ -1,43 +1,35 @@
 class ComparatorUtil{
 
-/*
--getPathByNodeID(nodeID)
--isChildOf( childID, parentID)
--getHierarchyValue (columnName, nodeID, exclude_prefix)
--getTopNodeID()
--getParentID (id)
--getHierarchyColumn(schemaID, tableName, columnName, compareColumnName, compareColumnValue)
--getHierarchyColumn(schemaID, tableName, columnName)
-*/
+/**
+ * This function gets you array of all comparators.
+ * @return {[Array of objects]} [Array of all comparator object. Object props: Orgcode, label, isHidden (true/false)]
+ */
   static function getComparators(){
     var internalComps = Config.comparators.internals;
     var alreadyAdded = {};
+
+    //Already added variable determines whether the comparator should be hidden or not
+    //At first, I want to add the current level, because I don't want to show an internal comparator of current levl
+    //Additionaly, in case I want to hide the comparator, I can just use the current level for suppression as it has been already added here
     alreadyAdded[ReportHelper.context.user.PersonalizedReportBase.split(',')[0]] = 1;
 
     var finalArrayOfComps = [];
 
     for(var i = 0; i < internalComps.length; i++){
-      finalArrayOfComps.push(getCase(alreadyAdded, internalComps[i]));
+      finalArrayOfComps.push(getComparator(alreadyAdded, internalComps[i]));
       alreadyAdded[finalArrayOfComps[i].orgcode] = 1;
     }
 
     return finalArrayOfComps;
   }
 
-  static function contains(array, value){
-    var found = false;
-    for(var i =  0; i < array.length; i++){
-      if(array[i] == value){
-        found = true;
-      }
-    }
-    return found;
-  }
-
-  static function getCase(alreadyAdded, internalComps){
+  static function getComparator(alreadyAdded, internalComps){
 
      var state = ReportHelper.context.state;
      var user = ReportHelper.context.user;
+     //This should get me either an array that should look like ['Parent', '1'], or only the first part - ['TopLevel']
+     //First part detemines what type of comparator it is, the second part is the depth in the hierarchy, so the 'Parent:1'
+     //would represent first level above mine.
      var internalComp = internalComps.split(':');
      var multiSelect = (user.PersonalizedReportBase.split(',').length > 1) ? true : false;
      var fullPath = HierarchyUtil.getPathByNodeID(user.PersonalizedReportBase);
@@ -46,11 +38,14 @@ class ComparatorUtil{
         case 'TOPLEVEL':
         var orgcode = HierarchyUtil.getTopNode();
 
+//If multi select is true (we have more than 1 unit selected), check whether one of that units is top level, if so, hide the column
+//othervise we can display the comparator
+//If single select, just check whether this orgcode has been already added (or if we are on top level)
          if(multiSelect){
            return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: contains(user.PersonalizedReportBase.split(','), orgcode)
+            isHidden: ReportHelper.contains(user.PersonalizedReportBase.split(','), orgcode)
           }
          }else{
            return {
@@ -62,7 +57,7 @@ class ComparatorUtil{
           break;
 
         case 'LEVEL':
-         var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(fullPath.length - internalComp[1])] : user.PersonalizedReportBase;
+         var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(fullPath.length - internalComp[1])] : user.PersonalizedReportBase.split(',');
 
          return {
             orgcode: orgcode,
@@ -72,7 +67,7 @@ class ComparatorUtil{
           break;
 
         case 'PARENT':
-          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase;
+          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase;.split(',')
 
           return {
             orgcode: orgcode,
@@ -97,12 +92,17 @@ class ComparatorUtil{
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
-            isHidden: (alreadyAdded[customComparator] == 1)
+            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
           };
        break;
       }
   }
-
+/**
+ * Will return a value in the specified column for the specified orgcode in the hierarchy
+ * @param  {[string]} nodeId          [orgcode ID you want to find the value for]
+ * @param  {[string]} hierarchyColumn [column in the hierarchy]
+ * @return {[string]}                 [overridden value]
+ */
   static function getOverride(nodeId, hierarchyColumn){
     var overrideNode = HierarchyUtil.getHierarchyValue(hierarchyColumn, nodeId, false);
     nodeId = (overrideNode == '' || overrideNode == null) ? '' : overrideNode;
