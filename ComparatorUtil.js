@@ -92,7 +92,7 @@ class ComparatorUtil{
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
-            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
           };
        break;
       }
