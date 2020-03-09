@@ -179,7 +179,7 @@ class ReportHelper{
     }
   }
 
-  /**
+  /**-------------------------------------------------------------------------
    * This function is used to get labels and translations for page
    * @param  {String} pageID id of page we wish to translate
    * @return {Object} object with all the labels needed
@@ -214,4 +214,34 @@ class ReportHelper{
           return labels;
     }
   }
+  /**-------------------------------------------------------------------------
+ * returns in Debug all methods an properties of passed object
+ * @method getProperties
+ * @param  {Object}   object
+ */
+static function getProperties(object){
+   var myPropertyInfo= object.GetType().GetMethods();
+   log.LogDebug("Methods are:--------------------------------------------------------------");
+   for (var i = 0; i < myPropertyInfo.length; i++){
+    log.LogDebug(myPropertyInfo[i].ToString());}
+   var myPropertyInfo= object.GetType().GetProperties();
+  log.LogDebug("Properties of confirmit are:--------------------------------------------------");
+   for (var i = 0; i < myPropertyInfo.length; i++){
+   log.LogDebug(myPropertyInfo[i].ToString());}
+}
+
+/**
+ * Setting of hierarchy selector
+ * @method setReportBase
+ * @param  {string}  units separated by comma in one string('1000,1001,1002')
+ */
+static function setReportBase(unit){
+  var stringArray=[];
+  var unitArray=unit.split(',');
+  for(var i =0; i<unitArray.length; i++){
+    stringArray.push(unitArray[i]+'§'+Config.hierarchy.hierarchyName+'§'+Config.hierarchy.parentRelationName);
+  }
+  user.SetReportBase(stringArray);
+}
+
 }

@@ -45,6 +45,7 @@ static const hierarchy = {
 //SchemaId: 4237, //EURO-GER SERVER - Change for your project
     parentRelationName: 'parent', // *** NOTE: Case sensitive ***
     tableName: 'Korn Ferry Report new',
+    hierarchyName: 'Korn Ferry Report new',
     variableID: 'Orgcode',
     topNodeID: '1000',
     direct: false,
@@ -52,6 +53,13 @@ static const hierarchy = {
     hideScoresColumnName: '__l9hide',
     numberOfChildren: 1
 };
+
+static var suppression = {
+  // if threshold = 0 its switched off
+  minN: 5,
+  violator: 0,
+  reminder: 0
+}
 
   static var dimensionArray = [
       //{ Id:'DIM_ENG', Questions: [ 'OM12', /* 'OM01' ,*/ 'OS02', 'OM06', 'OM11'], Tier:2 } ,
