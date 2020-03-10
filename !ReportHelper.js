@@ -223,9 +223,10 @@ static function getProperties(object){
    var myPropertyInfo= object.GetType().GetMethods();
    log.LogDebug("Methods are:--------------------------------------------------------------");
    for (var i = 0; i < myPropertyInfo.length; i++){
-    log.LogDebug(myPropertyInfo[i].ToString());}
+    log.LogDebug(myPropertyInfo[i].ToString());
+  }
    var myPropertyInfo= object.GetType().GetProperties();
-  log.LogDebug("Properties of confirmit are:--------------------------------------------------");
+   log.LogDebug("Properties of confirmit are:--------------------------------------------------");
    for (var i = 0; i < myPropertyInfo.length; i++){
    log.LogDebug(myPropertyInfo[i].ToString());}
 }
@@ -238,8 +239,8 @@ static function getProperties(object){
  */
 static function contains(array, value){
   var found = false;
-  for(var i =  0; i < array.length; i++){
-    if(array[i] == value){
+  for (var i =  0; i < array.length; i++){
+    if (array[i] == value){
       found = true;
     }
   }
@@ -247,18 +248,19 @@ static function contains(array, value){
 }
 
 
-/**
- * Setting of hierarchy selector
- * @method setReportBase
- * @param  {string}  units separated by comma in one string('1000,1001,1002')
- */
-static function setReportBase(unit){
-  var stringArray=[];
-  var unitArray=unit.split(',');
-  for(var i =0; i<unitArray.length; i++){
-    stringArray.push(unitArray[i]+'§'+Config.hierarchy.hierarchyName+'§'+Config.hierarchy.parentRelationName);
+  /**
+   * Setting of hierarchy selector
+   * @method setReportBase
+   * @param  {string}  units separated by comma in one string('1000,1001,1002')
+   */
+  static function setReportBase(unit){
+    var stringArray = [];
+    var unitArray = unit.split(',');
+
+    for (var i = 0; i < unitArray.length; i++){
+      stringArray.push(unitArray[i] + '§' + Config.hierarchy.hierarchyName + '§' + Config.hierarchy.parentRelationName);
+    }
+    user.SetReportBase(stringArray);
   }
-  user.SetReportBase(stringArray);
-}
 
 }

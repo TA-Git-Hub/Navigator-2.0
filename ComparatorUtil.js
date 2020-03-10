@@ -4,7 +4,7 @@ class ComparatorUtil{
  * This function gets you array of all comparators.
  * @return {[Array of objects]} [Array of all comparator object. Object props: Orgcode, label, isHidden (true/false)]
  */
-  static function getComparators(){
+  static function getComparators() {
     var internalComps = Config.comparators.internals;
     var alreadyAdded = {};
 
@@ -23,7 +23,7 @@ class ComparatorUtil{
     return finalArrayOfComps;
   }
 
-  static function getComparator(alreadyAdded, internalComps){
+  static function getComparator(alreadyAdded, internalComps) {
 
      var state = ReportHelper.context.state;
      var user = ReportHelper.context.user;
@@ -34,14 +34,14 @@ class ComparatorUtil{
      var multiSelect = (user.PersonalizedReportBase.split(',').length > 1) ? true : false;
      var fullPath = HierarchyUtil.getPathByNodeID(user.PersonalizedReportBase);
 
-  	 switch(internalComp[0].toUpperCase()){
+  	 switch (internalComp[0].toUpperCase()) {
         case 'TOPLEVEL':
         var orgcode = HierarchyUtil.getTopNode();
 
 //If multi select is true (we have more than 1 unit selected), check whether one of that units is top level, if so, hide the column
 //othervise we can display the comparator
 //If single select, just check whether this orgcode has been already added (or if we are on top level)
-         if(multiSelect){
+         if (multiSelect) {
            return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
