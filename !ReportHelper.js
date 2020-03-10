@@ -223,12 +223,13 @@ static function getProperties(object){
    var myPropertyInfo= object.GetType().GetMethods();
    log.LogDebug("Methods are:--------------------------------------------------------------");
    for (var i = 0; i < myPropertyInfo.length; i++){
-    log.LogDebug(myPropertyInfo[i].ToString());
-  }
+     log.LogDebug(myPropertyInfo[i].ToString());
+   }
    var myPropertyInfo= object.GetType().GetProperties();
    log.LogDebug("Properties of confirmit are:--------------------------------------------------");
    for (var i = 0; i < myPropertyInfo.length; i++){
-   log.LogDebug(myPropertyInfo[i].ToString());}
+     log.LogDebug(myPropertyInfo[i].ToString());
+   }
 }
 
 /**
@@ -237,7 +238,16 @@ static function getProperties(object){
  * @param  {[whatever]} value [Value you are looking for in the array]
  * @return true/false
  */
-static function contains(array, value){
+ function arrayContains(array, value){
+  // var found = false;
+   for (var i =  0; i < array.length; i++){
+     if (array[i] === value){
+       return true;
+     }
+   }
+   return false;
+ }
+/*static function contains(array, value){
   var found = false;
   for (var i =  0; i < array.length; i++){
     if (array[i] == value){
@@ -245,7 +255,7 @@ static function contains(array, value){
     }
   }
   return found;
-}
+}*/
 
 
   /**
