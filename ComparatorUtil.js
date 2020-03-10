@@ -45,7 +45,7 @@ class ComparatorUtil{
            return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: ReportHelper.contains(user.PersonalizedReportBase.split(','), orgcode)
+            isHidden: ReportHelper.arrayContains(user.PersonalizedReportBase.split(','), orgcode)
           }
          }else{
            return {
