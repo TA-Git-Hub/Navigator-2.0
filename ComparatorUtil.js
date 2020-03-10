@@ -33,11 +33,13 @@ class ComparatorUtil{
      var internalComp = internalComps.split(':');
      var multiSelect = (user.PersonalizedReportBase.split(',').length > 1) ? true : false;
      var fullPath = HierarchyUtil.getPathByNodeID(user.PersonalizedReportBase);
+     var schemaId = Config.hierarchy.schemaID;
+     var tableName = Config.hierarchy.tableName;
 
   	 switch (internalComp[0].toUpperCase()) {
         case 'TOPLEVEL':
         var orgcode = HierarchyUtil.getTopNode();
-
+        var isViolator = isNodeViolator(schemaId, tableName, orgcode);
 //If multi select is true (we have more than 1 unit selected), check whether one of that units is top level, if so, hide the column
 //othervise we can display the comparator
 //If single select, just check whether this orgcode has been already added (or if we are on top level)
@@ -58,44 +60,59 @@ class ComparatorUtil{
 
         case 'LEVEL':
          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(fullPath.length - internalComp[1])] : user.PersonalizedReportBase.split(',')[0];
-
+         var isViolator = isNodeViolator(schemaId, tableName, orgcode);
          return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator})//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
           };
           break;
 
         case 'PARENT':
           var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase.split(',')[0];
-
+          var isViolator = isNodeViolator(schemaId, tableName, orgcode);
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator})//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
          };
           break;
 
           case 'REPORTBASE':
           var orgcode = state.Parameters.GetString('REPORT_BASE_CURRENT');
+          var isViolator = isNodeViolator(schemaId, tableName, orgcode);
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator})//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
          };
           break;
 
        default:
          var overrideResult = getOverride(fullPath[0], internalComp[0]);
          var customComparator = (overrideResult == '') ? fullPath[0] : overrideResult;
-
+         var isViolator = isNodeViolator(schemaId, tableName, customComparator);
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
-            isHidden: (multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}) //(multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
           };
        break;
       }
+  }
+
+  static function isHidden(conditionObject){
+    if (conditionObject.isViolator === true) {
+      return true;
+    }
+
+    if (conditionObject.multiSelect === true) {
+      return true;
+    }else if (alreadyAdded[customComparator] == 1) {
+            return true;
+          }else {
+            return false;
+          }
   }
 /**
  * Will return a value in the specified column for the specified orgcode in the hierarchy

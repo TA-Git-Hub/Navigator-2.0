@@ -8,6 +8,7 @@ class ReportDetails{
   private var unfav = null;
   private var scale = {};
   private var validN = null;
+  private var flags = {};
 
   /**
    * Constructor for object of ReportDetails, provide ID and get scale from survey
@@ -30,7 +31,11 @@ class ReportDetails{
     }
 
     if (information.validN !== null) {
-      setValidN(information.validN);
+      if(information.validN < Config.suppression.minN){
+        flags["minN"] = true;
+      }else{
+        setValidN(information.validN);
+      }
     }
 
     calculate(context);
@@ -46,25 +51,29 @@ class ReportDetails{
     this.neu = 0;
     this.unfav = 0;
 
-    for (var i = 0; i < this.scale.length; i++) {
-      switch(this.scale[i].Weight){
-        case 1:
-          this.fav += this.distribution[i];
-          break;
-        case 0:
-          this.neu += this.distribution[i];
-          break;
-        case -1:
-          this.unfav += this.distribution[i];
-          break;
+    if(this.flags.minN === true){
 
-        case undefined:
-          // don't know
-          break;
+    }else{
+      for (var i = 0; i < this.scale.length; i++) {
+        switch(this.scale[i].Weight){
+          case 1:
+            this.fav += this.distribution[i];
+            break;
+          case 0:
+            this.neu += this.distribution[i];
+            break;
+          case -1:
+            this.unfav += this.distribution[i];
+            break;
 
-        default:
-        ReportHelper.debug('ReportDetails.calculate() - unknown scale weight');
-      }
+          case undefined:
+            // don't know
+            break;
+
+          default:
+            ReportHelper.debug('ReportDetails.calculate() - unknown scale weight');
+          }
+        }
     }
     calculateMethology('count/validN');
   }
@@ -76,9 +85,9 @@ class ReportDetails{
   private function calculateMethology(type){
     switch (type) {
       case 'count/validN':
-        this.fav = (this.validN === 0) ? 0 : Math.round((this.fav / this.validN)*100);
-        this.neu = (this.validN === 0) ? 0 : Math.round((this.neu / this.validN)*100);
-        this.unfav = (this.validN === 0) ? 0 : Math.round((this.unfav / this.validN)*100);
+        this.fav = (this.flags.minN === true) ? -1 : Math.round((this.fav / this.validN)*100);
+        this.neu = (this.flags.minN === true) ? -1 : Math.round((this.neu / this.validN)*100);
+        this.unfav = (this.flags.minN === true) ? -1 : Math.round((this.unfav / this.validN)*100);
         break;
       default:
       ReportHelper.debug('ReportDetails.calculateMethology() - unknown calculate methology');

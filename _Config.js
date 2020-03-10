@@ -40,7 +40,7 @@ static var demographics = ['Orgcode', 'Segment_EEF','intenttostay','Gender','Cou
 
 //Hierarchy settings
 static const hierarchy = {
-    schemaId: 5078, //US - Change for your project
+    schemaID: 5078, //US - Change for your project
 //SchemaId: 3857, //EURO SERVER - Change for your project
 //SchemaId: 4237, //EURO-GER SERVER - Change for your project
     parentRelationName: 'parent', // *** NOTE: Case sensitive ***
@@ -57,7 +57,8 @@ static const hierarchy = {
 static var suppression = {
   // if threshold = 0 its switched off
   minN: 5,
-  violator: 0,
+  commentMinN: 30,
+  violator: true,
   reminder: 0
 }
 

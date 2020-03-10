@@ -82,7 +82,7 @@ class HierarchyUtil{
 			prefix = '__l' + ReportHelper.context.report.CurrentLanguage;
 		}
 		var result = getHierarchyColumn(
-                              			Config.hierarchy.schemaId,
+                              			Config.hierarchy.schemaID,
                               			Config.hierarchy.tableName,
                               			prefix + columnName,
                               			'id',
@@ -100,7 +100,7 @@ class HierarchyUtil{
   * @return {String}
   */
   static function getTopNodeID() {
-    var result = getHierarchyColumn(Config.hierarchy.schemaId,
+    var result = getHierarchyColumn(Config.hierarchy.schemaID,
                            				  Config.hierarchy.tableName,
                                     'id',
                            				  Config.hierarchy.parentRelationName,
@@ -115,7 +115,7 @@ class HierarchyUtil{
   static function getTopNode() {
     var confirmit = ReportHelper.context.confirmit;
 
-    var schema : DBDesignerSchema = confirmit.GetDBDesignerSchema(Config.hierarchy.schemaId);
+    var schema : DBDesignerSchema = confirmit.GetDBDesignerSchema(Config.hierarchy.schemaID);
     var table : DBDesignerTable = schema.GetDBDesignerTable(Config.hierarchy.tableName);
 
     var idColumn : StringCollection = table.GetColumnValues('id');
@@ -137,7 +137,7 @@ class HierarchyUtil{
    */
   static function getParentID(id) {
 
-  	var result =  getHierarchyColumn (Config.hierarchy.schemaId,            //schema
+  	var result =  getHierarchyColumn (Config.hierarchy.schemaID,            //schema
                 							        Config.hierarchy.tableName,           //table
                               				Config.hierarchy.parentRelationName,  //column to return
                               				'id',                                 //conidition column
@@ -180,7 +180,18 @@ class HierarchyUtil{
       return hashtable [key];
   }
 
+static function isNodeViolator(schemaId, tableName, node){
+  var value = loadColumn(schemaID, tableName, 'hide', 'id', node);
 
+  switch(value){
+    case (value.ToUpperCase() === "TRUE"):
+      return true;
+    case (value.ToUpperCase() === ""):
+      return false;
+
+    default: //TODO: orgcode handling ERIK!
+  }
+}
 
 
 
