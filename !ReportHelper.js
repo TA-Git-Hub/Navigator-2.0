@@ -32,6 +32,9 @@ class ReportHelper{
     user = input.user;
     page = input.page;
     pageContext = input.pageContext;
+
+    ParamUtil.setDefaultValues();
+    ParamUtil.setCurrentReportBase();
   }
 
   /**
