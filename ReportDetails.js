@@ -100,7 +100,7 @@ class ReportDetails{
   }
 
   public function getJSONString(){
-    return {validN: this.validN, distribution: this.distribution, fav: this.fav, neu: this.neu, unfav: this.unfav};
+    return {validN: this.validN, distribution: this.distribution, fav: this.fav, neu: this.neu, unfav: this.unfav, flags: this.flags};
 
   }
 
