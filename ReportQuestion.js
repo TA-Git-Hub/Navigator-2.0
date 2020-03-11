@@ -79,7 +79,7 @@ class ReportQuestion{
     if(current.flags.minN === true){
       for(var key in this.details){
         details[key].flags.minN = true;
-        details[key].calculate();
+        details[key].calculate({});
       }
     }
   }

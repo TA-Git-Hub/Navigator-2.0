@@ -181,8 +181,12 @@ class HierarchyUtil{
   }
 
 static function isNodeViolator(schemaID, tableName, node){
-  const hideColumnID = Config.hierarchy.violatorColumnName;
+  var hideColumnID = Config.hierarchy.violatorColumnName;
   var value = loadColumn(schemaID, tableName, hideColumnID, 'id', node);
+
+  ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
+  ReportHelper.debug(value);
+  ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
 
   switch(value){
     case (value.ToUpperCase() === "TRUE"):
