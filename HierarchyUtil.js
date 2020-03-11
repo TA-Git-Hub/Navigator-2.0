@@ -184,10 +184,6 @@ static function isNodeViolator(schemaID, tableName, node){
   var hideColumnID = Config.hierarchy.violatorColumnName;
   var value = loadColumn(schemaID, tableName, hideColumnID, 'id', node).ToString();
 
-  ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
-  ReportHelper.debug(value);
-  ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
-
   switch(value){
     case (value === "TRUE"):
       return true;

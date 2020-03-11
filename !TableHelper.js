@@ -79,6 +79,8 @@ class TableHelper{
       var question : ReportQuestion = new ReportQuestion(allQuestionID[i]);
       question.setup({label: label, details: detailTable}, context);
 
+      ReportHelper.debug('Question ready: ' + allQuestionID[i]);
+
       returnArray.push(question);
     }
     return returnArray;
