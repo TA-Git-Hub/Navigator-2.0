@@ -241,7 +241,7 @@ static function getProperties(object){
  * @param  {[whatever]} value [Value you are looking for in the array]
  * @return true/false
  */
- function arrayContains(array, value){
+ static function arrayContains(array, value){
   // var found = false;
    for (var i =  0; i < array.length; i++){
      if (array[i] === value){
