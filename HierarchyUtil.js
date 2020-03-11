@@ -180,7 +180,7 @@ class HierarchyUtil{
       return hashtable [key];
   }
 
-static function isNodeViolator(schemaId, tableName, node){
+static function isNodeViolator(schemaID, tableName, node){
   var value = loadColumn(schemaID, tableName, 'hide', 'id', node);
 
   switch(value){
