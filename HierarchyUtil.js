@@ -186,13 +186,12 @@ static function isNodeViolator(schemaID, tableName, node){
 
   ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
   ReportHelper.debug(value);
-  ReportHelper.debug(value.ToUpperCase());
   ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
 
   switch(value){
     case (value.ToUpperCase() === "TRUE"):
       return true;
-    case (value.ToUpperCase() === ""):
+    case (value === ""):
       return false;
 
     default: //TODO: orgcode handling ERIK!
