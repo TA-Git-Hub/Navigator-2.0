@@ -182,7 +182,7 @@ class HierarchyUtil{
 
 static function isNodeViolator(schemaID, tableName, node){
   var hideColumnID = Config.hierarchy.violatorColumnName;
-  var value = loadColumn(schemaID, tableName, hideColumnID, 'id', node);
+  var value = loadColumn(schemaID, tableName, hideColumnID, 'id', node).ToString();
 
   ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
   ReportHelper.debug(value);
