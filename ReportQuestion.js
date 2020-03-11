@@ -34,6 +34,7 @@ class ReportQuestion{
 
     if (information.details !== null) {
       setDetails(information.details);
+      checkCurrentMinN();
     }
   }
 
@@ -70,6 +71,16 @@ class ReportQuestion{
 
     for (var i = 0; i < details.length; i++) {
       this.details[details[i].id] = details[i].details;
+    }
+  }
+
+  public function checkCurrentMinN() {
+    var current = this.details.current;
+    if(current.flags.minN === true){
+      for(key in this.details){
+        details[key].flags.minN = true;
+        details[key].calculate();
+      }
     }
   }
 
