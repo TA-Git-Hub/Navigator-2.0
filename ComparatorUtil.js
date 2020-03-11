@@ -60,7 +60,7 @@ class ComparatorUtil{
 
         case 'LEVEL':
          var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(fullPath.length - internalComp[1])] : user.PersonalizedReportBase.split(',')[0];
-         var isViolator = isNodeViolator(schemaId, tableName, orgcode);
+         var isViolator = HierarchyUtil.isNodeViolator(schemaId, tableName, orgcode);
          return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
@@ -70,7 +70,7 @@ class ComparatorUtil{
 
         case 'PARENT':
           var orgcode = (fullPath.length > internalComp[1]) ? fullPath[(internalComp[1])] : user.PersonalizedReportBase.split(',')[0];
-          var isViolator = isNodeViolator(schemaId, tableName, orgcode);
+          var isViolator = HierarchyUtil.isNodeViolator(schemaId, tableName, orgcode);
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
@@ -80,7 +80,7 @@ class ComparatorUtil{
 
           case 'REPORTBASE':
           var orgcode = state.Parameters.GetString('REPORT_BASE_CURRENT');
-          var isViolator = isNodeViolator(schemaId, tableName, orgcode);
+          var isViolator = HierarchyUtil.isNodeViolator(schemaId, tableName, orgcode);
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
@@ -91,7 +91,7 @@ class ComparatorUtil{
        default:
          var overrideResult = getOverride(fullPath[0], internalComp[0]);
          var customComparator = (overrideResult == '') ? fullPath[0] : overrideResult;
-         var isViolator = isNodeViolator(schemaId, tableName, customComparator);
+         var isViolator = HierarchyUtil.isNodeViolator(schemaId, tableName, customComparator);
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
