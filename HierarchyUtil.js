@@ -189,7 +189,7 @@ static function isNodeViolator(schemaID, tableName, node){
   ReportHelper.debug('FILDA FILDA FILDA FILDA FILDA');
 
   switch(value){
-    case (value.ToUpperCase() === "TRUE"):
+    case (value === "TRUE"):
       return true;
     case (value === ""):
       return false;
