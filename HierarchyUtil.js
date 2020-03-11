@@ -181,7 +181,7 @@ class HierarchyUtil{
   }
 
 static function isNodeViolator(schemaID, tableName, node){
-  var value = loadColumn(schemaID, tableName, 'hide', 'id', node);
+  var value = loadColumn(schemaID, tableName, '_l9hide', 'id', node);
 
   switch(value){
     case (value.ToUpperCase() === "TRUE"):
