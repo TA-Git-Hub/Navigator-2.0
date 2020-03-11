@@ -39,7 +39,7 @@ class ComparatorUtil{
   	 switch (internalComp[0].toUpperCase()) {
         case 'TOPLEVEL':
         var orgcode = HierarchyUtil.getTopNode();
-        var isViolator = isNodeViolator(schemaId, tableName, orgcode);
+        var isViolator = HierarchyUtil.isNodeViolator(schemaId, tableName, orgcode);
 //If multi select is true (we have more than 1 unit selected), check whether one of that units is top level, if so, hide the column
 //othervise we can display the comparator
 //If single select, just check whether this orgcode has been already added (or if we are on top level)
@@ -64,7 +64,7 @@ class ComparatorUtil{
          return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator})//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, orgcode)//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
           };
           break;
 
@@ -74,7 +74,7 @@ class ComparatorUtil{
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator})//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, orgcode)//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
          };
           break;
 
@@ -84,7 +84,7 @@ class ComparatorUtil{
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator})//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, orgcode)//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
          };
           break;
 
@@ -95,20 +95,20 @@ class ComparatorUtil{
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
-            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}) //(multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, customComparator) //(multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
           };
        break;
       }
   }
 
-  static function isHidden(conditionObject){
+  static function isHidden(conditionObject, alreadyAdded, orgcode){
     if (conditionObject.isViolator === true) {
       return true;
     }
 
     if (conditionObject.multiSelect === true) {
       return true;
-    }else if (alreadyAdded[customComparator] == 1) {
+    }else if (alreadyAdded[orgcode] == 1) {
             return true;
           }else {
             return false;
