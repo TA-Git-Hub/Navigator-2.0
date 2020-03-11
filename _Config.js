@@ -50,7 +50,7 @@ static const hierarchy = {
     topNodeID: '1000',
     direct: false,
     hideSelector: false,
-    hideScoresColumnName: '__l9hide',
+    violatorColumnName: '__l9hide',
     numberOfChildren: 1
 };
 
