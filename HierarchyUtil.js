@@ -123,7 +123,7 @@ class HierarchyUtil{
 
     var indexOfTopNode = parentColumn.IndexOf(undefined);
 
-    return idColumn.Item(indexOfTopNode)
+    return idColumn.Item(indexOfTopNode);
    // var overrideResult = getFieldValue ( 'internal1', topNode, false, context );
 
    // return (overrideResult == '') ? topNode : overrideResult

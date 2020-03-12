@@ -32,7 +32,9 @@ class ReportDetails{
 
     if (information.validN !== null) {
       if(information.validN < Config.suppression.minN){
-        flags["minN"] = true;
+        flags.minN = true;
+
+        ReportHelper.debug('Flag Set');
       }else{
         setValidN(information.validN);
       }
@@ -51,9 +53,10 @@ class ReportDetails{
     this.neu = 0;
     this.unfav = 0;
 
-    if(this.flags.minN === true){
+    if (this.flags.minN === true){
 
-    }else{
+    }
+    else{
       for (var i = 0; i < this.scale.length; i++) {
         switch(this.scale[i].Weight){
           case 1:
