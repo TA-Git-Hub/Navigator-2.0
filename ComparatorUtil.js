@@ -74,7 +74,7 @@ class ComparatorUtil{
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: true//isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, orgcode)//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, orgcode)//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
          };
           break;
 
@@ -95,7 +95,7 @@ class ComparatorUtil{
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
-            isHidden: true//isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, customComparator) //(multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
+            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, customComparator) //(multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
           };
        break;
       }
