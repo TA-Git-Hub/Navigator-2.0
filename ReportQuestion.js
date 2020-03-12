@@ -77,13 +77,13 @@ class ReportQuestion{
   public function checkCurrentMinN() {
     var current = this.details.current;
     var minN = current.getFlags().minN;
-    ReportHelper.debug('Current ' + current);
-    ReportHelper.debug('Current.flags ' + minN);
-    if(minN === true){
-      for(var key in this.details){
+
+    if (minN === true){
+      for (var key in this.details){
         details[key].setFlags('minN', true);
         details[key].calculate({});
       }
+      this.flags.minN = true;
     }
   }
 
