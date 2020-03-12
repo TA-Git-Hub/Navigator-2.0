@@ -102,6 +102,8 @@ class ComparatorUtil{
   }
 
   static function isHidden(conditionObject, alreadyAdded, orgcode){
+
+    ReportHelper.debug('isHidden ' + conditionObject.isViolator);
     if (conditionObject.isViolator === true) {
       ReportHelper.debug('isHidden because of violator === true');
       return true;
