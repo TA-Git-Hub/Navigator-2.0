@@ -187,10 +187,10 @@ static function isNodeViolator(schemaID, tableName, node){
   ReportHelper.debug('Violator ' + value + ' ; ' + 'Level ' + node)
 
   switch(value){
-    case (value === "TRUE"):
+    case "TRUE":
     ReportHelper.debug('==== isNodeViolator return true');
       return true;
-    case (value === ""):
+    case "":
       return false;
 
     default: //TODO: orgcode handling ERIK!
