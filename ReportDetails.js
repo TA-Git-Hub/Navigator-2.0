@@ -34,8 +34,9 @@ class ReportDetails{
       if(information.validN < Config.suppression.minN){
         this.flags.minN = true;
 
-        ReportHelper.debug('Flag Set');
-      }else{
+        setDistribution([]);
+      }
+      else{
         setValidN(information.validN);
       }
     }
