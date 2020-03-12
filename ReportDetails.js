@@ -102,6 +102,10 @@ class ReportDetails{
     return this.validN;
   }
 
+  public function getFlags(){
+    return this.flags;
+  }
+
   public function getJSONString(){
     return {validN: this.validN, distribution: this.distribution, fav: this.fav, neu: this.neu, unfav: this.unfav, flags: this.flags};
 
@@ -131,6 +135,10 @@ class ReportDetails{
 
   public function setScale(id){
     this.scale = ReportHelper.getQuestionScale(id);
+  }
+
+  public function setFlags(flagItem, flagValue){
+    this.flags[flagItem] = flagValue;
   }
 
 }
