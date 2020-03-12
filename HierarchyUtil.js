@@ -188,6 +188,7 @@ static function isNodeViolator(schemaID, tableName, node){
 
   switch(value){
     case (value === "TRUE"):
+    ReportHelper.debug('==== isNodeViolator return true');
       return true;
     case (value === ""):
       return false;
