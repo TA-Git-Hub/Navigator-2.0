@@ -76,6 +76,8 @@ class ReportQuestion{
 
   public function checkCurrentMinN() {
     var current = this.details.current;
+
+    ReportHelper.debug('Current ' + current);
     if(current.flags.minN === true){
       for(var key in this.details){
         details[key].flags.minN = true;
