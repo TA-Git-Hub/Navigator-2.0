@@ -78,6 +78,7 @@ class ReportQuestion{
     var current = this.details.current;
 
     ReportHelper.debug('Current ' + current);
+    ReportHelper.debug('Current.flags ' + current.flags.minN);
     if(current.flags.minN === true){
       for(var key in this.details){
         details[key].flags.minN = true;
