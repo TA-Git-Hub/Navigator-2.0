@@ -74,7 +74,7 @@ class ComparatorUtil{
           return {
             orgcode: orgcode,
             label: HierarchyUtil.getHierarchyValue('', orgcode, false),
-            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, orgcode)//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
+            isHidden: true//isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, orgcode)//(multiSelect == true) ? multiSelect : (alreadyAdded[orgcode] == 1)
          };
           break;
 
