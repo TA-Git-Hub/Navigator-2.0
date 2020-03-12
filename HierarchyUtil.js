@@ -182,18 +182,23 @@ class HierarchyUtil{
 
 static function isNodeViolator(schemaID, tableName, node){
   var hideColumnID = Config.hierarchy.violatorColumnName;
-  var value = loadColumn(schemaID, tableName, hideColumnID, 'id', node).ToString();
+  var isViolatorActive = Config.suppression.violator;
 
-  ReportHelper.debug('Violator ' + value + ' ; ' + 'Level ' + node)
+  if (isViolatorActive){
+    var value = loadColumn(schemaID, tableName, hideColumnID, 'id', node).ToString();
 
-  switch(value){
-    case "TRUE":
-    ReportHelper.debug('==== isNodeViolator return true');
-      return true;
-    case "":
-      return false;
+    switch(value){
+      case "TRUE":
+        return true;
+  
+      case "":
+        return false;
 
-    default: //TODO: orgcode handling ERIK!
+      default: //TODO: orgcode handling ERIK!
+    }
+  }
+  else{
+    return false;
   }
 }
 
