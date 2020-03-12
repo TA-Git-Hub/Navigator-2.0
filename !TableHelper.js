@@ -51,8 +51,6 @@ class TableHelper{
         // prepare question detail
         var details = new ReportDetails(allQuestionID[i]);
 
-        ReportHelper.debug('Details: Creation');
-
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         // get data from the column segment
         var distribution = getDistribution(rowIterator, questionMap[allQuestionID[i]], column, context);
@@ -64,8 +62,6 @@ class TableHelper{
 
         // set data in details that weren't set yet
         details.setup({distribution: distribution, validN: validN}, context);
-
-        ReportHelper.debug('Details: Setup');
 
         // if we are in trend column
         if (columnIterator <= Config.wave.codes.length) {
@@ -81,8 +77,6 @@ class TableHelper{
 
       // we have all the information needed, create question and fill it
       var question : ReportQuestion = new ReportQuestion(allQuestionID[i]);
-
-      ReportHelper.debug('Question ready: ' + allQuestionID[i]);
 
       question.setup({label: label, details: detailTable}, context);
 
