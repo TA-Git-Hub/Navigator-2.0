@@ -8,7 +8,7 @@ class ReportDetails{
   private var unfav = null;
   private var scale = {};
   private var validN = null;
-  private var flags = {};
+  private var flags = {minN: null};
 
   /**
    * Constructor for object of ReportDetails, provide ID and get scale from survey
