@@ -95,7 +95,7 @@ class ComparatorUtil{
          return {
             orgcode: customComparator,
             label: HierarchyUtil.getHierarchyValue('', customComparator, false),
-            isHidden: isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, customComparator) //(multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
+            isHidden: true//isHidden({multiSelect: multiSelect, isViolator: isViolator}, alreadyAdded, customComparator) //(multiSelect == true) ? multiSelect : (alreadyAdded[customComparator] == 1)
           };
        break;
       }
@@ -103,6 +103,7 @@ class ComparatorUtil{
 
   static function isHidden(conditionObject, alreadyAdded, orgcode){
     if (conditionObject.isViolator === true) {
+      ReportHelper.debug('isHidden because of violator === true');
       return true;
     }
 
