@@ -93,4 +93,13 @@ static var suppression = {
                 {id: 'OM06', question: null},
                 {id: 'NP01', question: null}
       ];
+
+      // Comments Questions
+    static var comments = {
+      Questions: [{Id:'Comm1', NodeIds: null /*['1001']*/},
+                  {Id:'Comm2', NodeIds: null/*['1002']*/},
+                  {Id:'Comm3', NodeIds: null/*['1001','1048']*/}],
+      UseVerbatimComponent: false, // if false show typical view which has a HitList component. This limits response text to 4K characters
+      IncludeThemesInCommentsTable: true //controls inclusion/exclusion comment themes next to the actual comment in comments table
+};
 }
