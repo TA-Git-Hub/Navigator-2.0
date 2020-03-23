@@ -14,6 +14,7 @@ class NSQTable{
 
     return questionIDArray;
   }
+
 /**
  * This function generates the segment table, basically the same way as the main table
  * @param       {table} context [contains table property]
@@ -41,7 +42,7 @@ class NSQTable{
     var rows = [];
 
     for (var i = 0; i < questionID.length; i++) {
-      rows.push(MainTable.getHorizontalExpression(questionID[i], {title: 'true', totals: 'true', collapsed: 'true'}));
+      rows.push(questionID[i] + '{title: true; totals: false; collapse: true}');
     }
     rows = rows.join("+");
 
