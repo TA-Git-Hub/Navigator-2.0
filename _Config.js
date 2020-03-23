@@ -101,5 +101,12 @@ static var suppression = {
                   {id:'Comm3', nodeIds: null/*['1001','1048']*/}],
       useVerbatimComponent: false, // if false show typical view which has a HitList component. This limits response text to 4K characters
       includeThemesInCommentsTable: true //controls inclusion/exclusion comment themes next to the actual comment in comments table
-};
+    };
+
+    static var nsq = {
+      multi: ['CQ62'],
+      ranking: ['CQ63'],
+      numeric: ['CQ64'],
+      numericList: ['CQ65']
+    };
 }
