@@ -1,4 +1,4 @@
-class NSQTable{
+/*class NSQTable{
 
   static function getQuestionID(){
     var nsq = Config.nsq;
@@ -20,7 +20,7 @@ class NSQTable{
  * @param       {table} context [contains table property]
  * @constructor
  */
-  static function getTable(table){
+/*  static function getTable(table){
 
     const report = ReportHelper.context.report;
     const user = ReportHelper.context.user;
@@ -42,7 +42,7 @@ class NSQTable{
     var rows = [];
 
     for (var i = 0; i < questionID.length; i++) {
-      rows.push(questionID[i] + '{title: true; totals: false; collapsed: true}');
+      rows.push(questionID[i] + '/[N]{title: true; totals: false; collapsed: true}');
     }
     rows = rows.join("+");
 
@@ -70,4 +70,4 @@ class NSQTable{
 
     table.AddHeaders(report, Config.dataSources.mainSurvey, expr);
   }
-}
+}*/
