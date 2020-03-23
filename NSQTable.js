@@ -42,7 +42,7 @@ class NSQTable{
     var rows = [];
 
     for (var i = 0; i < questionID.length; i++) {
-      rows.push(questionID[i] + '{title: true; totals: false; collapse: true}');
+      rows.push(questionID[i] + '{title: true; totals: false; collapsed: true}');
     }
     rows = rows.join("+");
 
