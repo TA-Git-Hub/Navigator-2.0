@@ -24,8 +24,6 @@ class NSQTable{
     const report = ReportHelper.context.report;
     const user = ReportHelper.context.user;
 
-    const rows = MainTable.getHorizontalExpression(segment, {title: 'true', totals: 'false'});
-
     const waveInfo = Config.wave;
     const hierarchyInfo = Config.hierarchy;
 
@@ -43,7 +41,7 @@ class NSQTable{
     var rows = [];
 
     for (var i = 0; i < questionID.length; i++) {
-      rows.push(getHorizontalExpression(questionID[i], {title: 'true', totals: 'true', collapsed: 'true'}));
+      rows.push(MainTable.getHorizontalExpression(questionID[i], {title: 'true', totals: 'true', collapsed: 'true'}));
     }
     rows = rows.join("+");
 
