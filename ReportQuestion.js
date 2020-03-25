@@ -18,7 +18,7 @@ class ReportQuestion{
    */
   public function ReportQuestion(id : String) {
     this.id = id;
-    this.type = ReportHelper.report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(id).QuestionType;
+    this.type = ReportHelper.context.report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(id).QuestionType;
   }
 
 
