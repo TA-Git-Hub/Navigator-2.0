@@ -118,6 +118,19 @@ class TableHelper{
         var textToClean = questionText[rowIterator];
         ReportHelper.debug('Issue Solved');
       }
+
+      try {
+        textToClean.indexOf('Filip');
+      } catch (e) {
+        ReportHelper.debug('Issue is indexOf()');
+      }
+
+      try {
+        textToClean.split('Filip');
+      } catch (e) {
+        ReportHelper.debug('Issue is split()');
+      }
+
       // get rid of 'WildCardReplacements'
       ReportHelper.debug('Clean Text of : ' + textToClean);
       var label = ReportHelper.cleanText(textToClean, context);
