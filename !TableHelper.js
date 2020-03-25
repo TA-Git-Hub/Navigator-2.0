@@ -168,6 +168,13 @@ class TableHelper{
         case 'NSQ':
           for (var i = 0; i < allNSQid.length; i++) {
             var questionScale = ReportHelper.getQuestionScale(allNSQid[i]).length;
+            var type = context.report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(allNSQid[i]).QuestionType;
+
+            // for some reason numeric questions return scale length = 0; that would mess up with our methology
+            // as there is surely 1 answer for numeric questions we apply a little cheat here
+            if (type === QuestionType.Numeric){
+              questionScale = 1;
+            }
             ReportHelper.debug('Question: ' + allNSQid[i] + ' has scale length ' + questionScale)
             questionMap[allNSQid[i]] = questionScale;
           }
