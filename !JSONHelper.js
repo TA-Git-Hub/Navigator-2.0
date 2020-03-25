@@ -27,7 +27,7 @@ class JSONHelper{
          return {
           dimensions: ReportHelper.getDimensionObject(),
           question: ReportHelper.getAllQuestionObject(),
-          nsq: TableHelper.populateNSQ(),
+          nsq: ReportHelper.getNSQObject(),
           label: ReportHelper.getLabels(ReportHelper.context.page.CurrentPageId),
           language: {current: context.report.CurrentLanguage,
                      active: context.report.Languages

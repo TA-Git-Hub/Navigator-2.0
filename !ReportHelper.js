@@ -118,6 +118,17 @@ class ReportHelper{
     return allQuestionObject;
   }
 
+  public static function getNSQObject(){
+    var question = TableHelper.populateNSQ(context);
+    var returnObject = {};
+
+    for (var i = 0; i < question.length; i++) {
+      returnObject[question[i].getID()] = question[i].getJSONString(context);
+    }
+
+    return returnObject;
+  }
+
 /**-------------------------------------------------------------------------
  * returns question text from RT survey
  * @method getTextRT/getTextSV
