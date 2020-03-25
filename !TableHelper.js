@@ -107,7 +107,7 @@ class TableHelper{
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
         rowIterator = tempIt;
-        ReportHelper.debug('Start row: ' + rowIterator ' for question: ' + allNSQid[i]);
+        ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
         // get rid of 'WildCardReplacements'
         var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
         // prepare question detail
@@ -147,7 +147,7 @@ class TableHelper{
       question.setup({label: label, details: detailTable}, context);
       ReportHelper.debug('Question setup complete: ' + allNSQid[i]);
 
-      ReportHelper.debug('End row: ' + rowIterator ' for question: ' + allNSQid[i]);
+      ReportHelper.debug('End row: ' + rowIterator + ' for question: ' + allNSQid[i]);
 
       returnArray.push(question);
     }
