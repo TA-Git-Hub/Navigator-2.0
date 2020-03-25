@@ -124,6 +124,7 @@ class TableHelper{
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
         rowIterator = tempIt;
+        ReportHelper.debug('Detail to create: ' + allNSQid[i]);
         // prepare question detail
         var details = new ReportDetails(allNSQid[i]);
         ReportHelper.debug('Detail created: ' + allNSQid[i]);
@@ -154,6 +155,7 @@ class TableHelper{
       }
       tempIt = rowIterator;
 
+      ReportHelper.debug('Question to setup: ' + allNSQid[i]);
       // we have all the information needed, create question and fill it
       var question : ReportQuestion = new ReportQuestion(allNSQid[i]);
       ReportHelper.debug('Question created: ' + allNSQid[i]);
