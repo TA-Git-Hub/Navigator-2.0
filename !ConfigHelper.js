@@ -34,7 +34,7 @@ class ConfigHelper{
 
     for (var list in nsq) {
       // we want only ranking questions, skip everything else
-      if (getRanking === true && list.ToUpperCase() !== 'RANKING') {
+      if (getRanking === true && list !== 'ranking') {
         continue;
       }
       if (nsq[list].length > 0) {
