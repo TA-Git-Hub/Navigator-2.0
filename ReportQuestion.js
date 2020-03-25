@@ -8,7 +8,7 @@ class ReportQuestion{
   private var flags = {}; // to-do SO, KDA, suppression... TRUE/FALSE
   private var apLink : String = null;
   private var orgcodes : String[] = []; // to-do determines local question visibility
-
+  private var type = null;
 
 
   /**
@@ -18,6 +18,7 @@ class ReportQuestion{
    */
   public function ReportQuestion(id : String) {
     this.id = id;
+    this.type = ReportHelper.report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(id).QuestionType;
   }
 
 
@@ -44,7 +45,7 @@ class ReportQuestion{
     //context.log.LogDebug('key: ' + key)
       details[key] = this.details[key].getJSONString(context);
     }
-    return {id: this.id, label: this.label, details: details, flags: this.flags, apLink: this.apLink, orgcodes: this.orgcodes};
+    return {id: this.id, label: this.label, details: details, flags: this.flags, type: this.type, apLink: this.apLink, orgcodes: this.orgcodes};
   }
 
   public function getID() {

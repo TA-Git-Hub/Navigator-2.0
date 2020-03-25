@@ -119,25 +119,6 @@ class TableHelper{
         ReportHelper.debug('Issue Solved');
       }
 
-      try {
-        textToClean.indexOf('Filip');
-      } catch (e) {
-        ReportHelper.debug('Issue is indexOf()');
-        ReportHelper.debug('Type is ' + textToClean.GetType());
-      }
-
-      try {
-        textToClean.split('Filip');
-      } catch (e) {
-        ReportHelper.debug('Issue is split()');
-      }
-
-      try {
-        textToClean.join('Filip');
-      } catch (e) {
-        ReportHelper.debug('Issue is join()');
-      }
-
       // get rid of 'WildCardReplacements'
       ReportHelper.debug('Clean Text of : ' + textToClean);
       var label = ReportHelper.cleanText(textToClean, context);
