@@ -102,6 +102,8 @@ class TableHelper{
     var tempIt = 0;
     var columnCount = getColumnCount(tablePath);
 
+    ReportHelper.debug('Number of question texts: ' + questionText.length);
+
     // for questions
     for (var i = 0; i < allNSQid.length; i++) {
       var detailTable = [];
