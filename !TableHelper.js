@@ -172,7 +172,7 @@ class TableHelper{
     }
 
     if (context.questionMapType === 'NSQ') {
-      var question = Config.nsq;
+      var nsq = Config.nsq;
 
       for (var list in nsq) {
         if (nsq[list].length > 0) {
