@@ -110,10 +110,13 @@ class TableHelper{
 
       ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
       try{
+        ReportHelper.debug('Issue may happen');
         var textToClean = questionText[rowIterator][1];
+        ReportHelper.debug('Issue Happened');
       }
       catch(e){
         var textToClean = questionText[rowIterator];
+        ReportHelper.debug('Issue Solved');
       }
       // get rid of 'WildCardReplacements'
       ReportHelper.debug('Clean Text of : ' + questionText[rowIterator][1]);
