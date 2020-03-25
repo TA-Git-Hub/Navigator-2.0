@@ -96,7 +96,7 @@ static var suppression = {
 
       // Comments Questions
     static var comments = {
-      questions: [{id:'Comm1', nodeIds: null /*['1001']*/},
+      questions: [{id:'Comm1', nodeIds: ['1001']] /*['1001']*/},
                   {id:'Comm2', nodeIds: null/*['1002']*/},
                   {id:'Comm3', nodeIds: null/*['1001','1048']*/}],
       useVerbatimComponent: false, // if false show typical view which has a HitList component. This limits response text to 4K characters
