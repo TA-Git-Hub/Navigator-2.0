@@ -89,8 +89,6 @@ class TableHelper{
 
   static function populateNSQ(context){
     context.questionMapType = 'NSQ';
-
-    ReportHelper.debug(context.questionMapType)
     var questionMap = createQuestionMap(context);
 
     // get the path of table we want
@@ -220,6 +218,7 @@ class TableHelper{
    */
   static function getColumnCount(tablePath){
     switch(tablePath){
+      case 'dataPage:NSQ':
       case 'dataPage:MainTable' :
         return Config.wave.codes.length + Config.comparators.internals.length + Config.comparators.externals.length;
 
