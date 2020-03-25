@@ -118,7 +118,7 @@ class TableHelper{
         var distribution = getDistribution(rowIterator, questionMap[allNSQid[i]], column, context);
         // update current column position with question answer scale length
         rowIterator += questionMap[allNSQid[i]];
-        ReportHelper.debug('Row iterator after data counted: ' + questionMap[allNSQid[i]);
+        ReportHelper.debug('Row iterator after data counted: ' + questionMap[allNSQid[i]]);
         var validN = column[rowIterator].Value;
         // for validN row
         rowIterator += 1;
