@@ -110,6 +110,7 @@ class TableHelper{
         var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
         // prepare question detail
         var details = new ReportDetails(allQuestionID[i]);
+        ReportHelper.debug('Detail created: ' + allQuestionID[i]);
 
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         // get data from the column segment
@@ -137,6 +138,7 @@ class TableHelper{
 
       // we have all the information needed, create question and fill it
       var question : ReportQuestion = new ReportQuestion(allQuestionID[i]);
+      ReportHelper.debug('Question created: ' + allQuestionID[i]);
 
       question.setup({label: label, details: detailTable}, context);
 
