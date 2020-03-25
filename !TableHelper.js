@@ -109,8 +109,9 @@ class TableHelper{
       var detailTable = [];
 
       ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
-      ReportHelper.debug(questionText[rowIterator][1]);
-      ReportHelper.debug(questionText[rowIterator]);
+      ReportHelper.debug(questionText[23]);
+      ReportHelper.debug(questionText[23][1]);
+
       // get rid of 'WildCardReplacements'
       ReportHelper.debug('Clean Text of : ' + questionText[rowIterator][1]);
       var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
