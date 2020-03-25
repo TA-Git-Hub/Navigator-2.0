@@ -108,16 +108,15 @@ class TableHelper{
     for (var i = 0; i < allNSQid.length; i++) {
       var detailTable = [];
 
+      ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
+      ReportHelper.debug(questionText[rowIterator][1]);
+      ReportHelper.debug(questionText[rowIterator]);
       // get rid of 'WildCardReplacements'
       ReportHelper.debug('Clean Text of : ' + questionText[rowIterator][1]);
       var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
         rowIterator = tempIt;
-        ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
-
-
-
         // prepare question detail
         var details = new ReportDetails(allNSQid[i]);
         ReportHelper.debug('Detail created: ' + allNSQid[i]);
