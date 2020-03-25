@@ -28,6 +28,21 @@ class ConfigHelper{
     return allQuestion;
   }
 
+  public static function getNSQArray(){
+    var nsq = Config.nsq;
+    var questionIDArray = []
+
+    for (var list in nsq) {
+      if (nsq[list].length > 0) {
+        for (var i = 0; i < nsq[list].length; i++) {
+          questionIDArray.push(nsq[list][i].id);
+        }
+      }
+    }
+
+    return questionIDArray;
+  }
+
   /**
    * This function returns ID of wave based on it's position in Array
    * @param  {integer} index

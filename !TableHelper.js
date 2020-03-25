@@ -3,6 +3,7 @@
  */
 class TableHelper{
   static var allQuestionID = ConfigHelper.getQuestionArray();
+  static var allNSQid = ConfigHelper.getNSQArray();
   private var reportQuestionHT = {};
 
   /**
@@ -103,7 +104,7 @@ class TableHelper{
     var columnCount = getColumnCount(tablePath);
 
     // for questions
-    for (var i = 0; i < allQuestionID.length; i++) {
+    for (var i = 0; i < allNSQid.length; i++) {
       var detailTable = [];
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
@@ -111,14 +112,14 @@ class TableHelper{
         // get rid of 'WildCardReplacements'
         var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
         // prepare question detail
-        var details = new ReportDetails(allQuestionID[i]);
-        ReportHelper.debug('Detail created: ' + allQuestionID[i]);
+        var details = new ReportDetails(allNSQid[i]);
+        ReportHelper.debug('Detail created: ' + allNSQid[i]);
 
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         // get data from the column segment
         var distribution = getDistribution(rowIterator, questionMap[allQuestionID[i]], column, context);
         // update current column position with question answer scale length
-        rowIterator += questionMap[allQuestionID[i]];
+        rowIterator += questionMap[allNSQid[i]];
         var validN = column[rowIterator].Value;
         // for validN row
         rowIterator += 1;
@@ -139,8 +140,8 @@ class TableHelper{
       tempIt = rowIterator;
 
       // we have all the information needed, create question and fill it
-      var question : ReportQuestion = new ReportQuestion(allQuestionID[i]);
-      ReportHelper.debug('Question created: ' + allQuestionID[i]);
+      var question : ReportQuestion = new ReportQuestion(allNSQid[i]);
+      ReportHelper.debug('Question created: ' + allNSQid[i]);
 
       question.setup({label: label, details: detailTable}, context);
 
