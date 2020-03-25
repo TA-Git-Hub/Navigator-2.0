@@ -115,7 +115,7 @@ class TableHelper{
       }
       catch(e){
         ReportHelper.debug('Issue Happened');
-        var textToClean = questionText[rowIterator];
+        var textToClean = questionText[rowIterator][0];
         ReportHelper.debug('Issue Solved');
       }
 
