@@ -37,6 +37,11 @@ class ConfigHelper{
       if (getRanking === true && list !== 'ranking') {
         continue;
       }
+      // we dont want ranking, skip it
+      if (getRanking === false && list === 'ranking') {
+        continue;
+      }
+
       if (nsq[list].length > 0) {
         for (var i = 0; i < nsq[list].length; i++) {
           questionIDArray.push(nsq[list][i].id);
