@@ -88,6 +88,8 @@ class TableHelper{
 
   static function populateNSQ(context){
     context.questionMapType = 'NSQ';
+
+    ReportHelper.debug(context.questionMapType)
     var questionMap = createQuestionMap(context);
 
     // get the path of table we want
