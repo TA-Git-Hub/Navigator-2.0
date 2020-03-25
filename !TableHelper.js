@@ -112,14 +112,14 @@ class TableHelper{
       try{
         ReportHelper.debug('Issue may happen');
         var textToClean = questionText[rowIterator][1];
-        ReportHelper.debug('Issue Happened');
       }
       catch(e){
+        ReportHelper.debug('Issue Happened');
         var textToClean = questionText[rowIterator];
         ReportHelper.debug('Issue Solved');
       }
       // get rid of 'WildCardReplacements'
-      ReportHelper.debug('Clean Text of : ' + questionText[rowIterator][1]);
+      ReportHelper.debug('Clean Text of : ' + textToClean);
       var label = ReportHelper.cleanText(textToClean, context);
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
