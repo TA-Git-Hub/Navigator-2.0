@@ -115,7 +115,7 @@ class TableHelper{
 
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         // get data from the column segment
-        var distribution = getDistribution(rowIterator, questionMap[allQuestionID[i]], column, context);
+        var distribution = getDistribution(rowIterator, questionMap[allNSQid[i]], column, context);
         // update current column position with question answer scale length
         rowIterator += questionMap[allNSQid[i]];
         var validN = column[rowIterator].Value;
