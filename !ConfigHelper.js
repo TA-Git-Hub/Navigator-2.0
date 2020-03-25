@@ -28,11 +28,15 @@ class ConfigHelper{
     return allQuestion;
   }
 
-  public static function getNSQArray(){
+  public static function getNSQArray(getRanking){
     var nsq = Config.nsq;
     var questionIDArray = []
 
     for (var list in nsq) {
+      // we want only ranking questions, skip everything else
+      if (getRanking === true && list.ToUpperCase() !== 'RANKING') {
+        continue;
+      }
       if (nsq[list].length > 0) {
         for (var i = 0; i < nsq[list].length; i++) {
           questionIDArray.push(nsq[list][i].id);

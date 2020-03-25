@@ -3,7 +3,8 @@
  */
 class TableHelper{
   static var allQuestionID = ConfigHelper.getQuestionArray();
-  static var allNSQid = ConfigHelper.getNSQArray();
+  static var allNSQid = ConfigHelper.getNSQArray(false);
+  static var allRankingID = ConfigHelper.getNSQArray(true);
   private var reportQuestionHT = {};
 
   /**
@@ -163,36 +164,38 @@ class TableHelper{
   static function createQuestionMap(context){
     var questionMap = {};
 
-    if (context.questionMapType === 'standard') {
-      var question = Config.questionGridStructure;
+    switch (context.questionMapType) {
+        case 'NSQ':
+          for (var i = 0; i < allNSQid.length; i++) {
+            var questionScale = ReportHelper.getQuestionScale(allNSQid[i]).length;
+            ReportHelper.debug('Question: ' + allNSQid[i] + ' has scale length ' + questionScale)
+            questionMap[allNSQid[i]] = questionScale;
+          }
+        break;
 
-      for(var i = 0; i < question.length; i++){
-        var questionScale = ReportHelper.getQuestionScale(question[i].id).length;
+        case 'Ranking':
+          for (var i = 0; i < allRankingID.length; i++) {
+            var questionScale = ReportHelper.getQuestionScale(allRankingID[i]).length;
+            ReportHelper.debug('Question: ' + allRankingID[i] + ' has scale length ' + questionScale)
+            questionMap[allRankingID[i]] = questionScale;
+          }
+        break;
 
-        if(question[i].question === null){
-          questionMap[question[i].id] = questionScale;
-        }
-        else{
-          for(var j = 0; j < question[i].question.length; j++){
-            questionMap[question[i].question[j]] = questionScale;
+      default:
+      // standard grid questions
+        var question = Config.questionGridStructure;
+        for(var i = 0; i < question.length; i++){
+          var questionScale = ReportHelper.getQuestionScale(question[i].id).length;
+
+          if(question[i].question === null){
+            questionMap[question[i].id] = questionScale;
+          }
+          else{
+            for(var j = 0; j < question[i].question.length; j++){
+              questionMap[question[i].question[j]] = questionScale;
+            }
           }
         }
-      }
-    }
-
-    if (context.questionMapType === 'NSQ') {
-      var nsq = Config.nsq;
-
-      for (var list in nsq) {
-        if (nsq[list].length > 0) {
-          for (var i = 0; i < nsq[list].length; i++) {
-            var questionScale = ReportHelper.getQuestionScale(nsq[list][i].id).length;
-
-            ReportHelper.debug('Question: ' + nsq[list][i].id + ' has scale length ' + questionScale)
-            questionMap[nsq[list][i].id] = questionScale;
-          }
-        }
-      }
     }
 
     return questionMap;
