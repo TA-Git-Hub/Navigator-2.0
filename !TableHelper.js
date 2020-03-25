@@ -183,6 +183,8 @@ class TableHelper{
           for (var i = 0; i < nsq[list].length; i++) {
             var questionScale = ReportHelper.getQuestionScale(nsq[list][i].id).length;
 
+            ReportHelper.debug('Question: ' + nsq[list][i].id + ' has scale length ' + questionScale)
+
             if (questionMap[nsq[list][i].id] === null) {
               questionMap[nsq[list][i].id] = questionScale;
             }
