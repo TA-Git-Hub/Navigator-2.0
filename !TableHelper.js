@@ -91,7 +91,7 @@ class TableHelper{
     var questionMap = createQuestionMap(context);
 
     // get the path of table we want
-    var tablePath = tableMapping('dataPage:NSQ');
+    var tablePath = 'dataPage:NSQ';
 
     // all question texts from table
     var questionText = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);

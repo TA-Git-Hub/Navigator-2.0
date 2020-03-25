@@ -92,12 +92,3 @@ class ReportQuestion{
   }
 
 }
-
-class ReportNSQ extends ReportQuestion{
-  private var type = null;
-
-  public function ReportNSQ(id){
-    super(id);
-  }
-
-}
