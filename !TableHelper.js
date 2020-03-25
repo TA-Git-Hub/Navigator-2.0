@@ -144,6 +144,7 @@ class TableHelper{
       ReportHelper.debug('Question created: ' + allNSQid[i]);
 
       question.setup({label: label, details: detailTable}, context);
+      ReportHelper.debug('Question setup complete: ' + allNSQid[i]);
 
       returnArray.push(question);
     }
