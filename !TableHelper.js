@@ -110,6 +110,7 @@ class TableHelper{
         rowIterator = tempIt;
         ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
         // get rid of 'WildCardReplacements'
+        ReportHelper.debug('Clean Text of : ' + questionText[rowIterator][1]);
         var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
         // prepare question detail
         var details = new ReportDetails(allNSQid[i]);
