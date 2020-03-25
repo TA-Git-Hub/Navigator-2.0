@@ -109,12 +109,15 @@ class TableHelper{
       var detailTable = [];
 
       ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
-      ReportHelper.debug(questionText[23]);
-      ReportHelper.debug(questionText[23][1]);
-
+      try{
+        var textToClean = questionText[rowIterator][1];
+      }
+      catch(e){
+        var textToClean = questionText[rowIterator];
+      }
       // get rid of 'WildCardReplacements'
       ReportHelper.debug('Clean Text of : ' + questionText[rowIterator][1]);
-      var label = ReportHelper.cleanText(questionText[rowIterator][1], context);
+      var label = ReportHelper.cleanText(textToClean, context);
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
         rowIterator = tempIt;
