@@ -114,6 +114,7 @@ class TableHelper{
         ReportHelper.debug('Detail created: ' + allNSQid[i]);
 
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
+        ReportHelper.debug('Row iterator before data counted: ' + questionMap[allNSQid[i]]);
         // get data from the column segment
         var distribution = getDistribution(rowIterator, questionMap[allNSQid[i]], column, context);
         // update current column position with question answer scale length
@@ -184,10 +185,7 @@ class TableHelper{
             var questionScale = ReportHelper.getQuestionScale(nsq[list][i].id).length;
 
             ReportHelper.debug('Question: ' + nsq[list][i].id + ' has scale length ' + questionScale)
-
-            if (questionMap[nsq[list][i].id] === null) {
-              questionMap[nsq[list][i].id] = questionScale;
-            }
+            questionMap[nsq[list][i].id] = questionScale;
           }
         }
       }
