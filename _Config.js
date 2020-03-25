@@ -104,9 +104,17 @@ static var suppression = {
     };
 
     static var nsq = {
-      multi: ['CQ62'],
-      ranking: ['CQ63'],
-      numeric: ['CQ64'],
-      numericList: ['CQ65']
+      multi: [
+        {id: 'CQ62', showTrend: true}
+      ],
+      ranking: [
+        {id: 'CQ63', showTrend: true}
+      ],
+      numeric: [
+        {id: 'CQ64', showTrend: true}
+      ],
+      numericList: [
+        {id: 'CQ65', showTrend: true}
+      ]
     };
 }

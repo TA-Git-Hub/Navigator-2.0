@@ -20,7 +20,7 @@
  * @param       {table} context [contains table property]
  * @constructor
  */
-/*  static function getTable(table){
+/*  static function getTable(table, mode){
 
     const report = ReportHelper.context.report;
     const user = ReportHelper.context.user;
@@ -28,10 +28,12 @@
     const waveInfo = Config.wave;
     const hierarchyInfo = Config.hierarchy;
 
-	  const currWaveFilter = MainTable.getFilterExpression({variableID: waveInfo.variableID, filterExpression: waveInfo.codes[0]});
+    var headerType = (mode === 'Ranking') ? 'CATEGORIES]+[SEGMENT' : 'SEGMENT';
+
+	const currWaveFilter = MainTable.getFilterExpression({variableID: waveInfo.variableID, filterExpression: waveInfo.codes[0]});
     const currOrgcodeFilter = MainTable.getFilterExpression({variableID: hierarchyInfo.variableID, filterExpression: user.PersonalizedReportBase});
-    const currOrgcodeSVSyntax = MainTable.getVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression: currOrgcodeFilter, hideheader: 'false', headerType: 'SEGMENT'});
-    const currWaveSVSyntax = MainTable.getVerticalExpression({label:'Current wave: ' + waveInfo.codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: 'SEGMENT'});
+    const currOrgcodeSVSyntax = MainTable.getVerticalExpression({label:'Current orgcode: ' + user.PersonalizedReportBase, filterExpression: currOrgcodeFilter, hideheader: 'false', headerType: headerType});
+    const currWaveSVSyntax = MainTable.getVerticalExpression({label:'Current wave: ' + waveInfo.codes[0], filterExpression:currWaveFilter, hideheader: 'false', headerType: headerType});
 
     const syntaxObject = {
       waveSyntax: currWaveSVSyntax,
@@ -42,32 +44,41 @@
     var rows = [];
 
     for (var i = 0; i < questionID.length; i++) {
-      rows.push(questionID[i] + '/[N]{title: true; totals: false; collapsed: true}');
-    }
-    rows = rows.join("+");
+      var type = report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(questionID[i]).QuestionType;
 
-//Get columns for trends filtered by current orgcode
-     var waveColumnsJoined = MainTable.getColumnSyntax('wave', syntaxObject)
+      // we are not using table for ranking - ignore ranking
+      if(type === QuestionType.MultiOrdered && mode !== 'Ranking') continue;
 
-//Get columns for demos filtered by current wave and current orgcode
-     var demos = [ Config.hierarchy.variableID ];
-     var demoColumnsJoined = MainTable.getColumnSyntax('demos', syntaxObject, demos);
-     var comps = ComparatorUtil.getComparators();
-//Get columns for hierarchy orgcodes filtered by current wave
-    if(comps.length > 0){
-      var internalColumnsJoined = MainTable.getColumnSyntax('orgcode', syntaxObject, comps);
-    }
-//Create one big syntax for table by connecting arrays
+      // we are using table for ranking - ignore everything else
+      if(type !== QuestionType.MultiOrdered && mode === 'Ranking') continue;
 
-
-    if(internalColumnsJoined != undefined){
-      var allColumns = [waveColumnsJoined, internalColumnsJoined, demoColumnsJoined].join("+");
-    }else{
-      var allColumns = [waveColumnsJoined, demoColumnsJoined].join("+");
+      var specialColumn = (mode === 'Ranking') ?
+          '[FORMULA]{expression:"if( ROW = 1,CELLV(2,1), CELLV(COL,ROW-1)+CELLV(COL+1,ROW))"} + [CATEGORIES]/[SEGMENT]' : '[SEGMENT]';
+      rows.push(questionID[i] + '{title:true; totals:true; collapsed:true}');
     }
 
-    var expr = [rows, allColumns].join('^');
+    //Get columns for trends filtered by current orgcode
+       var waveColumnsJoined = MainTable.getColumnSyntax('wave', syntaxObject);
 
-    table.AddHeaders(report, Config.dataSources.mainSurvey, expr);
+      //Get columns for demos filtered by current wave and current orgcode
+       var demos = [ Config.hierarchy.variableID ];
+       var demoColumnsJoined = MainTable.getColumnSyntax('demos', syntaxObject, demos);
+       var comps = ComparatorUtil.getComparators();
+      //Get columns for hierarchy orgcodes filtered by current wave
+      if(comps.length > 0){
+        var internalColumnsJoined = MainTable.getColumnSyntax('orgcode', syntaxObject, comps);
+      }
+
+      //Create one big syntax for table by connecting arrays
+      if(internalColumnsJoined != undefined){
+        var allColumns = [waveColumnsJoined, internalColumnsJoined, demoColumnsJoined].join("+");
+      }else{
+        var allColumns = [waveColumnsJoined, demoColumnsJoined].join("+");
+      }
+
+      var expr = [rows.join('+'), allColumns].join('^');
+
+      table.AddHeaders(report, Config.dataSources.mainSurvey, expr);
   }
-}*/
+}
+*/
