@@ -47,7 +47,7 @@ class TableHelper{
       var detailTable = [];
       var question : ReportQuestion = new ReportQuestion(allQuestion[i]);
       // get answer texts
-      var distributionTexts = (question.getType() === QuestionType.Single) ? null : getDistributionText(allQuestion[i]);
+      var distributionTexts = (question.getType() === 'Single') ? null : getDistributionText(allQuestion[i]);
 
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
