@@ -200,15 +200,11 @@ class TableHelper{
     var startIndex = (mainColumnIndex-1)*subColumnCount + 1;
     var endIndex = (mainColumnIndex-1)*subColumnCount + subColumnCount;
 
-    ReportHelper.debug('Start: ' + startIndex);
-    ReportHelper.debug('End: ' + endIndex);
     var distribution = [];
 
     for (var i = startIndex; i <= endIndex; i++) {
       var column = context.report.TableUtils.GetColumnValues(tablePath, i);
       distribution.push(getDistribution(rowIterator, numberOfAnswers, column, context));
-
-      ReportHelper.debug(i);
     }
 
     return distribution;

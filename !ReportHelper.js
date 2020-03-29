@@ -103,7 +103,7 @@ class ReportHelper{
     }
 
     for (var i = 0; i < questionRanking.length; i++) {
-      returnObject[questionRanking[i].getID()] = questionNSQ[i].getJSONString(context);
+      returnObject[questionRanking[i].getID()] = questionRanking[i].getJSONString(context);
     }
 
     return returnObject;
