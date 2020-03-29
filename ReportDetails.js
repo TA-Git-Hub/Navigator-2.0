@@ -112,9 +112,32 @@ class ReportDetails{
     return this.flags;
   }
 
-  public function getJSONString(){
-    return {validN: this.validN, distribution: this.distribution, distributionTexts: this.distributionTexts, fav: this.fav, neu: this.neu, unfav: this.unfav, flags: this.flags};
-
+  public function getJSONString(type){
+    switch (type) {
+      case 'MultiOrdered':
+      case 'Multi':
+      case 'MultiNumeric':
+      case 'Numeric':
+        return {validN: this.validN,
+                distribution: this.distribution,
+                distributionTexts: this.distributionTexts,
+                //fav: this.fav,
+                //neu: this.neu,
+                //unfav: this.unfav,
+                flags: this.flags
+              };
+        break;
+        // single
+      default:
+      return {validN: this.validN,
+              distribution: this.distribution,
+              //distributionTexts: this.distributionTexts,
+              fav: this.fav,
+              neu: this.neu,
+              unfav: this.unfav,
+              flags: this.flags
+            };
+    }
   }
 
   //Setters

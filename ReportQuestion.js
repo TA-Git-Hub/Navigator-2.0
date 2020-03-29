@@ -44,9 +44,35 @@ class ReportQuestion{
     var details = {};
     for(var key in this.details){
     //context.log.LogDebug('key: ' + key)
-      details[key] = this.details[key].getJSONString(context);
+      details[key] = this.details[key].getJSONString(this.type);
     }
-    return {id: this.id, label: this.label, details: details, flags: this.flags, type: this.type, apLink: this.apLink, orgcodes: this.orgcodes};
+
+    switch (this.type) {
+      case 'MultiOrdered':
+      case 'Multi':
+      case 'MultiNumeric':
+      case 'Numeric':
+        return {id: this.id,
+                label: this.label,
+                details: details,
+                flags: this.flags,
+                type: this.type,
+              //  apLink: this.apLink,
+                orgcodes: this.orgcodes
+              };
+        break;
+        // single
+      default:
+      return {id: this.id,
+              label: this.label,
+              details: details,
+              flags: this.flags,
+              type: this.type,
+              apLink: this.apLink,
+              orgcodes: this.orgcodes
+            };
+    }
+
   }
 
   public function getID() {
