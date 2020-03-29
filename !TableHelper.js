@@ -135,7 +135,7 @@ class TableHelper{
         var distributionTexts = getDistributionText(allNSQid[i]);
 
         // set data in details that weren't set yet
-        details.setup({distribution: distribution, validN: validN, texts: distributionTexts}, context);
+        details.setup({distribution: distribution, validN: validN, distributionTexts: distributionTexts}, context);
 
         // if we are in trend column
         if (columnIterator <= Config.wave.codes.length) {
@@ -223,7 +223,7 @@ class TableHelper{
     var textArray = [];
 
     for (var i = 0; i < scale.length; i++) {
-      text.push(scale[i].Text);
+      textArray.push(scale[i].Text);
     }
 
     return textArray;
