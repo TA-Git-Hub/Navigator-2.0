@@ -109,20 +109,6 @@ class TableHelper{
     return returnArray;
   }
 
-  static function iterateTheSubColumn(rowIterator, numberOfAnswers, mainColumnIndex, subColumnCount, tablePath, context){
-    var startIndex = (mainColumnIndex-1)*subColumnCount;
-    var endIndex = (mainColumnIndex-1)*subColumnCount + subColumnCount;
-
-    var distribution = [];
-
-    for (var i = startIndex; i <= endIndex; i++) {
-      var column = context.report.TableUtils.GetColumnValues(tablePath, i);
-      distribution.push(getDistribution(rowIterator, numberOfAnswers, column, context));
-    }
-
-    return distribution;
-  }
-
   /**
    * This function creates map - 'questionID' : 'number of answers'
    * @param  {Object} context wrapper of global properties
@@ -205,6 +191,24 @@ class TableHelper{
 
     for (var i = 0; i < numberOfAnswers; i++){
       distribution.push(column[rowIterator + i].Value);
+    }
+
+    return distribution;
+  }
+
+  static function iterateTheSubColumn(rowIterator, numberOfAnswers, mainColumnIndex, subColumnCount, tablePath, context){
+    var startIndex = (mainColumnIndex-1)*subColumnCount;
+    var endIndex = (mainColumnIndex-1)*subColumnCount + subColumnCount;
+
+    ReportHelper.debug('Start: ' + startIndex);
+    ReportHelper.debug('End: ' + endIndex);
+    var distribution = [];
+
+    for (var i = startIndex; i <= endIndex; i++) {
+      var column = context.report.TableUtils.GetColumnValues(tablePath, i);
+      distribution.push(getDistribution(rowIterator, numberOfAnswers, column, context));
+
+      ReportHelper.debug(i);
     }
 
     return distribution;
