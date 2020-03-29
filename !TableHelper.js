@@ -197,7 +197,7 @@ class TableHelper{
   }
 
   static function iterateTheSubColumn(rowIterator, numberOfAnswers, mainColumnIndex, subColumnCount, tablePath, context){
-    var startIndex = (mainColumnIndex-1)*subColumnCount;
+    var startIndex = (mainColumnIndex-1)*subColumnCount + 1;
     var endIndex = (mainColumnIndex-1)*subColumnCount + subColumnCount;
 
     ReportHelper.debug('Start: ' + startIndex);
