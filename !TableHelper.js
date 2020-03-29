@@ -39,7 +39,7 @@ class TableHelper{
     var questionText = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);
     var returnArray = [];
     var rowIterator = 0;
-    var tempIT = rowIterator;
+    var tempIt = rowIterator;
     var columnCount = getColumnCount(tablePath);
 
     // for questions
@@ -105,7 +105,7 @@ class TableHelper{
    * @param  {Object} context  wrapper of global properties
    * @return {Array}         array of ReportQuestion
    */
-  static function populateQuestion(context){
+/*  static function populateQuestion(context){
     // create map where questionID is key and Scale length is value
     context.questionMapType = 'standard';
     var questionMap = createQuestionMap(context);
