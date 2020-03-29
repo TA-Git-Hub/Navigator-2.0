@@ -93,6 +93,22 @@ class ReportHelper{
     return returnObject;
   }
 
+  public static function getNSQObject(){
+    var questionNSQ = TableHelper.gatherQuestions(context, 'NSQ');
+    var questionRanking = TableHelper.gatherQuestions(context, 'Ranking');
+    var returnObject = {};
+
+    for (var i = 0; i < questionNSQ.length; i++) {
+      returnObject[questionNSQ[i].getID()] = questionNSQ[i].getJSONString(context);
+    }
+
+    for (var i = 0; i < questionRanking.length; i++) {
+      returnObject[questionRanking[i].getID()] = questionNSQ[i].getJSONString(context);
+    }
+
+    return returnObject;
+  }
+
 /**
  * This function returns scale of question from survey
  * @param       {String} id survey question ID
@@ -116,17 +132,6 @@ class ReportHelper{
 
   public static function getAllQuestionObject(){
     return allQuestionObject;
-  }
-
-  public static function getNSQObject(){
-    var question = TableHelper.gatherQuestions(context, 'NSQ');
-    var returnObject = {};
-
-    for (var i = 0; i < question.length; i++) {
-      returnObject[question[i].getID()] = question[i].getJSONString(context);
-    }
-
-    return returnObject;
   }
 
 /**-------------------------------------------------------------------------
