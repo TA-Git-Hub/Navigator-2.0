@@ -110,12 +110,12 @@ class TableHelper{
   }
 
   static function iterateTheSubColumn(rowIterator, numberOfAnswers, mainColumnIndex, subColumnCount, tablePath, context){
-    var startIndex = mainColumnIndex*subColumnCount;
-    var endIndex = mainColumnIndex*subColumnCount + subColumnCount;
+    var startIndex = (mainColumnIndex-1)*subColumnCount;
+    var endIndex = (mainColumnIndex-1)*subColumnCount + subColumnCount;
 
     var distribution = [];
 
-    for (var i = startIndex; i < endIndex; i++) {
+    for (var i = startIndex; i <= endIndex; i++) {
       var column = context.report.TableUtils.GetColumnValues(tablePath, i);
       distribution.push(getDistribution(rowIterator, numberOfAnswers, column, context));
     }
