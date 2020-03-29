@@ -82,7 +82,7 @@ class ReportHelper{
    * @return {Object}      All ReportQuestions
    */
   public static function createQuestionHashtable() {
-    var question = TableHelper.populateQuestion(context);
+    var question = TableHelper.gatherQuestions(context, 'Single');
     var returnObject = {};
 
     for (var i = 0; i < question.length; i++) {
@@ -119,7 +119,7 @@ class ReportHelper{
   }
 
   public static function getNSQObject(){
-    var question = TableHelper.populateNSQ(context);
+    var question = TableHelper.gatherQuestions(context, 'NSQ');
     var returnObject = {};
 
     for (var i = 0; i < question.length; i++) {
@@ -137,9 +137,9 @@ class ReportHelper{
  * @return {String}
  */
 
-  public static function getTextRT(qID,code){
+  public static function getTextRT(qID, code){
     var project = report.DataSource.GetProject(Config.dataSources.rtSurvey);
-    return getText(project,qID,code)
+    return getText(project, qID, code);
   };
 
 /*  public static function getTextRT(qID){
@@ -188,7 +188,7 @@ class ReportHelper{
       return returnValue;
     }
     catch (e) {
-      ReportHelper.debug ('[MISSING RESOURCE TEXT: ' + qID + '.' + code + ']');
+    //  ReportHelper.debug ('[MISSING RESOURCE TEXT: ' + qID + '.' + code + ']');
       return '[MISSING RESOURCE TEXT: ' + qID + '.' + code + ']';
     }
   }
@@ -235,15 +235,21 @@ class ReportHelper{
  */
 static function getProperties(object){
    var myPropertyInfo= object.GetType().GetMethods();
-   log.LogDebug("Methods are:--------------------------------------------------------------");
+   log.LogDebug("-------------- Methods / Functions --------------");
    for (var i = 0; i < myPropertyInfo.length; i++){
      log.LogDebug(myPropertyInfo[i].ToString());
    }
+   log.LogDebug("----------------------------");
+   log.LogDebug("  ");
+
    var myPropertyInfo= object.GetType().GetProperties();
-   log.LogDebug("Properties of confirmit are:--------------------------------------------------");
+
+   log.LogDebug("-------------- Properties --------------");
    for (var i = 0; i < myPropertyInfo.length; i++){
      log.LogDebug(myPropertyInfo[i].ToString());
    }
+   log.LogDebug("----------------------------");
+   log.LogDebug("  ");
 }
 
 /**

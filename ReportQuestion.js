@@ -16,8 +16,9 @@ class ReportQuestion{
    * @param       {[String]} id survey question ID
    * @constructor
    */
-  public function ReportQuestion(id : String) {
+  public function ReportQuestion(id) {
     this.id = id;
+    // confirmit enumerator
     this.type = ReportHelper.context.report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(id).QuestionType.ToString();
   }
 
@@ -59,6 +60,10 @@ class ReportQuestion{
 
   public function getDetails() {
     return this.details;
+  }
+
+  public function getType() {
+    return this.type;
   }
 
   // -- SETTERS

@@ -4,7 +4,7 @@ class ReportDimension {
   var id = "";
   var label = "";
   var description = "";
-  var tier = "1"
+  var tier = "1";
   var flags = {dimensionScore: true} ; // to-do SO, KDA, suppression... TRUE/FALSE
   var apLink = "";
   var details = {};
@@ -118,7 +118,7 @@ public function ReportDimension(dimension, allQuestionObject) {
    */
 
   function getDimDescription(dimensionID) {
-    return ReportHelper.getTextRT('dimensionDescription',dimensionID)+' in Painnice';
+    return ReportHelper.getTextRT('dimensionDescription', dimensionID);
   }
 
 
@@ -130,7 +130,7 @@ public function ReportDimension(dimension, allQuestionObject) {
  */
 
   function getDimLabel(dimensionID) {
-    return ReportHelper.getTextRT('dimensionLabel',dimensionID);
+    return ReportHelper.getTextRT('dimensionLabel', dimensionID);
   }
 
 /**---------------------------------------------------------------------

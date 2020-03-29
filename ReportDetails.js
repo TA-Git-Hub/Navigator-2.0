@@ -42,7 +42,7 @@ class ReportDetails{
       }
     }
 
-    if (information.distributionTexts !== undefined) {
+    if (information.distributionTexts !== null) {
       this.distributionTexts = information.distributionTexts;
     }
 

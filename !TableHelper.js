@@ -2,26 +2,101 @@
  * This class is meant for working with tables
  */
 class TableHelper{
-  static var allQuestionID = ConfigHelper.getQuestionArray();
+  static var allSingleID = ConfigHelper.getQuestionArray();
   static var allNSQid = ConfigHelper.getNSQArray(false);
   static var allRankingID = ConfigHelper.getNSQArray(true);
   private var reportQuestionHT = {};
 
-  /**
-   * This function maps pageID to it's table
-   * @param       {[type]} pageId [description]
-   */
-  static function tableMapping(pageID){
 
-    switch(pageID){
-      case 'dataPage' : return 'dataPage:MainTable';
-      case 'gandalf' : return 'dataPage:MainTable';
-      case 'boromir' : return 'dataPage:TestTable';
-      case 'theoden' : return 'dataPage:MainTable';
-      case 'resultsSummary' : return 'dataPage:MainTable';
+  static function gatherQuestions(context, type){
 
-      default : return 'dataPage:MainTable';
+    var questionMap = createQuestionMap(context, type);
+    var tablePath = 'dataPage:'; // pageID
+
+    /**
+     * In this switch we prepare some important things listed below
+     *
+     *  tablePath - set the ID of table, we want to use from dataPage
+     *  allQuestion - get the IDs of questions, which have been used in this table
+     */
+    switch (type) {
+      case 'NSQ':
+        tablePath += 'NSQ'; // tableID
+        var allQuestion = allNSQid;
+        break;
+
+      case 'Ranking':
+        tablePath += 'Ranking'; // tableID
+        var allQuestion = allRankingID;
+        break;
+      // grid -- single -- questions
+      default:
+        tablePath += 'MainTable'; // tableID
+        var allQuestion = allSingleID;
+
     }
+
+    var questionText = context.report.TableUtils.GetRowHeaderCategoryTitles(tablePath);
+    var returnArray = [];
+    var rowIterator = 0;
+    var tempIT = rowIterator;
+    var columnCount = getColumnCount(tablePath);
+
+    // for questions
+    for (var i = 0; i < allQuestion.length; i++) {
+      var detailTable = [];
+      var question : ReportQuestion = new ReportQuestion(allQuestion[i]);
+      // get answer texts
+      var distributionTexts = (question.getType() === QuestionType.Single) ? null : getDistributionText(allQuestion[i]);
+
+      // start at 1 - Confirm it indexes from 1 - go over columns
+      for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
+        rowIterator = tempIt;
+
+        // get rid of 'WildCardReplacements'
+        // most question types have their text on position text[row][1]
+        // numeric types have their text on position text[row][0] -- this is due to them 'not having' answers
+        try{
+          var textToClean = questionText[rowIterator][1];
+        }
+        catch(e){
+          var textToClean = questionText[rowIterator][0];
+        }
+
+        var label = ReportHelper.cleanText(textToClean, context);
+        // prepare question detail
+        var details = new ReportDetails(allQuestion[i]);
+
+        var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
+        // get data from the column segment
+        var distribution = getDistribution(rowIterator, questionMap[allQuestion[i]], column, context);
+        // update current column position with question answer scale length
+        rowIterator += questionMap[allQuestion[i]];
+        var validN = column[rowIterator].Value;
+        // for validN row
+        rowIterator += 1;
+
+        // set data in details that weren't set yet
+        details.setup({distribution: distribution, validN: validN, distributionTexts: distributionTexts}, context);
+
+        // if we are in trend column
+        if (columnIterator <= Config.wave.codes.length) {
+            detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
+        }
+
+        // if we are past trend column and below end - internal column
+        if (columnIterator > Config.wave.codes.length && columnIterator <= columnCount){
+          detailTable.push({details: details, id: ConfigHelper.getInternalID(columnIterator - Config.wave.codes.length - 1)});
+        }
+      }
+      tempIt = rowIterator;
+
+      // we have all the information needed, setup question
+      question.setup({label: label, details: detailTable}, context);
+
+      returnArray.push(question);
+    }
+    return returnArray;
   }
 
   /**
@@ -165,10 +240,10 @@ class TableHelper{
    * @param  {Object} context wrapper of global properties
    * @return {Object}         Map
    */
-  static function createQuestionMap(context){
+  static function createQuestionMap(context, type){
     var questionMap = {};
 
-    switch (context.questionMapType) {
+    switch (type) {
         case 'NSQ':
           for (var i = 0; i < allNSQid.length; i++) {
             var questionScale = ReportHelper.getQuestionScale(allNSQid[i]).length;
@@ -254,6 +329,7 @@ class TableHelper{
    */
   static function getColumnCount(tablePath){
     switch(tablePath){
+      case 'dataPage:Ranking':
       case 'dataPage:NSQ':
       case 'dataPage:MainTable' :
         return Config.wave.codes.length + Config.comparators.internals.length + Config.comparators.externals.length;
