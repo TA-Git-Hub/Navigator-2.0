@@ -18,21 +18,25 @@ class TableHelper{
      *
      *  tablePath - set the ID of table, we want to use from dataPage
      *  allQuestion - get the IDs of questions, which have been used in this table
+     *  subColumnCount - for example Ranking questions have by default some subColumnCount - let's declare their pressence for our code
      */
     switch (type) {
       case 'NSQ':
         tablePath += 'NSQ'; // tableID
         var allQuestion = allNSQid;
+        var subColumnCount = 0;  // none
         break;
 
       case 'Ranking':
         tablePath += 'Ranking'; // tableID
         var allQuestion = allRankingID;
+        var subColumnCount = 1; // some
         break;
       // grid -- single -- questions
       default:
         tablePath += 'MainTable'; // tableID
         var allQuestion = allSingleID;
+        var subColumnCount = 0; // none
 
     }
 
@@ -46,6 +50,10 @@ class TableHelper{
     for (var i = 0; i < allQuestion.length; i++) {
       var detailTable = [];
       var question : ReportQuestion = new ReportQuestion(allQuestion[i]);
+
+      // we have some subColumnCount - Yay! (add +1 for totals column), but in case we don't let's improve that Zero to One, for math purposes
+      subColumnCount = (subColumnCount !== 0) ? report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(allQuestion[i]).GetScale().length + 1 : 0;
+
       // get answer texts
       var distributionTexts = (question.getType() === 'Single') ? null : getDistributionText(allQuestion[i]);
 
@@ -69,7 +77,9 @@ class TableHelper{
 
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
         // get data from the column segment
-        var distribution = getDistribution(rowIterator, questionMap[allQuestion[i]], column, context);
+        // note that if we have table with subcolumns, we switch to a function which iterates subcolumns
+        var distribution = (subColumnCount === 0) ? getDistribution(rowIterator, questionMap[allQuestion[i]], column, context)
+                                                  : iterateTheSubColumn(rowIterator, questionMap[allQuestion[i]], columnIterator, subColumnCount, tablePath, context);
         // update current column position with question answer scale length
         rowIterator += questionMap[allQuestion[i]];
         var validN = column[rowIterator].Value;
@@ -97,6 +107,20 @@ class TableHelper{
       returnArray.push(question);
     }
     return returnArray;
+  }
+
+  static function iterateTheSubColumn(rowIterator, numberOfAnswers, mainColumnIndex, subColumnCount, tablePath, context){
+    var startIndex = mainColumnIndex*subColumnCount;
+    var endIndex = mainColumnIndex*subColumnCount + subColumnCount;
+
+    var distribution = [];
+
+    for (var i = startIndex; i < endIndex; i++) {
+      var column = report.TableUtils.GetColumnValues(tablePath, i);
+      distribution.push(getDistribution(rowIterator, numberOfAnswers, column, context));
+    }
+
+    return distribution;
   }
 
   /**
@@ -179,7 +203,7 @@ class TableHelper{
   static function getDistribution(rowIterator, numberOfAnswers, column, context){
     var distribution = [];
 
-    for(var i = 0; i < numberOfAnswers; i++){
+    for (var i = 0; i < numberOfAnswers; i++){
       distribution.push(column[rowIterator + i].Value);
     }
 
