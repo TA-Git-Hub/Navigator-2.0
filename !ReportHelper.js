@@ -253,7 +253,6 @@ static function getProperties(object){
  * @return true/false
  */
  static function arrayContains(array, value){
-  // var found = false;
    for (var i =  0; i < array.length; i++){
      if (array[i] === value){
        return true;
@@ -261,15 +260,6 @@ static function getProperties(object){
    }
    return false;
  }
-/*static function contains(array, value){
-  var found = false;
-  for (var i =  0; i < array.length; i++){
-    if (array[i] == value){
-      found = true;
-    }
-  }
-  return found;
-}*/
 
 
   /**

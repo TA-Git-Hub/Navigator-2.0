@@ -102,47 +102,40 @@ class TableHelper{
     var tempIt = 0;
     var columnCount = getColumnCount(tablePath);
 
-    ReportHelper.debug('Number of question texts: ' + questionText.length);
-
     // for questions
     for (var i = 0; i < allNSQid.length; i++) {
       var detailTable = [];
 
-      ReportHelper.debug('Start row: ' + rowIterator + ' for question: ' + allNSQid[i]);
+      // most question types have their text on position text[row][1]
+      // numeric types have their text on position text[row][0] -- this is due to them 'not having' answers
       try{
-        ReportHelper.debug('Issue may happen');
         var textToClean = questionText[rowIterator][1];
       }
       catch(e){
-        ReportHelper.debug('Issue Happened');
         var textToClean = questionText[rowIterator][0];
-        ReportHelper.debug('Issue Solved');
       }
 
       // get rid of 'WildCardReplacements'
-      ReportHelper.debug('Clean Text of : ' + textToClean);
       var label = ReportHelper.cleanText(textToClean, context);
       // start at 1 - Confirm it indexes from 1 - go over columns
       for (var columnIterator = 1; columnIterator <= columnCount; columnIterator++) {
         rowIterator = tempIt;
-        ReportHelper.debug('Detail to create: ' + allNSQid[i]);
         // prepare question detail
         var details = new ReportDetails(allNSQid[i]);
-        ReportHelper.debug('Detail created: ' + allNSQid[i]);
-
         var column = context.report.TableUtils.GetColumnValues(tablePath, columnIterator);
-        ReportHelper.debug('Row iterator before data counted: ' + questionMap[allNSQid[i]]);
         // get data from the column segment
         var distribution = getDistribution(rowIterator, questionMap[allNSQid[i]], column, context);
         // update current column position with question answer scale length
         rowIterator += questionMap[allNSQid[i]];
-        ReportHelper.debug('Row iterator after data counted: ' + questionMap[allNSQid[i]]);
         var validN = column[rowIterator].Value;
         // for validN row
         rowIterator += 1;
 
+        // get answer texts
+        var distributionTexts = getDistributionText(allNSQid[i]);
+
         // set data in details that weren't set yet
-        details.setup({distribution: distribution, validN: validN}, context);
+        details.setup({distribution: distribution, validN: validN, texts: distributionTexts}, context);
 
         // if we are in trend column
         if (columnIterator <= Config.wave.codes.length) {
@@ -156,15 +149,10 @@ class TableHelper{
       }
       tempIt = rowIterator;
 
-      ReportHelper.debug('Question to setup: ' + allNSQid[i]);
       // we have all the information needed, create question and fill it
       var question : ReportQuestion = new ReportQuestion(allNSQid[i]);
-      ReportHelper.debug('Question created: ' + allNSQid[i]);
 
       question.setup({label: label, details: detailTable}, context);
-      ReportHelper.debug('Question setup complete: ' + allNSQid[i]);
-
-      ReportHelper.debug('End row: ' + rowIterator + ' for question: ' + allNSQid[i]);
 
       returnArray.push(question);
     }
@@ -191,7 +179,6 @@ class TableHelper{
             if (type === QuestionType.Numeric){
               questionScale = 1;
             }
-            ReportHelper.debug('Question: ' + allNSQid[i] + ' has scale length ' + questionScale)
             questionMap[allNSQid[i]] = questionScale;
           }
         break;
@@ -199,13 +186,12 @@ class TableHelper{
         case 'Ranking':
           for (var i = 0; i < allRankingID.length; i++) {
             var questionScale = ReportHelper.getQuestionScale(allRankingID[i]).length;
-            ReportHelper.debug('Question: ' + allRankingID[i] + ' has scale length ' + questionScale)
             questionMap[allRankingID[i]] = questionScale;
           }
         break;
 
       default:
-      // standard grid questions
+      // standard -- single -- grid questions
         var question = Config.questionGridStructure;
         for(var i = 0; i < question.length; i++){
           var questionScale = ReportHelper.getQuestionScale(question[i].id).length;
@@ -222,6 +208,25 @@ class TableHelper{
     }
 
     return questionMap;
+  }
+
+  /**
+   * We use mostly questions of type SINGLE - this function is meant mainly for almost every other type [ranking, multi, multiNumeric, ...]
+   * As the other types need to report more than answer data, but also the answer text
+   *
+   * NOTE: I'm not sure if this works with translations - further testing needed!!!
+   * @param  {[String]} id Question ID
+   * @return {[String Array]}    Answer texts
+   */
+  static function getDistributionText(id){
+    var scale = ReportHelper.getQuestionScale(id);
+    var textArray = [];
+
+    for (var i = 0; i < scale.length; i++) {
+      text.push(scale[i].Text);
+    }
+
+    return textArray;
   }
 
   /**

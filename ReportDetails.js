@@ -3,6 +3,7 @@
  */
 class ReportDetails{
   private var distribution = [];
+  private var distributionTexts = [];
   private var fav = null;
   private var neu = null;
   private var unfav = null;
@@ -39,6 +40,10 @@ class ReportDetails{
       else{
         setValidN(information.validN);
       }
+    }
+
+    if (information.distributionTexts !== undefined) {
+      this.distributionTexts = information.distributionTexts;
     }
 
     calculate(context);
@@ -108,7 +113,7 @@ class ReportDetails{
   }
 
   public function getJSONString(){
-    return {validN: this.validN, distribution: this.distribution, fav: this.fav, neu: this.neu, unfav: this.unfav, flags: this.flags};
+    return {validN: this.validN, distribution: this.distribution, distributionTexts: this.distributionTexts, fav: this.fav, neu: this.neu, unfav: this.unfav, flags: this.flags};
 
   }
 
