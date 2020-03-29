@@ -52,7 +52,7 @@ class TableHelper{
       var question : ReportQuestion = new ReportQuestion(allQuestion[i]);
 
       // we have some subColumnCount - Yay! (add +1 for totals column), but in case we don't let's improve that Zero to One, for math purposes
-      subColumnCount = (subColumnCount !== 0) ? report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(allQuestion[i]).GetScale().length + 1 : 0;
+      subColumnCount = (subColumnCount > 0) ? (context.report.DataSource.GetProject(Config.dataSources.mainSurvey).GetQuestion(allQuestion[i]).GetScale().length + 1) : 0;
 
       // get answer texts
       var distributionTexts = (question.getType() === 'Single') ? null : getDistributionText(allQuestion[i]);
@@ -116,7 +116,7 @@ class TableHelper{
     var distribution = [];
 
     for (var i = startIndex; i < endIndex; i++) {
-      var column = report.TableUtils.GetColumnValues(tablePath, i);
+      var column = context.report.TableUtils.GetColumnValues(tablePath, i);
       distribution.push(getDistribution(rowIterator, numberOfAnswers, column, context));
     }
 
