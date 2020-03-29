@@ -95,17 +95,17 @@ class ReportHelper{
 
   public static function getNSQObject(){
     var questionNSQ = TableHelper.gatherQuestions(context, 'NSQ');
-    var questionRanking = TableHelper.gatherQuestions(context, 'Ranking');
+  //  var questionRanking = TableHelper.gatherQuestions(context, 'Ranking');
     var returnObject = {};
 
     for (var i = 0; i < questionNSQ.length; i++) {
       returnObject[questionNSQ[i].getID()] = questionNSQ[i].getJSONString(context);
     }
 
-    for (var i = 0; i < questionRanking.length; i++) {
+  /*  for (var i = 0; i < questionRanking.length; i++) {
       returnObject[questionRanking[i].getID()] = questionNSQ[i].getJSONString(context);
     }
-
+*/
     return returnObject;
   }
 
