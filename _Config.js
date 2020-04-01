@@ -108,7 +108,7 @@ static var suppression = {
         {id: 'CQ62', showTrend: true}
       ],
       ranking: [
-        {id: 'CQ63', showTrend: true}
+        {id: 'CQ63', showTrend: false}
       ],
       numeric: [
         {id: 'CQ64', showTrend: true}
