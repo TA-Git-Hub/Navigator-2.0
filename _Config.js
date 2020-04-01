@@ -104,16 +104,20 @@ static var suppression = {
     };
 
     static var nsq = {
-      multi: [
+      // multi
+      Multi: [
         {id: 'CQ62', showTrend: true}
       ],
-      ranking: [
+      // ranking
+      MultiOrdered: [
         {id: 'CQ63', showTrend: false}
       ],
-      numeric: [
+      // numeric
+      Numeric: [
         {id: 'CQ64', showTrend: true}
       ],
-      numericList: [
+      // numericList
+      MultiNumeric: [
         {id: 'CQ65', showTrend: true}
       ]
     };
