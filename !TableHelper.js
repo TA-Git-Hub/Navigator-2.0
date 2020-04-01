@@ -47,8 +47,6 @@ class TableHelper{
     var columnCount = getColumnCount(tablePath);
 
     // for questions
-
-    ReportHelper.debug('number of questions ' + allQuestion.length)
     for (var i = 0; i < allQuestion.length; i++) {
       var detailTable = [];
       var question : ReportQuestion = new ReportQuestion(allQuestion[i]);
@@ -88,7 +86,6 @@ class TableHelper{
         // for validN row
         rowIterator += 1;
 
-        ReportHelper.debug('details setup');
         // set data in details that weren't set yet
         details.setup({distribution: distribution, validN: validN, distributionTexts: distributionTexts}, context);
 
@@ -99,9 +96,7 @@ class TableHelper{
               var list = Config.nsq[questionType];
 
               for (var j = 0; j < list.length; j++) {
-                if (list[j].id === allQuestion[i] && list[j].showTrend === false) {
-
-                  ReportHelper.debug('question: ' + list[j].id + ' hideTrend');
+                if (list[j].id === allQuestion[i] && list[j].showTrend === false && columnIterator > 1) {
                   details.setDistribution([]);
                   break;
                 }
@@ -120,8 +115,6 @@ class TableHelper{
 
       // we have all the information needed, setup question
       question.setup({label: label, details: detailTable}, context);
-
-      ReportHelper.debug('question ready ' + i);
 
       returnArray.push(question);
     }
