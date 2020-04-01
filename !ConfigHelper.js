@@ -34,11 +34,11 @@ class ConfigHelper{
 
     for (var list in nsq) {
       // we want only ranking questions, skip everything else
-      if (getRanking === true && list !== 'ranking') {
+      if (getRanking === true && list !== 'MultiOrdered') {
         continue;
       }
       // we dont want ranking, skip it
-      if (getRanking === false && list === 'ranking') {
+      if (getRanking === false && list === 'MultiOrdered') {
         continue;
       }
 
