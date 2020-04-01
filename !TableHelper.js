@@ -120,7 +120,11 @@ class TableHelper{
       // we have all the information needed, setup question
       question.setup({label: label, details: detailTable}, context);
 
+<<<<<<< HEAD
       ReportHelper.debug('question ready ' + i);
+=======
+      ReportHelper('question ready ' + i);
+>>>>>>> 5689dfd83cd2303f51fb2f5073a79ee792a56a31
 
       returnArray.push(question);
     }
