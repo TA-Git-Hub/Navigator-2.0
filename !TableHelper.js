@@ -47,6 +47,8 @@ class TableHelper{
     var columnCount = getColumnCount(tablePath);
 
     // for questions
+
+    ReportHelper.debug('number of questions ' + allQuestion.length)
     for (var i = 0; i < allQuestion.length; i++) {
       var detailTable = [];
       var question : ReportQuestion = new ReportQuestion(allQuestion[i]);
@@ -97,6 +99,8 @@ class TableHelper{
 
               for (var j = 0; j < list.length; j++) {
                 if (list[j].id === allQuestion[i] && list[j].showTrend === false) {
+
+                  ReportHelper.debug('question: ' + list[j].id + ' hideTrend');
                   details.setDistribution([]);
                   break;
                 }
@@ -115,6 +119,8 @@ class TableHelper{
 
       // we have all the information needed, setup question
       question.setup({label: label, details: detailTable}, context);
+
+      ReportHelper('question ready ' + i);
 
       returnArray.push(question);
     }
