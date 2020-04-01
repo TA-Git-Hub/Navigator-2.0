@@ -91,6 +91,14 @@ class TableHelper{
 
         // if we are in trend column
         if (columnIterator <= Config.wave.codes.length) {
+            if(type === 'NSQ' || type === 'Ranking'){
+              var questionType = question.getType();
+
+              if (Config.nsq[questionType][allQuestion[i]].showTrend === false) {
+                continue;
+              }
+            }
+
             detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
         }
 
