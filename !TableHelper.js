@@ -92,17 +92,18 @@ class TableHelper{
         // if we are in trend column
         if (columnIterator <= Config.wave.codes.length) {
             var questionType = question.getType();
-            if(questionType !== 'Single'){
+            if (questionType !== 'Single'){
               var list = Config.nsq[questionType];
-              
+
               for (var j = 0; j < list.length; j++) {
                 if (list[j].id === allQuestion[i] && list[j].showTrend === false) {
-                  continue;
+                  detailTable.push({details: null, id: ConfigHelper.getWaveID(columnIterator - 1)});
                 }
               }
             }
-
-            detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
+            else{
+              detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
+            }
         }
 
         // if we are past trend column and below end - internal column
