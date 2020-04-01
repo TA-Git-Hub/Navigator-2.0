@@ -97,13 +97,14 @@ class TableHelper{
 
               for (var j = 0; j < list.length; j++) {
                 if (list[j].id === allQuestion[i] && list[j].showTrend === false) {
-                  detailTable.push({details: null, id: ConfigHelper.getWaveID(columnIterator - 1)});
+                  details.setDistribution([]);
+                  detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
+                  continue;
                 }
               }
             }
-            else{
-              detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
-            }
+
+            detailTable.push({details: details, id: ConfigHelper.getWaveID(columnIterator - 1)});
         }
 
         // if we are past trend column and below end - internal column
