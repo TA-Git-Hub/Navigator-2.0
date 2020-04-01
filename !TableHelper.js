@@ -88,6 +88,7 @@ class TableHelper{
         // for validN row
         rowIterator += 1;
 
+        ReportHelper.debug('details setup');
         // set data in details that weren't set yet
         details.setup({distribution: distribution, validN: validN, distributionTexts: distributionTexts}, context);
 
