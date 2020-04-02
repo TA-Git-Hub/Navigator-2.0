@@ -96,11 +96,12 @@ static var suppression = {
 
       // Comments Questions
     static var comments = {
-      questions: [{id:'Comm1', nodeIds: null/*['1001']*/},
-                  {id:'Comm2', nodeIds: null/*['1002']*/},
-                  {id:'Comm3', nodeIds: null/*['1001','1048']*/}],
+      questions: [{id:'Comm1', nodeID: null/*['1001']*/},
+                  {id:'Comm2', nodeID: null/*['1002']*/},
+                  {id:'Comm3', nodeID: null/*['1001','1048']*/}],
       useVerbatimComponent: false, // if false show typical view which has a HitList component. This limits response text to 4K characters
-      includeThemesInCommentsTable: true //controls inclusion/exclusion comment themes next to the actual comment in comments table
+      includeThemesInCommentsTable: true, //controls inclusion/exclusion comment themes next to the actual comment in comments table
+      showThemeChart: true // if set to true, the comment theme chart will be displayed;
     };
 
     static var nsq = {
