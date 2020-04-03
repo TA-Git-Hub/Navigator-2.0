@@ -29,10 +29,10 @@ class JSONHelper{
           question: ReportHelper.getAllQuestionObject(),
           nsq: ReportHelper.getNSQObject(),
           label: ReportHelper.getLabels(ReportHelper.context.page.CurrentPageId),
-          language: {current: context.report.CurrentLanguage,
+          /*language: {current: context.report.CurrentLanguage,
                      active: context.report.Languages
-                   },
-          //language: ReportLanguages.getLanguages(context),
+                   },*/
+          language: ReportLanguages.getLanguages(context),
           page: {current: ReportHelper.context.page.CurrentPageId,
                  all: []
                 }
